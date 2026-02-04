@@ -25,8 +25,12 @@ const useJobsStore = create((set, get) => ({
 
             const res = await api.get("/careers")
 
+            const jobsArray = Array.isArray(res.data)
+                ? res.data
+                : res.data.data || []
+
             set({
-                jobs: res.data.data || res.data,
+                jobs: jobsArray,
                 loading: false,
             })
         } catch (err) {
@@ -37,7 +41,8 @@ const useJobsStore = create((set, get) => ({
         }
     },
 
-    // ================= DERIVED =================
+
+    // ================ DERIVED =================
 
     filteredJobs: () => {
         const { jobs, searchQuery } = get()

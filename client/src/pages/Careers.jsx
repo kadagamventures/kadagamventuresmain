@@ -21,7 +21,7 @@ const Careers = () => {
         loadJobs();
     }, [loadJobs]);
 
-    const jobs = filteredJobs();
+    const jobs = Array.isArray(filteredJobs()) ? filteredJobs() : [];
 
     return (
         <main>
