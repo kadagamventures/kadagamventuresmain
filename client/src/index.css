@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik+Wet+Paint&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Tiny5&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.vision-outline {
+  font-family: poppins, sans-serif;
+  -webkit-text-stroke: 0.5px #000;
+  color: transparent;
+}
+
+.vision-filled {
+  font-family: poppins, sans-serif;
+  -webkit-text-stroke: 0.5px #000;
+  color: #ff0000;
+}
+
+@layer utilities {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 44px !important;
+    height: 44px !important;
+    border: 6px solid white !important;
+    border-radius: 50% !important;
+    background: white !important;
+    color: #ff7d31 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #ff7d31 !important;
+  }
+}
