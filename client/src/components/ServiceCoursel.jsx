@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 import "../styles/swiperpagination.css";
 
-import illustrationLadyService from '../assets/service/illustrationladyservice.png';
+import illustrationLadyService from '../assets/service/illustrationLadyService.png';
 
 import { services } from '../config/servicesConfig';
 
