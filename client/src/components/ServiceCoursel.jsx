@@ -6,6 +6,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+
 import "../styles/swiperpagination.css";
 
 import illustrationLadyService from '../assets/service/illustrationLadyService.png';
