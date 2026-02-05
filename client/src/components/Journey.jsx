@@ -1,5 +1,5 @@
 import React from 'react'
-import kadagamnextImage from "../assets/products/naveensir.png"
+import kadagamnextImage from "../assets/team/balajitwo.png"
 import umarani from "../assets/products/umaraninew.png"
 
 const Journey = () => {

@@ -46,10 +46,11 @@ import { FaPenRuler } from "react-icons/fa6";
 export const servicesData = {
     "website-development": {
         title: "Web Design & Development",
+        metatitle: "Best Website Development Company in Bangalore | Kadagam ventures",
+        metadescription: "Best website development company delivering professional website design, SEO-optimized websites, and custom mobile app development solutions.",
         description:
             "We design and develop fast, responsive, and visually engaging websites that help your business build trust, attract users, and drive measurable growth.",
         image: webdev,
-
         sections: [
             {
                 title: "What We Offer",
@@ -122,7 +123,6 @@ export const servicesData = {
                 },
             ],
         },
-
     },
     "digital-marketing": {
         title: "Digital Marketing",

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import HeroHome from '../components/HeroHome'
 import OurProducts from '../components/OurProducts'
 import Journey from '../components/Journey'
@@ -7,10 +7,20 @@ import ServiceCoursel from '../components/ServiceCoursel'
 import ContactUs from '../components/ContactUs'
 
 const Home = () => {
+
+    const contactRef = useRef(null);
+
+    const scrollToContact = () => {
+        contactRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        })
+    }
+
     return (
         <main className=''>
             <section>
-                <HeroHome />
+                <HeroHome onGetStarted={scrollToContact} />
             </section>
             <section>
                 <OurProducts />
@@ -24,7 +34,7 @@ const Home = () => {
             <section>
                 <ServiceCoursel />
             </section>
-            <section className='p-8'>
+            <section ref={contactRef} className='p-8'>
                 <ContactUs />
             </section>
         </main>

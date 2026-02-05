@@ -25,7 +25,6 @@ const AboutUs = () => {
                             <span className='text-[#E60012]'>Kadagam</span>   <span className='text-[#405BAA]'>Venture</span>
                         </>
                     }
-                    image={NaveenImage}
                 />
             </section>
             <section className='px-10 py-12'>

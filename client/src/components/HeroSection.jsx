@@ -7,7 +7,7 @@ const HeroSection = ({ title, image }) => {
             relative w-full
             min-h-[70vh]
             bg-black overflow-hidden
-            flex items-center
+            flex justify-center items-center
         ">
             {/* Accent */}
             <RightClipAccent />
@@ -18,14 +18,14 @@ const HeroSection = ({ title, image }) => {
                 className="
                     relative z-20 max-w-7xl mx-auto w-full
                     flex flex-col-reverse xl:flex-row
-                    items-center justify-center xl:justify-between
+                    items-center justify-center
                     px-6 xl:px-0
                     gap-4 xl:gap-0
                 "
             >
                 {/* Text */}
                 <div className="text-white xl:absolute">
-                    <h1 className="text-4xl sm:text-5xl  xl:text-7xl text-center xl:text-start font-bold leading-tight">
+                    <h1 className="text-4xl sm:text-5xl  xl:text-7xl text-center  font-bold leading-tight">
                         {title}
                     </h1>
                 </div>

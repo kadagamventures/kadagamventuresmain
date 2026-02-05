@@ -67,12 +67,11 @@ const ContactUs = () => {
                         <label className="relative flex flex-row items-center gap-3 cursor-pointer group">
                             <input
                                 type="radio"
-                                checked={form.inquiryAbout === "services"}
-                                onChange={() => setField("inquiry", "services")}
-                                name="inquiry"
+                                name="inquiryAbout"
                                 value="services"
+                                checked={form.inquiryAbout === "services"}
+                                onChange={() => setField("inquiryAbout", "services")}
                                 className="peer sr-only"
-                                defaultChecked
                             />
                             <div className="
         w-6 h-6 rounded-full border-2 border-white/70 
@@ -100,12 +99,11 @@ const ContactUs = () => {
                         <label className="relative flex items-center gap-3 cursor-pointer group">
                             <input
                                 type="radio"
+                                name="inquiryAbout"
+                                value="products"
                                 checked={form.inquiryAbout === "products"}
-                                onChange={() => setField("inquiry", "product")}
-                                name="inquiry"
-                                value="services"
+                                onChange={() => setField("inquiryAbout", "products")}
                                 className="peer sr-only"
-                                defaultChecked
                             />
                             <div className="
         w-6 h-6 rounded-full border-2 border-white/70 

@@ -7,7 +7,7 @@ import BgImage from "../assets/HomeHero/herosectionbg.png";
 import vectoreline from "../assets/HomeHero/vector_line.svg";
 import RightClipAccent from './RightClipAccent.jsx';
 
-const HeroHome = () => {
+const HeroHome = ({ onGetStarted }) => {
     return (
         <div className='relative h-auto lg:h-161.25 w-full overflow-hidden'>
             <img
@@ -46,7 +46,7 @@ const HeroHome = () => {
                         data-aos-duration="1200"
                         data-aos-delay="500"
                         className="mt-8">
-                        <Button title="Get Started" />
+                        <Button onClick={onGetStarted} title="Get Started" />
                     </div>
                 </div>
             </div>
