@@ -1,5 +1,5 @@
 import vinay from "../assets/team/vinay.png"
-import balaji from "../assets/team/balaji.png"
+import balaji from "../assets/team/Balaji.png"
 import nishanthi from "../assets/team/nishanthi.png"
 import anugya from "../assets/team/anugya.png"
 import darshan from "../assets/team/darshan.png"
