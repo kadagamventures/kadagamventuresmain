@@ -18,10 +18,10 @@ export const footerConfig = {
     ],
 
     entities: [
-        { label: "Kadagam Foundation", path: "/foundation" },
-        { label: "Nithyaevent", path: "/products/nithyaevents" },
-        { label: "Nithya Tickets", path: "/products/nithyatickets" },
-        { label: "Kadagam next", path: "/products/kadagam-next" },
+        { label: "Kadagam Foundation", path: "https://kadagamfoundation.org/" },
+        { label: "Nithyaevent", path: "https://nithyaevent.com/" },
+        { label: "Nithya Tickets", path: "https://nithyatickets.com/" },
+        { label: "Kadagam next", path: "https://www.kadagamnext.com/" },
         { label: "Nithyaevent vendor", path: "/vendor" },
     ],
 
