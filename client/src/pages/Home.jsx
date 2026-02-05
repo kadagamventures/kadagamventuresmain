@@ -5,6 +5,7 @@ import Journey from '../components/Journey'
 import Vision from '../components/Vision'
 import ServiceCoursel from '../components/ServiceCoursel'
 import ContactUs from '../components/ContactUs'
+import OurClients from '../components/OurClients'
 
 const Home = () => {
 
@@ -24,6 +25,9 @@ const Home = () => {
             </section>
             <section>
                 <OurProducts />
+            </section>
+            <section>
+                <OurClients />
             </section>
             <section>
                 <Journey />
