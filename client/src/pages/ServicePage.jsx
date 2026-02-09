@@ -14,7 +14,6 @@ const ServicePage = () => {
         );
     }, []);
 
-
     if (!service) {
         return (
             <>
@@ -37,7 +36,7 @@ const ServicePage = () => {
 
     return (
         <>
-            {/* ✅ SEO META TAGS */}
+            {/* SEO META TAGS */}
             <Helmet>
                 <title>{service.metatitle}</title>
                 <meta name="description" content={service.metadescription} />
@@ -45,7 +44,7 @@ const ServicePage = () => {
                 <meta property="og:description" content={service.description} />
                 <meta property="og:type" content="website" />
 
-                {/* optional image preview */}
+
                 {service.image && (
                     <meta property="og:image" content={service.image} />
                 )}
@@ -53,7 +52,7 @@ const ServicePage = () => {
                 <meta name="robots" content="index, follow" />
             </Helmet>
 
-            <ServiceLayout service={service} />
+            <ServiceLayout service={service} slug={serviceSlug} />
         </>
     );
 };

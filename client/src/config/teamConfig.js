@@ -11,7 +11,7 @@ import veeran from "../assets/team/veeran.png"
 import arvindm from "../assets/team/aravindnew.png"
 import sagar from "../assets/team/sagar.png"
 import stanly from "../assets/team/stanleynewone.png"
-
+import kiran from "../assets/team/kiran.png"
 
 
 export const TeamDetails = [
@@ -106,5 +106,12 @@ export const TeamDetails = [
         name: "Stanley E",
         designation: "Business Development Asst",
         linkedIn: "https://www.linkedin.com/in/stanley-havoc-a2b318246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+        id: 13,
+        profile: kiran,
+        name: "Kiran Kumar",
+        designation: "Full Stack Developer",
+        // linkedIn: "https://www.linkedin.com/in/stanley-havoc-a2b318246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     },
 ]

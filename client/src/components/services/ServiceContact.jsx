@@ -10,7 +10,9 @@ const ServiceContact = () => {
 
 
     return (
-        <section className="bg-black h-fit p-8 relative">
+        <section
+            id="contact-us"
+            className="bg-black h-fit p-8 relative">
             <div className="max-w-7xl mx-auto px-6 flex flex-row gap-16 items-center">
 
                 <div className="bg-white rounded-2xl p-10 shadow-xl max-w-xl w-full">

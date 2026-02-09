@@ -1,13 +1,13 @@
 import React from 'react'
-import RightClipAccent from '../RightClipAccent'
-
+// import RightClipAccent from '../RightClipAccent'
 import ServiceHero from './ServiceHero'
-import ServiceCTA from './ServiceCTA'
+// import ServiceCTA from './ServiceCTA'
 import ServiceContact from './ServiceContact'
 import ServiceContent from './ServiceContent'
 import ServiceProcess from './ServiceProcess'
+// import PricingTableData from '../PricingTableData'
 
-const ServiceLayout = ({ service }) => {
+const ServiceLayout = ({ service, slug }) => {
 
     if (!service) return null;
 
@@ -18,11 +18,11 @@ const ServiceLayout = ({ service }) => {
             <ServiceHero {...service} />
             <ServiceContent sections={service.sections} />
             <ServiceProcess process={service.process || []} />
+            {/* <PricingTableData slug={slug} /> */}
             {/* <ServiceCTA /> */}
-            <ServiceContact />
-
+            <ServiceContact slug={slug} />
         </main>
     )
-}
+};
 
 export default ServiceLayout

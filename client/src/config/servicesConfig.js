@@ -5,6 +5,10 @@ import uiuxservice from "../assets/service/uiuxserrvice.png";
 import landingservice from "../assets/service/landingservice.png";
 import brandservice from "../assets/service/brandservice.png";
 import softwaretestingservice from "../assets/service/softwaretestingservice.png"
+import interactiveService from "../assets/service/interactiveService.png"
+import brandstart from "../assets/service/brandstart.png"
+import videoprodserivice from "../assets/service/videoprodserivice.png"
+import videoeditservice from "../assets/service/videoeditservice.png"
 
 export const services = [
     {
@@ -62,5 +66,37 @@ export const services = [
         image: softwaretestingservice,
         description:
             "Ensure quality and reliability with manual and automated testing including functional, performance, security, and end-to-end testing.",
+    },
+    {
+        id: 8,
+        title: "Interactive & Animated Websites",
+        slug: "animated-websites",
+        image: interactiveService,
+        description:
+            "High-impact storytelling websites with smooth animations, micro-interactions, and modern motion design.",
+    },
+    {
+        id: 9,
+        title: "Brand Strategy & Identity",
+        slug: "brand-strategy-identity",
+        image: brandstart,
+        description:
+            "Complete brand strategy including positioning, tone, visual systems, and identity creation.",
+    },
+    {
+        id: 10,
+        title: "Video Production",
+        slug: "video-production",
+        image: videoprodserivice,
+        description:
+            "Professional video shoots for corporate, promotional, product, and brand storytelling content.",
+    },
+    {
+        id: 11,
+        title: "Video Editing & Post Production",
+        slug: "video-editing",
+        image: videoeditservice,
+        description:
+            "High-quality editing, transitions, color grading, sound design, subtitles, and cinematic finishing.",
     },
 ];

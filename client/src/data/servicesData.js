@@ -5,6 +5,12 @@ import landingpagedesign from "../assets/service/landingpagedesigne.png"
 import brandinggraphic from "../assets/service/brandinggraphic.png"
 import mobilebg from "../assets/service/mobilebg.png"
 import softwareTesting from "../assets/service/softwareTesting.png"
+import Interactive from "../assets/service/Interactive.png"
+import BrandStar from "../assets/service/BrandStar.png"
+import Videoprod from "../assets/service/Videoprod.png"
+import videoedit from "../assets/service/videoedit.png"
+
+
 
 import {
     FaSearch,
@@ -41,7 +47,6 @@ import {
 } from "react-icons/fa";
 
 import { FaPenRuler } from "react-icons/fa6";
-
 
 export const servicesData = {
     "website-development": {
@@ -507,7 +512,7 @@ export const servicesData = {
         title: "Branding & Graphic Design",
         description:
             "We craft strong brand identities and visually compelling designs that help businesses stand out, communicate clearly, and build lasting brand recognition.",
-        image: brandinggraphic,
+        image: BrandStar,
 
         sections: [
             {
@@ -688,6 +693,135 @@ export const servicesData = {
                     title: "Release Validation",
                     icon: FaCheckCircle,
                 },
+            ],
+        },
+    },
+    "animated-websites": {
+        title: "Interactive & Animated Websites",
+        description:
+            "We build modern, high-impact websites with smooth animations, micro-interactions, and storytelling experiences that captivate users and boost engagement.",
+        image: Interactive,
+
+        sections: [
+            {
+                title: "What We Offer",
+                items: [
+                    "GSAP & smooth scroll animations",
+                    "Micro-interactions and hover effects",
+                    "Storytelling landing experiences",
+                    "3D & motion-based UI effects",
+                    "Performance-optimized animations",
+                ],
+            },
+            {
+                title: "Why It Matters",
+                items: [
+                    "Higher user engagement",
+                    "Better brand recall",
+                    "Modern premium look",
+                    "Improved conversions",
+                ],
+            },
+        ],
+
+        process: {
+            title: "Our Animation Workflow",
+            steps: [
+                { title: "Concept" },
+                { title: "Wireframe" },
+                { title: "Motion Design" },
+                { title: "Development" },
+                { title: "Optimize" },
+            ],
+        },
+    },
+    "brand-strategy-identity": {
+        title: "Brand Strategy & Identity",
+        description:
+            "We help businesses define their voice, positioning, and visual identity to build memorable brands that stand out in competitive markets.",
+        image: brandinggraphic,
+
+        sections: [
+            {
+                title: "What We Offer",
+                items: [
+                    "Brand positioning & messaging",
+                    "Logo & visual identity systems",
+                    "Typography & color strategy",
+                    "Brand guidelines documentation",
+                    "Complete rebranding support",
+                ],
+            },
+        ],
+
+        process: {
+            title: "Our Branding Process",
+            steps: [
+                { title: "Research" },
+                { title: "Strategy" },
+                { title: "Concept" },
+                { title: "Design" },
+                { title: "Launch" },
+            ],
+        },
+    },
+    "video-production": {
+        title: "Video Production",
+        description:
+            "Professional video shoots for corporate films, product promotions, brand stories, and marketing campaigns.",
+        image: Videoprod,
+
+        sections: [
+            {
+                title: "What We Offer",
+                items: [
+                    "Corporate & promotional videos",
+                    "Product & commercial shoots",
+                    "Event coverage",
+                    "Ad films & social media videos",
+                    "Script & storyboard planning",
+                ],
+            },
+        ],
+
+        process: {
+            title: "Production Workflow",
+            steps: [
+                { title: "Pre-Production" },
+                { title: "Scripting" },
+                { title: "Shooting" },
+                { title: "Editing" },
+                { title: "Delivery" },
+            ],
+        },
+    },
+    "video-editing": {
+        title: "Video Editing & Post Production",
+        description:
+            "Professional editing, transitions, sound design, and cinematic finishing to create impactful videos for every platform.",
+        image: videoedit,
+
+        sections: [
+            {
+                title: "What We Offer",
+                items: [
+                    "Professional cuts & transitions",
+                    "Color grading & correction",
+                    "Sound design & background music",
+                    "Subtitles & captions",
+                    "Motion graphics & titles",
+                    "YouTube / Reel optimization",
+                ],
+            },
+        ],
+
+        process: {
+            title: "Post Production Process",
+            steps: [
+                { title: "Footage Review" },
+                { title: "Editing" },
+                { title: "Enhancement" },
+                { title: "Final Export" },
             ],
         },
     },

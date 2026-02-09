@@ -37,7 +37,7 @@ const Journey = () => {
                 </p>
 
                 <p>
-                    Founded by Mr. Naveen Kumar and the team, our journey bridges the digital world with human
+                    Founded by Mrs. Uma Rani and the team, our journey bridges the digital world with human
                     values. We don’t just build technology — we craft intelligent platforms, design transformative
                     experiences, and ignite positive change. Our products fuel industry evolution; our deeper
                     mission is rooted in creating opportunities that uplift communities and shape a better tomorrow.

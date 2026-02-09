@@ -5,10 +5,6 @@ import kadagamfoundation from "../assets/products/kadagamfoundationtwo.png"
 
 export const navMenu = [
     {
-        label: "About us",
-        path: "/about",
-    },
-    {
         label: "Services",
         dropdown: true,
         heading: "Our Services",
@@ -55,14 +51,39 @@ export const navMenu = [
                 description:
                     "Ensure quality and reliability with manual and automated testing services, including functional, performance, security, and end-to-end testing.",
                 path: "/services/software-testing",
-            }
+            },
+            {
+                title: "Interactive & Animated Websites",
+                description:
+                    "High-impact storytelling websites with smooth animations, micro-interactions, and modern motion design.",
+                path: "/services/animated-websites",
+            },
+            {
+                title: "Brand Strategy & Identity",
+                description:
+                    "Complete brand strategy including positioning, tone, visual systems, and identity creation.",
+                path: "/services/brand-strategy-identity",
+            },
+            {
+                title: "Video Production",
+                description:
+                    "Professional video shoots for corporate, promotional, product, and brand storytelling content.",
+                path: "/services/video-production",
+            },
+            {
+                title: "Video Editing & Post Production",
+                description:
+                    "High-quality editing, transitions, color grading, sound design, subtitles, and cinematic finishing.",
+                path: "/services/video-editing",
+            },
+
 
         ],
     },
     {
         label: "Products",
         dropdown: true,
-        heading: "In-House Products",
+        heading: "In-House Ventures",
         children: [
             {
                 title: "Nithyaevents",
@@ -97,6 +118,10 @@ export const navMenu = [
     {
         label: "Careers",
         path: "/careers",
+    },
+    {
+        label: "About us",
+        path: "/about",
     },
     // {
     //     label: "Blogs",

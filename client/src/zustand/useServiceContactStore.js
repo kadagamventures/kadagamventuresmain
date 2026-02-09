@@ -3,14 +3,14 @@ import axios from "axios"
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
-})
+});
 
 const initialForm = {
     firstName: "",
     email: "",
     company: "",
     projectDetails: "",
-}
+};
 
 const useServiceContactStore = create((set, get) => ({
     // ===== STATE =====
@@ -59,6 +59,6 @@ const useServiceContactStore = create((set, get) => ({
             })
         }
     },
-}))
+}));
 
 export default useServiceContactStore

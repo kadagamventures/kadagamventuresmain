@@ -32,7 +32,7 @@ const AboutUs = () => {
                 <p className='leading-loose text-xl font-sans text-gray-700 text-start'>
                     At Kadagam Ventures, we believe that business is not just about profit—it’s about purpose.
                     Kadagam Ventures is more than an IT company—it’s a purpose-driven force where innovation meets impact and progress uplifts people.
-                    Founded by Mr. Naveen Kumar and The team, our journey bridges the digital world with human values. We don’t just build technology — we craft intelligent platforms, design transformative experiences, and ignite positive change.
+                    Founded by Mrs. Uma Rani and The team, our journey bridges the digital world with human values. We don’t just build technology — we craft intelligent platforms, design transformative experiences, and ignite positive change.
                     Our products fuel industry evolution; our deeper mission is rooted in creating opportunities that uplift communities and shape a better tomorrow.
                 </p>
                 <p className='leading-loose text-xl font-sans text-gray-700 text-start'>

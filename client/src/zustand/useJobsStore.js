@@ -18,7 +18,7 @@ const useJobsStore = create((set, get) => ({
     setSearchQuery: (value) =>
         set({ searchQuery: value }),
 
-    // ✅ REAL API ONLY
+    // REAL API ONLY
     loadJobs: async () => {
         try {
             set({ loading: true, error: null })
