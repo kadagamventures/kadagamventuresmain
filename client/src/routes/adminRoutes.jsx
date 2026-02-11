@@ -33,7 +33,7 @@ export const adminRoutes = [
     {
         name: "Contact Us",
         path: "contact",
-        icon: "FaMailBulk",
+        icon: "FaPhoneVolume",
         element: <AdminSubscribers />
     },
 ]
