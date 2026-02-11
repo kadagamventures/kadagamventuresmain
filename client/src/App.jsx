@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import MainLayout from './layout/MainLayout.jsx'
+import AdminLayout from './layout/AdminLayout.jsx'
 
 import { Toaster } from 'react-hot-toast'
 import Home from './pages/Home.jsx'
@@ -17,6 +18,11 @@ import Blogs from './pages/Blogs.jsx'
 import BlogDetails from './pages/BlogDetails.jsx'
 
 import PageNotFound from "./pages/PageNotFound.jsx";
+import ProtectedAdminRoute from './routes/ProtectedAdminRoute.jsx'
+import AdminDashboard from './pages/Admin/AdminDashboard.jsx'
+import AdminLogin from './pages/Admin/AdminLogin.jsx'
+
+import { adminRoutes } from './routes/adminRoutes.jsx'
 
 
 const App = () => {
@@ -54,6 +60,26 @@ const App = () => {
           <Route path="/services/:serviceSlug" element={<ServicePage />} />
           <Route path='/blogs/:slug' element={<BlogDetails />} />
         </Route>
+
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route path="/admin" element={<ProtectedAdminRoute />}>
+          <Route element={<AdminLayout />}>
+
+            {adminRoutes.map(route => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+
+            <Route index element={<AdminDashboard />} />
+
+          </Route>
+        </Route>
+
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <ScrollUp />
