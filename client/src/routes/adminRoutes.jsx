@@ -66,6 +66,7 @@ export const adminRoutes = [
         icon: "FaCog",
         element: <BusinessSettings />
     },
+    
 
     {
         path: "invoices/:id",
