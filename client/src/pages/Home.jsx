@@ -26,9 +26,9 @@ const Home = () => {
             <section>
                 <OurProducts />
             </section>
-            <section>
+            {/* <section>
                 <OurClients />
-            </section>
+            </section> */}
             <section>
                 <Journey />
             </section>

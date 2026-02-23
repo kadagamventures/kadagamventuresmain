@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/useAuthStore";
 import { adminRoutes } from "../routes/adminRoutes";
 
-import { FaHome, FaBriefcase, FaMailBulk, FaPhoneAlt } from "react-icons/fa";
+import { FaHome, FaBriefcase, FaMailBulk, FaPhoneAlt, FaBuilding, FaFileInvoice, FaCog } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 
 import Kadagamventureslogohd from "../assets/Logo/Kadagamventureslogohd.png";
@@ -13,7 +13,10 @@ const icons = {
     CgNotes: <CgNotes />,
     FaBriefcase: <FaBriefcase />,
     FaMailBulk: <FaMailBulk />,
-    FaPhoneAlt: <FaPhoneAlt />
+    FaPhoneAlt: <FaPhoneAlt />,
+    FaBuilding: <FaBuilding />,
+    FaFileInvoice: <FaFileInvoice />,
+    FaCog: <FaCog />
 };
 
 const AdminSidebar = () => {

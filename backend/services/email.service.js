@@ -1,4 +1,4 @@
-const { SendEmailCommand } = require("@aws-sdk/client-ses");
+const { SendEmailCommand, SendRawEmailCommand } = require("@aws-sdk/client-ses");
 const { GetObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const {
@@ -121,4 +121,88 @@ exports.sendApplicantReply = async (email, name) => {
   });
 
   await ses.send(command);
+};
+
+// 📄 SEND INVOICE WITH PDF ATTACHMENT
+exports.sendInvoiceWithAttachment = async (invoice) => {
+
+  if (!invoice?.pdfKey)
+    throw new Error("Invoice PDF not found");
+
+  // Get PDF from S3
+  const command = new GetObjectCommand({
+    Bucket: AWS_S3_BUCKET_NAME,
+    Key: invoice.pdfKey,
+  });
+
+  const s3Object = await s3.send(command);
+  const pdfBuffer = Buffer.from(
+    await s3Object.Body.transformToByteArray()
+  );
+
+  const boundary = "InvoiceBoundary";
+
+  const rawEmail =
+    `From: ${clean(AWS_SES_SENDER_EMAIL)}
+To: ${clean(invoice.company.email)}
+Subject: Invoice ${invoice.invoiceNumber} – Invoice & Service Agreement
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="${boundary}"
+
+--${boundary}
+Content-Type: text/html; charset="UTF-8"
+
+<html>
+  <body style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #333; line-height: 1.6;">
+    
+    <p>Dear ${clean(invoice.company.companyName || "Valued Client")},</p>
+
+    <p>
+      We hope this message finds you well.
+    </p>
+
+    <p>
+      Please find attached the <strong>Invoice (${invoice.invoiceNumber})</strong> 
+      along with the applicable <strong>Service Agreement</strong> for your review and records.
+    </p>
+
+    <p>
+      Kindly process the payment as per the agreed terms mentioned in the invoice. 
+      Should you require any clarification regarding the invoice or agreement, 
+      please feel free to contact us.
+    </p>
+
+    <p>
+      We appreciate your continued business and look forward to serving you.
+    </p>
+
+    <br/>
+
+    <p>
+      Warm Regards,<br/>
+      <strong>Kadagam Ventures Private Limited.</strong><br/>
+      ${clean(invoice.company.phone || "")}
+    </p>
+
+  </body>
+</html>
+
+--${boundary}
+Content-Type: application/pdf; name="Invoice-${invoice.invoiceNumber}.pdf"
+Content-Disposition: attachment; filename="Invoice-${invoice.invoiceNumber}.pdf"
+Content-Transfer-Encoding: base64
+
+${pdfBuffer.toString("base64")}
+
+--${boundary}--`;
+
+
+
+  await ses.send(
+    new SendRawEmailCommand({
+      RawMessage: {
+        Data: Buffer.from(rawEmail),
+      },
+    })
+  );
 };
