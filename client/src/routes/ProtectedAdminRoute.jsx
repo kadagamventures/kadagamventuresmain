@@ -5,7 +5,7 @@ import useAuthStore from '../zustand/useAuthStore'
 const ProtectedAdminRoute = () => {
     const { isAuthenticated } = useAuthStore();
 
-    return !isAuthenticated
+    return isAuthenticated
         ? <Outlet />
         : <Navigate to="/admin/login" replace />;
 };

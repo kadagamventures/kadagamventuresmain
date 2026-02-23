@@ -39,3 +39,145 @@
     color: #ff7d31 !important;
   }
 }
+
+
+.blog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* When image exists, make layout side-by-side */
+.blog-content p:has(+ img),
+.blog-content img {
+    max-width: 100%;
+}
+
+/* Special layout when image follows text */
+.blog-content img {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+    .blog-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .blog-content p {
+        flex: 1;
+    }
+
+    .blog-content img {
+        flex: 1;
+        max-width: 450px;
+    }
+}
+
+
+.blog-content {
+  max-width: 100%;
+}
+
+/* default content */
+.blog-content p,
+.blog-content h2 {
+  width: 100%;
+}
+
+/* only images inside section */
+.blog-content .content-section {
+  margin-bottom: 30px;
+}
+
+/* grid layout only when image exists */
+@media (min-width: 768px) {
+  .blog-content .content-section.has-image {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+      align-items: start;
+  }
+
+  .blog-content .content-section.has-image img {
+      width: 100%;
+      border-radius: 12px;
+  }
+}
+.content-section img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+}
+
+/* ===== PERFECT JUSTIFIED BLOG CONTENT ===== */
+
+.content-section {
+  margin-bottom: 50px;
+}
+
+/* Headings */
+.content-section h1,
+.content-section h2,
+.content-section h3 {
+  text-align: left; /* headings should NOT be justified */
+  font-weight: 400;
+  color: #111827;
+}
+
+.content-section h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.content-section h2 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.content-section h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+/* Paragraph justify alignment */
+.content-section p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #374151;
+  margin-bottom: 16px;
+
+  text-align: justify;          /* THIS MAKES PERFECT ALIGNMENT */
+  text-justify: inter-word;     /* improves spacing */
+}
+
+/* Lists justify */
+.content-section li {
+  font-size: 17px;
+  line-height: 1.9;
+  text-align: justify;
+}
+
+/* Image styling */
+.content-section img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+
+  .content-section p {
+    font-size: 16px;
+    text-align: justify;
+  }
+
+}
+
+
+

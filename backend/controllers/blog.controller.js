@@ -9,7 +9,45 @@ const {
 } = require("../utils/s3");
 
 // ADMIN – CREATE BLOG
+// exports.createBlog = asyncHandler(async (req, res, next) => {
+//   const { error } = blogSchema.createBlogSchema.validate(req.body);
+//   if (error) return next(new AppError(error.details[0].message, 400));
+
+//   if (!req.files?.featuredImage) {
+//     return next(new AppError("Featured image required", 400));
+//   }
+
+//   const featuredImage = await uploadToS3({
+//     file: req.files.featuredImage[0],
+//     folder: "blogs/featured",
+//   });
+
+//   const ogImage = req.files.ogImage
+//     ? await uploadToS3({
+//         file: req.files.ogImage[0],
+//         folder: "blogs/og",
+//       })
+//     : null;
+
+//   const blog = await blogService.createBlog({
+//     ...req.body,
+//     featuredImage,
+//     ogImage,
+//   });
+
+//   res.status(201).json({ success: true, data: blog });
+// });
 exports.createBlog = asyncHandler(async (req, res, next) => {
+
+  // ✅ FIX: parse SEO JSON string
+  if (req.body.seo && typeof req.body.seo === "string") {
+    try {
+      req.body.seo = JSON.parse(req.body.seo);
+    } catch (err) {
+      return next(new AppError("Invalid SEO format", 400));
+    }
+  }
+
   const { error } = blogSchema.createBlogSchema.validate(req.body);
   if (error) return next(new AppError(error.details[0].message, 400));
 
@@ -37,6 +75,7 @@ exports.createBlog = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({ success: true, data: blog });
 });
+
 
 // PUBLIC – GET BLOGS
 exports.getBlogs = asyncHandler(async (req, res) => {
@@ -86,16 +125,71 @@ exports.getRecommendedBlogs = asyncHandler(async (req, res) => {
       data: response,
     });
   });
+
+
+  exports.getAllBlogsAdmin = asyncHandler(async (req, res) => {
+    const blogs = await blogService.getAllBlogs();
+  
+    const response = await Promise.all(
+      blogs.map(async (blog) => ({
+        ...blog.toObject(),
+        featuredImageUrl: await getSignedImageUrl(blog.featuredImage),
+        ogImageUrl: await getSignedImageUrl(blog.ogImage),
+      }))
+    );
+  
+    res.json({
+      success: true,
+      data: response,
+    });
+  });
+  
   
 
 // ADMIN – UPDATE
+// exports.updateBlog = asyncHandler(async (req, res, next) => {
+//   const blog = await blogService.getBlogById(req.params.id);
+//   if (!blog) return next(new AppError("Blog not found", 404));
+
+//   if (req.files?.featuredImage) {
+//     await deleteFromS3(blog.featuredImage);
+
+//     blog.featuredImage = await uploadToS3({
+//       file: req.files.featuredImage[0],
+//       folder: "blogs/featured",
+//     });
+//   }
+
+//   if (req.files?.ogImage) {
+//     await deleteFromS3(blog.ogImage);
+
+//     blog.ogImage = await uploadToS3({
+//       file: req.files.ogImage[0],
+//       folder: "blogs/og",
+//     });
+//   }
+
+//   Object.assign(blog, req.body);
+//   await blog.save();
+
+//   res.json({ success: true, data: blog });
+// });
 exports.updateBlog = asyncHandler(async (req, res, next) => {
+
+  // ✅ ADD THIS
+  if (req.body.seo && typeof req.body.seo === "string") {
+    try {
+      req.body.seo = JSON.parse(req.body.seo);
+    } catch {
+      return next(new AppError("Invalid SEO format", 400));
+    }
+  }
+
   const blog = await blogService.getBlogById(req.params.id);
   if (!blog) return next(new AppError("Blog not found", 404));
 
   if (req.files?.featuredImage) {
     await deleteFromS3(blog.featuredImage);
-
     blog.featuredImage = await uploadToS3({
       file: req.files.featuredImage[0],
       folder: "blogs/featured",
@@ -104,7 +198,6 @@ exports.updateBlog = asyncHandler(async (req, res, next) => {
 
   if (req.files?.ogImage) {
     await deleteFromS3(blog.ogImage);
-
     blog.ogImage = await uploadToS3({
       file: req.files.ogImage[0],
       folder: "blogs/og",
@@ -112,10 +205,15 @@ exports.updateBlog = asyncHandler(async (req, res, next) => {
   }
 
   Object.assign(blog, req.body);
+
+  blog.publishedAt =
+    req.body.status === "published" ? new Date() : null;
+
   await blog.save();
 
   res.json({ success: true, data: blog });
 });
+
 
 // ADMIN – DELETE
 exports.deleteBlog = asyncHandler(async (req, res, next) => {

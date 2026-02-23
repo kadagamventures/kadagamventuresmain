@@ -123,8 +123,8 @@ export const navMenu = [
         label: "About us",
         path: "/about",
     },
-    // {
-    //     label: "Blogs",
-    //     path: "/blogs",
-    // },
+    {
+        label: "Blogs",
+        path: "/blogs",
+    },
 ];

@@ -16,6 +16,8 @@ router.post(
   controller.createBlog
 );
 
+router.get("/admin/all", adminAuth, controller.getAllBlogsAdmin);
+
 router.put(
   "/:id",
   adminAuth,

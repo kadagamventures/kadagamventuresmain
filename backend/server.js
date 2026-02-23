@@ -7,6 +7,7 @@ require("dotenv").config({
   const connectDB = require("./config/dbConfig");
   const corsMiddleware = require("./config/cors.config");
   const AppError = require("./utils/appError")
+  const adminDashboardRoutes = require("./routes/adminDashboardRoutes");
   
   const app = express();
 
@@ -52,6 +53,67 @@ require("dotenv").config({
   app.use("/api/inquiries", require("./routes/inquiry.route"));
   // work - together
   app.use("/api/work-together", require("./routes/workTogether.route"));
+  //Mobile app development
+  app.use(
+    "/api/services/mobile-app-development",
+    require("./routes/mobileAppDevelopment.route")
+  );
+ // Website Development
+ app.use("/api/services/website-development", require("./routes/websiteDevelopment.route"));
+ // UI/UX Designing
+ app.use("/api/services/ui-ux-designing", require("./routes/uiUxDesigning.route"));
+// Landing Page design
+ app.use(
+  "/api/services/landing-page-design",
+  require("./routes/landingPageDesign.route")
+);
+// Branding Graphic Design
+app.use(
+  "/api/services/branding-graphic-design",
+  require("./routes/brandingGraphicDesign.route")
+);
+// QA Testing
+app.use(
+  "/api/services/software-testing-qa",
+  require("./routes/softwareTestingQA.route")
+);
+// Digital Marketing
+app.use(
+  "/api/services/digital-marketing",
+  require("./routes/digitalMarketing.route")
+);
+// Interactive Animated Websites
+app.use(
+  "/api/services/interactive-animated-websites",
+  require("./routes/interactiveAnimatedWebsites.route")
+);
+//Brand Strategy Identify
+app.use(
+  "/api/services/brand-strategy-identity",
+  require("./routes/brandStrategyIdentity.route")
+);
+// Video production
+app.use(
+  "/api/services/video-production",
+  require("./routes/videoProduction.route")
+);
+//Video Editing and Post Producation
+app.use(
+  "/api/services/video-editing-post-production",
+  require("./routes/videoEditingPostProduction.route")
+);
+
+//
+app.use("/api/companies", require("./routes/company.routes"));
+app.use("/api/invoice", require("./routes/invoice.routes"));
+app.use("/api/business", require("./routes/business.routes"));
+
+app.use("/api/admin", adminDashboardRoutes);
+
+
+
+
+
 
   
 
