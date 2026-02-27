@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { servicesData } from "../data/servicesData";
 import ServiceLayout from "../components/services/ServiceLayout";
 
 const ServicePage = () => {
     const { serviceSlug } = useParams();
+    const location = useLocation();
+    const baseUrl = "https://kadagamventures.com";
     const service = servicesData[serviceSlug];
 
     useEffect(() => {
@@ -40,6 +42,12 @@ const ServicePage = () => {
             <Helmet>
                 <title>{service.metatitle}</title>
                 <meta name="description" content={service.metadescription} />
+                {service.metakeywords && (
+                    <meta
+                        name="keywords"
+                        content={service.metakeywords.join(", ")}
+                    />
+                )}
                 <meta property="og:title" content={service.title} />
                 <meta property="og:description" content={service.description} />
                 <meta property="og:type" content="website" />
@@ -48,6 +56,10 @@ const ServicePage = () => {
                 {service.image && (
                     <meta property="og:image" content={service.image} />
                 )}
+                <link
+        rel="canonical"
+        href={`${baseUrl}${location.pathname}`}
+    />
 
                 <meta name="robots" content="index, follow" />
             </Helmet>

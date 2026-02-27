@@ -178,6 +178,21 @@
   }
 
 }
+.quill-custom .ql-container {
+  height: 600px;
+}
 
+.quill-custom .ql-editor {
+  height: 100%;
+  overflow-y: auto;
+}
+.quill-scroll .ql-container {
+  height: 600px;      /* fixed height */
+  overflow-y: auto;   /* enable scroll */
+}
+
+.quill-scroll .ql-editor {
+  min-height: 250px;
+}
 
 

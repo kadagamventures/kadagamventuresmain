@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import RightClipAccent from "../components/RightClipAccent";
@@ -13,6 +13,8 @@ import DOMPurify from "dompurify";
 const BlogDetails = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const baseUrl = "https://kadagamventures.com";
 
   const createSections = (html) => {
     const container = document.createElement("div");
@@ -82,11 +84,46 @@ const BlogDetails = () => {
     <main className="bg-white min-h-screen">
       {/* ================= SEO ================= */}
       <Helmet>
-        <title>{blog.seo?.metaTitle || blog.title}</title>
-        <meta name="description" content={blog.seo?.metaDescription} />
-        <meta name="keywords" content={blog.seo?.metaKeywords?.join(", ")} />
-        <meta property="og:image" content={blog.ogImageUrl} />
-      </Helmet>
+  {/* Title */}
+  <title>{blog.seo?.metaTitle || blog.title}</title>
+
+  {/* Meta Description */}
+  <meta
+    name="description"
+    content={blog.seo?.metaDescription || blog.excerpt}
+  />
+
+  {/* Keywords (optional) */}
+  {blog.seo?.metaKeywords && (
+    <meta
+      name="keywords"
+      content={blog.seo.metaKeywords.join(", ")}
+    />
+  )}
+
+  {/* Canonical */}
+  <link
+    rel="canonical"
+    href={`${baseUrl}${location.pathname}`}
+  />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={blog.title} />
+  <meta
+    property="og:description"
+    content={blog.seo?.metaDescription || blog.excerpt}
+  />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={`${baseUrl}${location.pathname}`} />
+  <meta property="og:image" content={blog.featuredImageUrl} />
+
+  {/* Article Info */}
+  <meta property="article:published_time" content={blog.publishedAt} />
+  <meta property="article:author" content={blog.author} />
+
+  {/* Robots */}
+  <meta name="robots" content="index, follow" />
+</Helmet>
 
       <div className="px-7 pt-3 xl:pt-6"></div>
 

@@ -29,37 +29,35 @@ const Journey = () => {
                 </div>
             </div>
             <div
-                className="text-start mx-auto  max-w-9xl px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-6 sm:py-8 md:py-10 lg:py-12 text-base sm:text-lg md:text-xl leading-relaxed text-[#000000BF] font-sans space-y-5 sm:space-y-6 md:space-y-7">
+                className="text-justify mx-auto  max-w-9xl px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-6 sm:py-8 md:py-10 lg:py-12 text-base sm:text-lg md:text-xl leading-relaxed text-[#000000BF] font-sans space-y-5 sm:space-y-6 md:space-y-7 ">
                 <p>
-                    At Kadagam Ventures, we believe that business is not just about profit - it’s about purpose.
-                    Kadagam Ventures is more than an IT company-it’s a purpose-driven force where innovation
-                    meets impact and progress uplifts people.
+                Kadagam Ventures was established in early 2020 by Indian entrepreneurs who
+                 identified a widespread market flaw; great ideas often fail due to a lack of support.
                 </p>
 
                 <p>
-                    Founded by Mrs. Uma Rani and the team, our journey bridges the digital world with human
-                    values. We don’t just build technology — we craft intelligent platforms, design transformative
-                    experiences, and ignite positive change. Our products fuel industry evolution; our deeper
-                    mission is rooted in creating opportunities that uplift communities and shape a better tomorrow.
+                They recognized that a business could only truly scale if there were a sophisticated mix of strategy, technology, and tireless execution.
+                Motivated by a genuine desire to address challenges, we have constructed Kadagam to be an ally in transformation.
+                </p>
+
+                
+
+                <p>
+                We help companies in navigating changing market dynamics, optimizing their processes, 
+                and drive additional growth through intentional digital transformation.From insight to
+                 execution, each solution is tailored to make a visible impact
+
                 </p>
 
                 <p>
-                    Kadagam Ventures was founded in the early 2020s by a group of forward-thinking entrepreneurs
-                    in India who believed that businesses need more than just ideas to grow — they need the right
-                    strategy, technology, and execution.
+                Today, Kadagam Ventures is an ecosystem of technology-powered products 
+                and services such as Web Design & Development, Mobile App Development, Digital Marketing,
+                UI/UX Designer, Landing page Design, Branding & Graphic Designer platforms for both startups 
+                and enterprises.
                 </p>
-
                 <p>
-                    With a strong focus on innovation and problem-solving, Kadagam Ventures was created to help
-                    organizations adapt to change, streamline operations, and unlock new opportunities through
-                    smart digital solutions. From strategy to execution, every solution is designed to deliver
-                    real value and measurable impact.
-                </p>
-
-                <p>
-                    Today, Kadagam Ventures stands as a growing ecosystem of technology-driven products and
-                    services, empowering startups and enterprises alike. Our journey is defined by resilience,
-                    continuous learning, and a commitment to building solutions that don’t just work — but work smart.
+                We’re on the relentless pursuit of success, we never stop learning, and we don’t just show up to work and punch in
+                  we also make the clock work for us through hard work, solutions, and systems.
                 </p>
             </div>
 

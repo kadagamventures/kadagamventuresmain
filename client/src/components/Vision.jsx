@@ -23,10 +23,10 @@ const Vision = () => {
                                 <span className="vision-filled">ON</span>
                             </h2>
                             <div className="mt-6 space-y-4 text-lg md:text-xl text-gray-800 leading-relaxed">
-                                <p>At Kadagam Ventures, We Envision A Future Where Technology Becomes The Backbone Of Sustainable Progress.</p>
-                                <p>We Are Building More Than Just Software—We're Building The Infrastructure For A Smarter, More Inclusive Tomorrow.</p>
-                                <p>As A Forward-Thinking IT Company, Our Mission Is To Lead The Way In Digital Innovation, Delivering Smart, Scalable Solutions That Help Businesses Evolve With Confidence.</p>
-                                <p>We Aim To Be A Global Leader In Delivering Intelligent, Future-Ready IT Solutions That Empower Businesses To Operate Smarter, Scale Faster, And Innovate Boldly.</p>
+                                <p>At Kadagam Ventures, we see technology as a driver of growth and development in a responsible way.</p>
+                                <p>We’re not just a software company, we work at the intersection of technology and people to tackle some of the world’s most important challenges.</p>
+                                <p>As a progressive IT company, we lead our clients with smart solutions.</p>
+                                <p>We strive to be the business partner that you will rely on around the world to work smarter, grow faster, and stay ahead.</p>
                             </div>
                         </div>
 
@@ -48,10 +48,10 @@ const Vision = () => {
                                 <span className="vision-filled">ON</span>
                             </h2>
                             <div className="mt-6 space-y-4 text-lg md:text-xl text-gray-800 leading-relaxed">
-                                <p>We Specialize In Delivering Cutting-Edge Web, Mobile, And Enterprise Applications That Drive Business Growth And Digital Transformation.</p>
-                                <p>From Dynamic Websites And Scalable Web Apps To Powerful E-Commerce Platforms, We Help Businesses Expand Their Online Presence And Enhance Operational Efficiency In A Connected World.</p>
-                                <p>But We Don't Stop At Innovation—We Lead With Intention.</p>
-                                <p>We Believe In Technology That Not Only Transforms Businesses—But Transforms Lives.</p>
+                                <p>Our expertise goes from websites to apps  we are masters of digital business technology development!</p>
+                                <p>From brilliant websites to Web design & development, Mobile App development, Digital marketing, UI/UX designer, Landing page Design, Branding & Graphic Designer platforms and analytics, we empower companies worldwide to thrive in the digital world.</p>
+                                <p>But innovation isn’t the only thing we do, we innovate with purpose.</p>
+                                <p>We firmly believe in technology that transforms not just businesses, but the lives of the people around them.</p>
                             </div>
                         </div>
 

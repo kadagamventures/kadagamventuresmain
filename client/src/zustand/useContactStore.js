@@ -44,7 +44,7 @@ const useContactStore = create((set, get) => ({
             set({ loading: true, error: null, success: false })
 
             // simple validation
-            if (!form.fullName || !form.phone || !form.email) {
+            if (!form.fullName || !form.contactNumber || !form.email) {
                 throw new Error("Please fill all fields")
             }
 

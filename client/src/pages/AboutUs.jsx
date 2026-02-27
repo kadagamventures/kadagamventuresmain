@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import HeroSection from '../components/HeroSection'
 import NaveenImage from "../assets/products/naveensir.png";
@@ -15,6 +15,16 @@ import ContactUs from '../components/ContactUs';
 
 
 const AboutUs = () => {
+
+    const contactRef = useRef(null);
+
+    const scrollToContact = () => {
+        contactRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
     return (
         <main>
             <section>
@@ -29,19 +39,24 @@ const AboutUs = () => {
             </section>
             <section className='px-10 py-12'>
                 <h3 className='font-extrabold text-3xl mb-4'>About Us</h3>
-                <p className='leading-loose text-xl font-sans text-gray-700 text-start'>
-                    At Kadagam Ventures, we believe that business is not just about profit—it’s about purpose.
-                    Kadagam Ventures is more than an IT company—it’s a purpose-driven force where innovation meets impact and progress uplifts people.
-                    Founded by Mrs. Uma Rani and The team, our journey bridges the digital world with human values. We don’t just build technology — we craft intelligent platforms, design transformative experiences, and ignite positive change.
-                    Our products fuel industry evolution; our deeper mission is rooted in creating opportunities that uplift communities and shape a better tomorrow.
+                <p className='leading-loose text-xl font-sans text-gray-700 text-justify'>
+                Kadagam Ventures was established in early 2020 by Indian entrepreneurs who identified a
+                widespread market flaw; great ideas often fail due to a lack of support. They recognized that a business could only truly scale 
+                if there were a sophisticated mix of strategy, technology, and tireless execution.
                 </p>
-                <p className='leading-loose text-xl font-sans text-gray-700 text-start'>
-                    Kadagam Ventures was founded in the early 2020s by a group of forward-thinking entrepreneurs in India who believed that businesses need more than just ideas to grow — they need the right strategy, technology, and execution.
-
-                    With a strong focus on innovation and problem-solving, Kadagam Ventures was created to help organizations adapt to change, streamline operations, and unlock new opportunities through smart digital solutions. From strategy to execution, every solution is designed to deliver real value and measurable impact.
-
-                    Today, Kadagam Ventures stands as a growing ecosystem of technology-driven products and services, empowering startups and enterprises alike. Our journey is defined by resilience, continuous learning, and a commitment to building solutions that don’t just work — but work smart.
-                </p>
+                <p className='leading-loose text-xl font-sans text-gray-700 text-justify'>
+                Motivated by a genuine desire to address challenges, we have constructed Kadagam to be
+                 an ally in transformation. We help companies in navigating changing market dynamics, 
+                 optimizing their processes, and drive additional growth through intentional digital 
+                 transformation.From insight to execution, each solution is tailored to make a visible impact.
+                 </p>
+                 <p className='leading-loose text-xl font-sans text-gray-700 text-justify'>
+                 Today, Kadagam Ventures is an ecosystem of technology-powered products and services such as 
+                 Web Design & Development, Mobile App Development, Digital Marketing, UI/UX Designer, Landing page Design,
+                 Branding & Graphic Designer platforms for both startups and enterprises. We’re on the relentless pursuit
+                  of success, we never stop learning, and we don’t just show up to work and punch in  we also make the 
+                  clock work for us through hard work, solutions and systems.
+                 </p>      
             </section>
             <section>
                 <Vision />
@@ -56,7 +71,7 @@ const AboutUs = () => {
                 <div className='text-start text-white  max-w-2xl space-y-6'>
                     <h2 className='text-4xl font-semibold'>Looking for the Right Service ?</h2>
                     <p className='text-lg'>We’ve Got You Covered Share your requirement and <br /> let us build the perfect solution for you.</p>
-                    <Button title={"Connect now"} />
+                   <Button title={"Connect now"} onClick={scrollToContact} />
                 </div>
                 <img
                     data-aos="fade-right"
@@ -68,29 +83,28 @@ const AboutUs = () => {
             </section>
             <section className="px-6 py-12 lg:px-16">
                 <h2 className="font-semibold text-2xl sm:text-3xl lg:text-4xl text-center mb-10">
-                    Bringing Ideas Into Impactful Digital Products
+                Transforming Ideas Into Digital Products with an Impact
                 </h2>
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-6  max-w-7xl  mx-auto">
                     <div className="max-w-3xl space-y-6 text-center lg:text-left">
                         <p className="leading-relaxed text-base sm:text-lg text-[#000000A6]">
-                            At Kadagam Ventures, we specialize in transforming ideas into scalable
-                            digital solutions that help businesses grow with confidence. Many of
-                            the products and platforms we’ve built began as simple concepts and
-                            evolved into powerful tools that drive real results.
+                        We create scalable digital solutions based on ideas that help businesses grow
+                         with confidence. A lot of the products and platforms we have built always started out
+                          as random ideas and eventually grew into robust tools that deliver action.
                         </p>
 
                         <p className="leading-relaxed text-base sm:text-lg text-[#000000A6]">
-                            We take pride in partnering closely with our clients—from early
-                            brainstorming to final delivery—ensuring every solution is thoughtfully
-                            designed and technically sound. Seeing our clients succeed, expand, and
-                            strengthen their digital presence is what motivates us every day.
+                        Our pride lies in close collaboration with our customers  all the way from early 
+                        brainstorming to final release, thus each solution designed thoroughly and after that 
+                        technically optimal. And nothing could be more satisfying for us than to see our clients GROW & 
+                        THRIVE thanks to their stronger online presence.
                         </p>
 
                         <p className="leading-relaxed text-base sm:text-lg text-[#000000A6]">
-                            While we follow a proven process to guide each project toward success,
-                            we believe flexibility is key. Every idea is unique, and we’re always
-                            open to refining, rethinking, and improving along the way to achieve
-                            the best outcome.
+                        We have a regular process for taking each project through, but realize every project
+                         is different! Every concept is unique, and we are always ready to iterate, reassess and 
+                         enhance while striving for the optimal outcome.
+
                         </p>
                     </div>
 
@@ -128,7 +142,7 @@ const AboutUs = () => {
                     })}
                 </div>
             </section>
-            <section className='px-6 py-12 lg:px-16'>
+            <section ref={contactRef} className='px-6 py-12 lg:px-16'>
                 <ContactUs />
             </section>
         </main>

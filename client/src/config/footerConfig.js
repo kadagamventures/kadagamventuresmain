@@ -11,8 +11,8 @@ export const footerConfig = {
     quickLinks: [
         { label: "Home", path: "/" },
         { label: "About us", path: "/about" },
-        { label: "Services", path: "/services" },
-        { label: "Products", path: "/products" },
+        { label: "Services", path: "/services/digital-marketing" },
+        { label: "Products", path: "https://nithyaevent.com/" },
         { label: "Careers", path: "/careers" },
         { label: "Blogs", path: "/blogs" },
     ],
@@ -38,7 +38,7 @@ export const footerConfig = {
         { label: "Privacy Policy", path: "/privacy-policy" },
         { label: "Terms and Conditions", path: "/terms" },
         { label: "Refund Policy", path: "/refund-policy" },
-        { label: "Help Centre", path: "/help" },
+        { label: "Help Centre", path: "/help-center" },
     ],
 
     address: {

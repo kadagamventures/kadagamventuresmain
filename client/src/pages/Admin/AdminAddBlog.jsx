@@ -193,7 +193,7 @@ export default function AdminAddBlog() {
           </div>
 
           {/* Content */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5">
               Content <span className="text-red-500">*</span>
             </label>
@@ -206,7 +206,22 @@ export default function AdminAddBlog() {
                 className=""
               />
             </div>
-          </div>
+          </div> */}
+          <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+    Content <span className="text-red-500">*</span>
+  </label>
+
+  <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
+    <ReactQuill
+      theme="snow"
+      value={form.content}
+      onChange={handleQuill}
+      modules={quillModules}
+      className="quill-scroll"
+    />
+  </div>
+</div>
 
           {/* Category & Author */}
           <div className="grid md:grid-cols-2 gap-6">

@@ -9,31 +9,31 @@ export const productBuild = [
     {
         icon: PiTargetLight,
         title: "Define",
-        desc: "We understand your idea, goals, and users before anything else.",
+        desc: "Before anything else, we get your idea, story and users.",
     },
     {
         icon: TbNotes,
         title: "Plan",
-        desc: "We map the right strategy, structure, and technology for success.",
+        desc: "And then we see the right strategy, structure and technology for success.",
     },
     {
         icon: MdAppSettingsAlt,
         title: "Build",
-        desc: "We design and develop clean, user-focused digital solutions.",
+        desc: "Simple, user-focused solutions based on clean design and development.",
     },
     {
         icon: PiRocketLaunchBold,
         title: "Launch",
-        desc: "We bring your product to life with precision and care.",
+        desc: "Takes your product from concept to reality.",
     },
     {
         icon: TbRulerMeasure2,
         title: "Measure",
-        desc: "We analyze performance and user feedback.",
+        desc: "We monitor performance and user feedback.",
     },
     {
         icon: ImLoop2,
         title: "Iterate",
-        desc: "We refine and improve to ensure continuous growth.",
+        desc: "We grow constantly by refining and improving.",
     },
 ];

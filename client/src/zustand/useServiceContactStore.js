@@ -55,7 +55,10 @@ const useServiceContactStore = create((set, get) => ({
         } catch (err) {
             set({
                 loading: false,
-                error: err.message || "Submission failed",
+                error:
+                    err.response?.data?.message ||  // backend message
+                    err.message ||                  // fallback
+                    "Submission failed",
             })
         }
     },

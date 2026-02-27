@@ -241,7 +241,7 @@ if (ogFile) {
           </div>
 
           {/* Content */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5">
               Content <span className="text-red-500">*</span>
             </label>
@@ -254,7 +254,22 @@ if (ogFile) {
                 className="min-h-[380px]"
               />
             </div>
-          </div>
+          </div> */}
+          <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+    Content <span className="text-red-500">*</span>
+  </label>
+
+  <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
+    <ReactQuill
+      theme="snow"
+      value={form.content}
+      onChange={handleQuillChange}
+      modules={quillModules}
+      className="quill-custom"
+    />
+  </div>
+</div>
 
           {/* Category & Author */}
           <div className="grid md:grid-cols-2 gap-6">

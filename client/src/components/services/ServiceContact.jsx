@@ -6,7 +6,8 @@ import useServiceContactStore from "../../zustand/useServiceContactStore"
 
 const ServiceContact = () => {
 
-    const { form, setField, submitForm, loading } = useServiceContactStore()
+    //const { form, setField, submitForm, loading } = useServiceContactStore()
+    const { form, setField, submitForm, loading, error, success } = useServiceContactStore()
 
 
     return (
@@ -38,7 +39,25 @@ const ServiceContact = () => {
                                     type="text"
                                     value={form.firstName}
                                     onChange={(e) => setField("firstName", e.target.value)}
-                                    className="mt-2 w-full border rounded-lg px-4 py-2 outline-none"
+                                    className="
+            mt-2 w-full
+            bg-gray-50
+            border border-gray-300
+            rounded-xl
+            px-4 py-3
+            text-gray-800
+            placeholder-gray-400
+            outline-none
+
+            transition-all duration-200
+
+            focus:bg-white
+            focus:border-[#405BAA]
+            focus:ring-2
+            focus:ring-[#405BAA]/20
+
+            hover:border-gray-400
+        "
                                 />
                             </div>
 
@@ -50,7 +69,25 @@ const ServiceContact = () => {
                                     type="email"
                                     value={form.email}
                                     onChange={(e) => setField("email", e.target.value)}
-                                    className="mt-2 w-full border rounded-lg px-4 py-2 outline-none"
+                                    className="
+            mt-2 w-full
+            bg-gray-50
+            border border-gray-300
+            rounded-xl
+            px-4 py-3
+            text-gray-800
+            placeholder-gray-400
+            outline-none
+
+            transition-all duration-200
+
+            focus:bg-white
+            focus:border-[#405BAA]
+            focus:ring-2
+            focus:ring-[#405BAA]/20
+
+            hover:border-gray-400
+        "
                                 />
                             </div>
                         </div>
@@ -64,7 +101,25 @@ const ServiceContact = () => {
                                 type="text"
                                 value={form.company}
                                 onChange={(e) => setField("company", e.target.value)}
-                                className="mt-2 w-full border rounded-lg px-4 py-2 outline-none"
+                                className="
+            mt-2 w-full
+            bg-gray-50
+            border border-gray-300
+            rounded-xl
+            px-4 py-3
+            text-gray-800
+            placeholder-gray-400
+            outline-none
+
+            transition-all duration-200
+
+            focus:bg-white
+            focus:border-[#405BAA]
+            focus:ring-2
+            focus:ring-[#405BAA]/20
+
+            hover:border-gray-400
+        "
                             />
                         </div>
 
@@ -77,8 +132,38 @@ const ServiceContact = () => {
                                 value={form.projectDetails}
                                 onChange={(e) => setField("projectDetails", e.target.value)}
                                 rows={4}
-                                className="mt-2 w-full border rounded-lg px-4 py-2 outline-none resize-none"
+                                className="
+            mt-2 w-full
+            bg-gray-50
+            border border-gray-300
+            rounded-xl
+            px-4 py-3
+            text-gray-800
+            placeholder-gray-400
+            outline-none
+
+            transition-all duration-200
+
+            focus:bg-white
+            focus:border-[#405BAA]
+            focus:ring-2
+            focus:ring-[#405BAA]/20
+
+            hover:border-gray-400
+        "
                             />
+                            {/* Error Message */}
+{error && (
+    <p className="text-red-500 text-sm mt-2">
+        {error}
+    </p>
+)}
+{/* Success Message */}
+{success && (
+    <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm">
+        ✅ Thank you! Your request has been submitted successfully. We’ll contact you soon.
+    </div>
+)}
                         </div>
 
                         {/* CTA */}

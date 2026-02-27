@@ -14,7 +14,13 @@ const NavBar = () => {
     const closeTimeout = useRef(null);
 
     const location = useLocation();
-    const isActive = (path) => location.pathname.startsWith(path);
+    //const isActive = (path) => location.pathname.startsWith(path);
+    const isActive = (path) => {
+        if (path === "/") {
+            return location.pathname === "/";
+        }
+        return location.pathname.startsWith(path);
+    };
 
     const handleMouseEnter = (label) => {
         if (closeTimeout.current) {

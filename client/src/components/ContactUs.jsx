@@ -7,7 +7,8 @@ import useContactStore from "../zustand/useContactStore";
 
 const ContactUs = () => {
 
-    const { form, setField, submitForm, loading } = useContactStore()
+    //const { form, setField, submitForm, loading } = useContactStore()
+    const { form, setField, submitForm, loading, error, success } = useContactStore()
 
     return (
         <div className="relative w-full max-w-7xl mx-auto h-125 rounded-3xl overflow-hidden bg-black/90 lg:bg-white">
@@ -55,6 +56,18 @@ const ContactUs = () => {
                         placeholder="Email Id"
                         className="w-full  bg-white lg:bg-[#3a3a3a] text-black lg:text-white placeholder-gray-400 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-red-500"
                     />
+                    {/* ERROR MESSAGE */}
+{error && (
+    <p className="text-red-500 text-sm mt-2">
+        {error}
+    </p>
+)}
+{/* SUCCESS MESSAGE */}
+{success && (
+    <div className="mt-3 bg-green-500/10 border border-green-500 text-green-400 px-4 py-3 rounded-lg text-sm">
+        ✅ Thank you! Your inquiry has been submitted successfully.
+    </div>
+)}
                 </div>
 
                 {/* Radio Section */}

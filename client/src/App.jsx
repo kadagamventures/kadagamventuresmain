@@ -40,6 +40,7 @@ import AdminViewCareer from './pages/Admin/AdminCareers/AdminViewCareer.jsx'
 import TermsAndConditions from './pages/TermsAndConditions.jsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import RefundPolicy from './pages/RefundPolicy.jsx'
+import HelpCenter from './pages/helpCenterData.jsx';
 
 
 
@@ -90,6 +91,8 @@ const App = () => {
           <Route path='/terms' element={<TermsAndConditions />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
           <Route path='/refund-policy' element={<RefundPolicy />} />
+          <Route path='/help-center' element={<HelpCenter/>} />
+
         </Route>
 
         <Route path="/admin/login" element={<AdminLogin />} />

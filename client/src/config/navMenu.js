@@ -4,6 +4,50 @@ import KadagamNext from "../assets/products/KadagamNext.png";
 import kadagamfoundation from "../assets/products/kadagamfoundationtwo.png"
 
 export const navMenu = [
+
+    {
+        label: "Home",
+        path: "/",
+    },
+    {
+        label: "About us",
+        path: "/about",
+    },
+    {
+        label: "Products",
+        dropdown: true,
+        heading: "In-House Ventures",
+        children: [
+            {
+                title: "Nithyaevents",
+                description: "Manage events easily",
+                url: "https://nithyaevent.com/",
+                logo: NithyaEvents,
+                external: true,
+            },
+            {
+                title: "Nithyatickets",
+                description: "Ticket booking and management",
+                url: "https://nithyatickets.com/",
+                logo: NithyaTickets,
+                external: true,
+            },
+            {
+                title: "Kadagam Next",
+                description: "Next-gen enterprise solutions",
+                url: "https://www.kadagamnext.com/",
+                logo: KadagamNext,
+                external: true,
+            },
+            {
+                title: "Kadagam Foundation",
+                description: "We’re Non- Profitable & Charity Organization",
+                url: "https://kadagamfoundation.org/",
+                logo: kadagamfoundation,
+                external: true,
+            },
+        ],
+    },
     {
         label: "Services",
         dropdown: true,
@@ -81,50 +125,14 @@ export const navMenu = [
         ],
     },
     {
-        label: "Products",
-        dropdown: true,
-        heading: "In-House Ventures",
-        children: [
-            {
-                title: "Nithyaevents",
-                description: "Manage events easily",
-                url: "https://nithyaevent.com/",
-                logo: NithyaEvents,
-                external: true,
-            },
-            {
-                title: "Nithyatickets",
-                description: "Ticket booking and management",
-                url: "https://nithyatickets.com/",
-                logo: NithyaTickets,
-                external: true,
-            },
-            {
-                title: "Kadagam Next",
-                description: "Next-gen enterprise solutions",
-                url: "https://www.kadagamnext.com/",
-                logo: KadagamNext,
-                external: true,
-            },
-            {
-                title: "Kadagam Foundation",
-                description: "We’re Non- Profitable & Charity Organization",
-                url: "https://kadagamfoundation.org/",
-                logo: kadagamfoundation,
-                external: true,
-            },
-        ],
+        label: "Blogs",
+        path: "/blogs",
     },
+   
     {
         label: "Careers",
         path: "/careers",
     },
-    {
-        label: "About us",
-        path: "/about",
-    },
-    {
-        label: "Blogs",
-        path: "/blogs",
-    },
+    
+   
 ];
