@@ -14,7 +14,7 @@ const BlogDetails = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const baseUrl = "https://kadagamventures.com";
+  const baseUrl = "https://www.kadagamventures.com";
 
   const createSections = (html) => {
     const container = document.createElement("div");

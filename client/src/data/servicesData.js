@@ -379,12 +379,27 @@ export const servicesData = {
             description:
                 "We understand your audience, craft the right message, execute targeted strategies, and continuously optimize to drive scalable business growth.",
             steps: [
-                { title: "Research" },
-                { title: "Strategy" },
-                { title: "Execute" },
-                { title: "Optimize" },
-                { title: "Scale" },
-            ]
+        {
+            title: "Research",
+            icon: FaSearch,
+        },
+        {
+            title: "Strategy",
+            icon: FaBullseye,
+        },
+        {
+            title: "Execute",
+            icon: FaPlayCircle,
+        },
+        {
+            title: "Optimize",
+            icon: FaChartLine,
+        },
+        {
+            title: "Scale",
+            icon: FaRocket,
+        },
+    ]
         }
 
 

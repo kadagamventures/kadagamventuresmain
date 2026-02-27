@@ -25,12 +25,12 @@ const HeroHome = ({ onGetStarted }) => {
           content="Best digital marketing company in Bangalore, Digital marketing agency in Bangalore, Website design company in Bangalore, Landing page design, Mobile app development services, Difference between UI and UX, Video editing services for businesses, Animated web design services Bangalore, Logo design & branding, Graphic design agencies, Brand strategy services, AI-powered software testing, Machine learning, Test automation"
         />
 
-        <link rel="canonical" href="https://kadagamventures.com/" />
+        <link rel="canonical" href="https://www.kadagamventures.com" />
         {/* ✅ ADD OPEN GRAPH HERE */}
     <meta property="og:title" content="Best Digital Marketing & Web Design Company in Bangalore | Kadagam Ventures" />
     <meta property="og:description" content="Looking for a Best digital marketing and web design company in Bangalore? We deliver app development and brand strategy solutions that drive real growth." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kadagamventures.com/" />
+    <meta property="og:url" content="https://www.kadagamventures.com" />
       </Helmet>
 
       <div className="relative h-auto lg:h-161.25 w-full overflow-hidden">

@@ -7,7 +7,7 @@ import ServiceLayout from "../components/services/ServiceLayout";
 const ServicePage = () => {
     const { serviceSlug } = useParams();
     const location = useLocation();
-    const baseUrl = "https://kadagamventures.com";
+    const baseUrl = "https://www.kadagamventures.com";
     const service = servicesData[serviceSlug];
 
     useEffect(() => {
