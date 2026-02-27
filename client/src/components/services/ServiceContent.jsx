@@ -77,7 +77,7 @@ const ServiceContent = ({ sections = [] }) => {
         <section
             data-aos="fade-top"
             data-aos-duration="800"
-            className="max-w-7xl mx-auto px-6 space-y-20"
+            className="max-w-7xl mx-auto px-6 space-y-7"
         >
             {sections.map((section, index) => (
                 <div key={index} className="w-full">
