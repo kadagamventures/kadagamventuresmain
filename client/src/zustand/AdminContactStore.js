@@ -23,17 +23,44 @@ const useAdminContactStore = create((set) => ({
   error: null,
   filter: "all",
 
+  // fetchAll: async () => {
+  //   try {
+  //     set({ loading: true, error: null, filter: "all" });
+
+  //     const res = await api.get("/inquiries");
+
+  //     set({
+  //       inquiries: res.data?.data || res.data, // safe handling
+  //       loading: false,
+  //     });
+  //   } catch (err) {
+  //     set({
+  //       loading: false,
+  //       error: err.response?.data?.message || "Failed to fetch inquiries",
+  //     });
+  //   }
+  // },
+
   fetchAll: async () => {
     try {
       set({ loading: true, error: null, filter: "all" });
-
+  
       const res = await api.get("/inquiries");
-
+  
       set({
         inquiries: res.data?.data || res.data, // safe handling
         loading: false,
       });
+  
     } catch (err) {
+  
+      // ✅ Token expired check
+      if (err.response?.data?.message === "Token expired or invalid") {
+        //localStorage.removeItem("adminToken"); // optional
+        window.location.href = "/admin/login";
+        return;
+      }
+  
       set({
         loading: false,
         error: err.response?.data?.message || "Failed to fetch inquiries",
@@ -79,3 +106,4 @@ const useAdminContactStore = create((set) => ({
 }));
 
 export default useAdminContactStore;
+  

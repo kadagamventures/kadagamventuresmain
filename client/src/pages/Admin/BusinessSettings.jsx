@@ -63,9 +63,9 @@ const BusinessSettings = () => {
 
     return (
         <div className="p-6 max-w-6xl mx-auto">
-            <h1 className="text-3xl font-semibold mb-8">
+            <h2 className="text-3xl font-semibold mb-8">
                 Business Settings
-            </h1>
+            </h2>
 
             <form
                 onSubmit={handleSubmit}

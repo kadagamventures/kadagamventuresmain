@@ -23,9 +23,9 @@ export default function AdminWorkTogether() {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-semibold text-gray-900">
           Work Together Requests
-        </h1>
+        </h2>
         <p className="mt-2 text-gray-600">
           {workRequests.length} {workRequests.length === 1 ? "request" : "requests"} received
         </p>

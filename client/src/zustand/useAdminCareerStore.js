@@ -23,17 +23,43 @@ const useAdminCareerStore = create((set, get) => ({
   error: null,
 
   // ================= FETCH =================
+  // fetchCareers: async () => {
+  //   try {
+  //     set({ loading: true, error: null });
+
+  //     const res = await api.get("/careers");
+
+  //     set({
+  //       careers: res.data.data || res.data,
+  //       loading: false,
+  //     });
+  //   } catch (err) {
+  //     set({
+  //       loading: false,
+  //       error: err.response?.data?.message || "Failed to fetch careers",
+  //     });
+  //   }
+  // },
   fetchCareers: async () => {
     try {
       set({ loading: true, error: null });
-
+  
       const res = await api.get("/careers");
-
+  
       set({
         careers: res.data.data || res.data,
         loading: false,
       });
+  
     } catch (err) {
+  
+      // ✅ Token expired check
+      if (err.response?.data?.message === "Token expired or invalid") {
+       // localStorage.removeItem("adminToken"); // optional
+        window.location.href = "/admin/login";
+        return;
+      }
+  
       set({
         loading: false,
         error: err.response?.data?.message || "Failed to fetch careers",

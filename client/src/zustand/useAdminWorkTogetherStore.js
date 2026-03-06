@@ -22,18 +22,43 @@ const useAdminWorkTogetherStore = create((set) => ({
   loading: false,
 
   // GET all requests
+  // fetchWorkRequests: async () => {
+  //   try {
+  //     set({ loading: true });
+
+  //     const res = await api.get("/work-together");
+
+  //     set({
+  //       workRequests: res.data.data || [],
+  //     });
+
+  //   } catch (err) {
+  //     toast.error("Failed to fetch work requests");
+  //   } finally {
+  //     set({ loading: false });
+  //   }
+  // },
   fetchWorkRequests: async () => {
     try {
       set({ loading: true });
-
+  
       const res = await api.get("/work-together");
-
+  
       set({
         workRequests: res.data.data || [],
       });
-
+  
     } catch (err) {
+  
+      // ✅ Token expired check
+      if (err.response?.data?.message === "Token expired or invalid") {
+        //localStorage.removeItem("adminToken"); // optional
+        window.location.href = "/admin/login";
+        return;
+      }
+  
       toast.error("Failed to fetch work requests");
+  
     } finally {
       set({ loading: false });
     }

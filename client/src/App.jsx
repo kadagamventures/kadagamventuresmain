@@ -42,6 +42,11 @@ import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import RefundPolicy from './pages/RefundPolicy.jsx'
 import HelpCenter from './pages/helpCenterData.jsx';
 
+//Leads
+import AdminAddLeads from './pages/Admin/leads/AdminAddLead.jsx'
+import AdminEditLeads from './pages/Admin/leads/AdminEditLead.jsx'
+import AdminViewLeads from './pages/Admin/leads/AdminViewLead.jsx'
+import AdminHistoryLeads from './pages/Admin/leads/AdminLeadsHistory.jsx'
 
 
 const App = () => {
@@ -118,7 +123,12 @@ const App = () => {
     <Route path="careers/add" element={<AdminAddCareer />} />
     <Route path="careers/edit/:id" element={<AdminEditCareer />} />
     <Route path="careers/view/:id" element={<AdminViewCareer />} />
-        
+
+                      {/* Leads */}
+    <Route path="leads/add" element={<AdminAddLeads/>}/>  
+    <Route path="leads/edit/:id" element={<AdminEditLeads/>} />  
+    <Route path="leads/view/:id" element={<AdminViewLeads/>} />
+    <Route path="leads/history" element={<AdminHistoryLeads/>} />
 
             <Route index element={<AdminDashboard />} />
 

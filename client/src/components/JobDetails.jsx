@@ -62,7 +62,7 @@ const JobDetails = () => {
 
             {/* Header */}
             <header className="space-y-2">
-                <h1 className="text-4xl font-bold">{job.title}</h1>
+                <h2 className="text-4xl font-bold">{job.title}</h2>
                 <p className="text-gray-500">
                     {job.location} • {job.experience} • {job.employmentType}
                 </p>

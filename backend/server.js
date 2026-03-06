@@ -102,6 +102,10 @@ app.use(
   "/api/services/video-editing-post-production",
   require("./routes/videoEditingPostProduction.route")
 );
+//leads
+app.use(
+  "/api/leads", require("./routes/leadBatch.route") 
+)
 
 //
 app.use("/api/companies", require("./routes/company.routes"));

@@ -72,9 +72,9 @@ export default function AdminSubscribers() {
       {/* Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
   <div>
-    <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+    <h2 className="text-3xl font-semibold tracking-tight text-gray-900">
       Subscribers
-    </h1>
+    </h2>
     <p className="mt-1.5 text-sm text-gray-600">
       Showing <strong>{filteredSubscribers.length}</strong> of{" "}
       <strong>{subscribers.length}</strong> subscribers

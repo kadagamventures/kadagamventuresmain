@@ -47,4 +47,20 @@ const {
       })
     );
   };
+
+
+  // 🔗 GET SIGNED FILE URL (7 DAYS)
+exports.getSignedFileUrl = async (key) => {
+  if (!key) return null;
+
+  return getSignedUrl(
+    s3,
+    new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: key,
+      ResponseContentDisposition: "attachment", // force download
+    }),
+    { expiresIn: 60 * 60 * 24 * 7 } // 7 days
+  );
+};
   

@@ -20,14 +20,40 @@ const useAdminSubscriberStore = create((set) => ({
   loading: false,
 
   // GET all subscribers
+  // fetchSubscribers: async () => {
+  //   try {
+  //     set({ loading: true });
+  //     const res = await api.get("/admin/subscribers");
+  //     set({ subscribers: res.data.data || res.data });
+  //   } catch (err) {
+  //     console.log(err)
+  //     toast.error("Failed to fetch subscribers");
+  //   } finally {
+  //     set({ loading: false });
+  //   }
+  // },
   fetchSubscribers: async () => {
     try {
       set({ loading: true });
+  
       const res = await api.get("/admin/subscribers");
-      set({ subscribers: res.data.data || res.data });
+  
+      set({
+        subscribers: res.data.data || res.data,
+      });
+  
     } catch (err) {
-      console.log(err)
+      console.log(err);
+  
+      // ✅ Token expired check
+      if (err.response?.data?.message === "Token expired or invalid") {
+        //localStorage.removeItem("adminToken"); // optional
+        window.location.href = "/admin/login";
+        return;
+      }
+  
       toast.error("Failed to fetch subscribers");
+  
     } finally {
       set({ loading: false });
     }

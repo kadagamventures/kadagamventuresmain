@@ -8,6 +8,7 @@ import BusinessSettings from "../pages/Admin/BusinessSettings";
 import CompanyList from "../pages/Admin/CompanyList";
 import InvoiceList from "../pages/Admin/InvoiceList";
 import InvoiceDetails from "../pages/Admin/InvoiceDetails/InvoiceDetails";
+import AdminLeads from "../pages/Admin/leads/AdminLeads"
 
 
 
@@ -47,6 +48,12 @@ export const adminRoutes = [
         path: "work-together",
         icon: "CgNotes",
         element: <AdminWorkTogether />
+      },
+      {
+         name: "Leads",
+         path: "leads",
+         icon: "FaBuilding",
+         element: <AdminLeads/>
       },
       {
         name: "Companies",
