@@ -12,7 +12,7 @@ const HeroHome = ({ onGetStarted }) => {
     <>
       <Helmet>
         <title>
-          Best Digital Marketing & Web Design Company in Bangalore | Kadagam Ventures
+         Digital Marketing & Web Design Bangalore | Kadagam Ventures
         </title>
 
         <meta
