@@ -16,6 +16,28 @@ const BlogDetails = () => {
   const location = useLocation();
   const baseUrl = "https://www.kadagamventures.com";
 
+  const handleContentClick = (e) => {
+    const link = e.target.closest("a");
+  
+    if (!link) return;
+  
+    const url = link.getAttribute("href");
+  
+    if (!url) return;
+  
+    // INTERNAL LINKS
+    if (url.startsWith("/")) {
+      e.preventDefault();
+      navigate(url);
+    }
+  
+    // EXTERNAL LINKS
+    if (url.startsWith("http")) {
+      e.preventDefault();
+      window.open(url, "_blank");
+    }
+  };
+
   const createSections = (html) => {
     const container = document.createElement("div");
     container.innerHTML = html;
@@ -308,11 +330,12 @@ const BlogDetails = () => {
                 }
 
                 return (
-                  <div key={index} className="content-section mb-10">
+                  <div key={index} className="content-section mb-10"  onClick={handleContentClick}>
                     {img ? (
                       <div className="grid md:grid-cols-2 gap-10 items-start">
                         {/* LEFT SIDE TEXT */}
                         <div
+                          className="blog-content-s"
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(textHTML),
                           }}
@@ -320,6 +343,7 @@ const BlogDetails = () => {
 
                         {/* RIGHT SIDE IMAGE */}
                         <div
+                         
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(imageHTML),
                           }}
@@ -327,6 +351,7 @@ const BlogDetails = () => {
                       </div>
                     ) : (
                       <div
+                        className="blog-content-s"
                         dangerouslySetInnerHTML={{
                           __html: DOMPurify.sanitize(textHTML),
                         }}

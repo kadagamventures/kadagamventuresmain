@@ -196,3 +196,13 @@
 }
 
 
+.blog-content-s ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+
+.blog-content-s ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
