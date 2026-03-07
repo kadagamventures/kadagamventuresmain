@@ -355,11 +355,11 @@ const BlogDetails = () => {
                   to={`/blogs/${item.slug}`}
                   className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100"
                 >
-                  <div className="aspect-4/3 relative">
+                  <div className="aspect-4/2 relative">
                     <img
                       src={item.featuredImageUrl || fallbackImage}
                       alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">
