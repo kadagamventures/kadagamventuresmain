@@ -21,7 +21,10 @@ const Careers = () => {
         loadJobs();
     }, [loadJobs]);
 
-    const jobs = Array.isArray(filteredJobs()) ? filteredJobs() : [];
+   // const jobs = Array.isArray(filteredJobs()) ? filteredJobs() : [];
+   const jobs = Array.isArray(filteredJobs())
+  ? [...filteredJobs()].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  : [];
 
     return (
         <main>
