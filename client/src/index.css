@@ -206,3 +206,15 @@
   list-style-type: decimal;
   padding-left: 20px;
 }
+
+/* Blog links styling */
+.blog-content-s a {
+  color: #2563eb;          /* Tailwind blue-600 */
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.blog-content-s a:hover {
+  color: #1d4ed8;          /* Tailwind blue-700 */
+}
