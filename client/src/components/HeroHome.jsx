@@ -27,7 +27,7 @@ const HeroHome = ({ onGetStarted }) => {
 
         <link rel="canonical" href="https://www.kadagamventures.com" />
         {/* ✅ ADD OPEN GRAPH HERE */}
-    <meta property="og:title" content="Best Digital Marketing & Web Design Company in Bangalore | Kadagam Ventures" />
+    <meta property="og:title" content="Digital Marketing & Web Design Bangalore | Kadagam Ventures" />
     <meta property="og:description" content="Looking for a Best digital marketing and web design company in Bangalore? We deliver app development and brand strategy solutions that drive real growth." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.kadagamventures.com" />

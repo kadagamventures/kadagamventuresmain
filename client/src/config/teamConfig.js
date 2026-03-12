@@ -65,20 +65,20 @@ export const TeamDetails = [
         designation: "SMO Executive",
         linkedIn: "https://www.linkedin.com/in/aman-sha-7a84b6267?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     },
-    {
-        id: 8,
-        profile: salman,
-        name: "Salman S",
-        designation: "SEO Executive",
-        linkedIn: "https://www.linkedin.com/in/salman-s-1a54081bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    },
-    {
-        id: 9,
-        profile: shivaji,
-        name: "Nadiminti Sivaji",
-        designation: "SMO Executive",
-        linkedIn: "https://www.linkedin.com/in/nadiminti-sivaji?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    },
+    // {
+    //     id: 8,
+    //     profile: salman,
+    //     name: "Salman S",
+    //     designation: "SEO Executive",
+    //     linkedIn: "https://www.linkedin.com/in/salman-s-1a54081bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    // },
+    // {
+    //     id: 9,
+    //     profile: shivaji,
+    //     name: "Nadiminti Sivaji",
+    //     designation: "SMO Executive",
+    //     linkedIn: "https://www.linkedin.com/in/nadiminti-sivaji?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    // },
     {
         id: 10,
         profile: veeran,
