@@ -1,5 +1,6 @@
 import React from "react";
 import { helpCenterData } from "../data/helpCenterData";
+import SocialLinks from "../components/SocialLinks";
 
 const HelpCenter = () => {
   const data = helpCenterData["help-center"];
@@ -10,6 +11,7 @@ const HelpCenter = () => {
         <h1 className="text-3xl md:text-4xl font-bold mb-4">{data.title}</h1>
 
         <p className="text-gray-600 mb-8">{data.description}</p>
+        <SocialLinks />
 
         {data.sections.map((section, index) => (
           <div key={index} className="mb-8">

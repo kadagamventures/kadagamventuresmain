@@ -8,7 +8,7 @@ class PDFService {
     static async generateInvoicePDF(invoiceData) {
 
         const browser = await puppeteer.launch({
-            headless: "new",
+            headless: true,
             args: ["--no-sandbox", "--disable-setuid-sandbox"]
         });
 
@@ -17,7 +17,10 @@ class PDFService {
 
         const html = generateTemplate(invoiceData);
 
-        await page.setContent(html, { waitUntil: "domcontentloaded" });
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        await page.evaluateHandle('document.fonts.ready');
+
+        await page.emulateMediaType('screen');
 
         // Generate PDF as Buffer (NOT file)
         const pdfBuffer = await page.pdf({

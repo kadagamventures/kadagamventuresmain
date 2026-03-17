@@ -1,5 +1,6 @@
 import React from "react";
 import { termsData } from "../data/termData";
+import SocialLinks from "../components/SocialLinks";
 
 const TermsAndConditions = () => {
     const data = termsData["terms-and-conditions"];
@@ -12,6 +13,7 @@ const TermsAndConditions = () => {
                 </h1>
 
                 <p className="text-gray-600 mb-8">{data.description}</p>
+                <SocialLinks />
 
                 {data.sections.map((section, index) => (
                     <div key={index} className="mb-8">

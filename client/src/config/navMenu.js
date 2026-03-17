@@ -3,6 +3,14 @@ import NithyaTickets from "../assets/products/nithyatickets.png";
 import KadagamNext from "../assets/products/KadagamNext.png";
 import kadagamfoundation from "../assets/products/kadagamfoundationtwo.png"
 
+import {
+    FaWhatsapp,
+    FaInstagram,
+    FaFacebookF,
+    FaYoutube,
+    FaLinkedinIn
+} from "react-icons/fa";
+
 export const navMenu = [
 
     {
@@ -24,6 +32,13 @@ export const navMenu = [
                 url: "https://nithyaevent.com/",
                 logo: NithyaEvents,
                 external: true,
+                social: [
+                    { icon: FaWhatsapp, url: "#" },
+                    { icon: FaInstagram, url: "#" },
+                    { icon: FaFacebookF, url: "#" },
+                    { icon: FaYoutube, url: "#" },
+                    { icon: FaLinkedinIn, url: "#" }
+                ]
             },
             {
                 title: "Nithyatickets",
@@ -31,6 +46,13 @@ export const navMenu = [
                 url: "https://nithyatickets.com/",
                 logo: NithyaTickets,
                 external: true,
+                social: [
+                    { icon: FaWhatsapp, url: "#" },
+                    { icon: FaInstagram, url: "#" },
+                    { icon: FaFacebookF, url: "#" },
+                    { icon: FaYoutube, url: "#" },
+                    { icon: FaLinkedinIn, url: "#" }
+                ]
             },
             {
                 title: "Kadagam Next",
@@ -38,6 +60,13 @@ export const navMenu = [
                 url: "https://www.kadagamnext.com/",
                 logo: KadagamNext,
                 external: true,
+                social: [
+                    { icon: FaWhatsapp, url: "#" },
+                    { icon: FaInstagram, url: "#" },
+                    { icon: FaFacebookF, url: "#" },
+                    { icon: FaYoutube, url: "#" },
+                    { icon: FaLinkedinIn, url: "#" }
+                ]
             },
             {
                 title: "Kadagam Foundation",
@@ -45,6 +74,13 @@ export const navMenu = [
                 url: "https://kadagamfoundation.org/",
                 logo: kadagamfoundation,
                 external: true,
+                social: [
+                    { icon: FaWhatsapp, url: "#" },
+                    { icon: FaInstagram, url: "#" },
+                    { icon: FaFacebookF, url: "#" },
+                    { icon: FaYoutube, url: "#" },
+                    { icon: FaLinkedinIn, url: "#" }
+                ]
             },
         ],
     },
@@ -128,11 +164,11 @@ export const navMenu = [
         label: "Blogs",
         path: "/blogs",
     },
-   
+
     {
         label: "Careers",
         path: "/careers",
     },
-    
-   
+
+
 ];

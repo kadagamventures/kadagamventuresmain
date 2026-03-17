@@ -117,7 +117,6 @@ const invoiceSchema = new mongoose.Schema({
 //
 // INDEXES (IMPORTANT FOR PERFORMANCE)
 //
-invoiceSchema.index({ invoiceNumber: 1 });
 invoiceSchema.index({ company: 1 });
 invoiceSchema.index({ status: 1 });
 invoiceSchema.index({ invoiceDate: -1 });

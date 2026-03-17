@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { GoArrowUpRight } from "react-icons/go";
 
 import fallbackImage from "../assets/Logo/Kadagamventuresdimlogo.png"
+import SocialLinks from "./SocialLinks";
 
 const BlogCard = ({ blog }) => {
     const date = new Date(blog.publishedAt).toLocaleDateString("en-IN")
@@ -61,6 +62,8 @@ const BlogCard = ({ blog }) => {
                         <GoArrowUpRight size={20} />
                     </div>
                 </div>
+
+                <SocialLinks />
             </div>
         </Link>
     )

@@ -9,6 +9,7 @@ import fallbackImage from "../assets/Logo/Kadagamventuresdimlogo.png";
 
 import { FaPen, FaArrowLeft } from "react-icons/fa";
 import DOMPurify from "dompurify";
+import SocialLinks from "../components/SocialLinks";
 
 const BlogDetails = () => {
   const { slug } = useParams();
@@ -18,19 +19,19 @@ const BlogDetails = () => {
 
   const handleContentClick = (e) => {
     const link = e.target.closest("a");
-  
+
     if (!link) return;
-  
+
     const url = link.getAttribute("href");
-  
+
     if (!url) return;
-  
+
     // INTERNAL LINKS
     if (url.startsWith("/")) {
       e.preventDefault();
       navigate(url);
     }
-  
+
     // EXTERNAL LINKS
     if (url.startsWith("http")) {
       e.preventDefault();
@@ -106,46 +107,46 @@ const BlogDetails = () => {
     <main className="bg-white min-h-screen">
       {/* ================= SEO ================= */}
       <Helmet>
-  {/* Title */}
-  <title>{blog.seo?.metaTitle || blog.title}</title>
+        {/* Title */}
+        <title>{blog.seo?.metaTitle || blog.title}</title>
 
-  {/* Meta Description */}
-  <meta
-    name="description"
-    content={blog.seo?.metaDescription || blog.excerpt}
-  />
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content={blog.seo?.metaDescription || blog.excerpt}
+        />
 
-  {/* Keywords (optional) */}
-  {blog.seo?.metaKeywords && (
-    <meta
-      name="keywords"
-      content={blog.seo.metaKeywords.join(", ")}
-    />
-  )}
+        {/* Keywords (optional) */}
+        {blog.seo?.metaKeywords && (
+          <meta
+            name="keywords"
+            content={blog.seo.metaKeywords.join(", ")}
+          />
+        )}
 
-  {/* Canonical */}
-  <link
-    rel="canonical"
-    href={`${baseUrl}${location.pathname}`}
-  />
+        {/* Canonical */}
+        <link
+          rel="canonical"
+          href={`${baseUrl}${location.pathname}`}
+        />
 
-  {/* Open Graph */}
-  <meta property="og:title" content={blog.title} />
-  <meta
-    property="og:description"
-    content={blog.seo?.metaDescription || blog.excerpt}
-  />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${baseUrl}${location.pathname}`} />
-  <meta property="og:image" content={blog.featuredImageUrl} />
+        {/* Open Graph */}
+        <meta property="og:title" content={blog.title} />
+        <meta
+          property="og:description"
+          content={blog.seo?.metaDescription || blog.excerpt}
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`${baseUrl}${location.pathname}`} />
+        <meta property="og:image" content={blog.featuredImageUrl} />
 
-  {/* Article Info */}
-  <meta property="article:published_time" content={blog.publishedAt} />
-  <meta property="article:author" content={blog.author} />
+        {/* Article Info */}
+        <meta property="article:published_time" content={blog.publishedAt} />
+        <meta property="article:author" content={blog.author} />
 
-  {/* Robots */}
-  <meta name="robots" content="index, follow" />
-</Helmet>
+        {/* Robots */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
 
       <div className="px-7 pt-3 xl:pt-6"></div>
 
@@ -224,7 +225,9 @@ const BlogDetails = () => {
               #{tag}
             </span>
           ))}
+          <SocialLinks />
         </div>
+
       </section>
 
       <section className="px-4 sm:px-6 md:px-8 lg:px-0">
@@ -330,7 +333,7 @@ const BlogDetails = () => {
                 }
 
                 return (
-                  <div key={index} className="content-section mb-10"  onClick={handleContentClick}>
+                  <div key={index} className="content-section mb-10" onClick={handleContentClick}>
                     {img ? (
                       <div className="grid md:grid-cols-2 gap-10 items-start">
                         {/* LEFT SIDE TEXT */}
@@ -343,7 +346,7 @@ const BlogDetails = () => {
 
                         {/* RIGHT SIDE IMAGE */}
                         <div
-                         
+
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(imageHTML),
                           }}
@@ -380,7 +383,7 @@ const BlogDetails = () => {
                   to={`/blogs/${item.slug}`}
                   className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100"
                 >
-                  <div className="aspect-4/2 relative">
+                  <div className="aspect-4/2 relative ">
                     <img
                       src={item.featuredImageUrl || fallbackImage}
                       alt={item.title}
@@ -394,17 +397,21 @@ const BlogDetails = () => {
                     <p className="mt-3 text-gray-600 line-clamp-2 text-sm md:text-base">
                       {item.excerpt}
                     </p>
-                    <div className="mt-4 text-sm text-gray-500">
+                    <div className="mt-4 text-sm text-gray-500 mb-2">
                       {new Date(item.publishedAt).toLocaleDateString("en-IN", {
                         month: "short",
                         day: "numeric",
                       })}
                     </div>
+                    <SocialLinks />
                   </div>
                 </Link>
+
               ))}
+
             </div>
           </div>
+
         </section>
       )}
     </main>

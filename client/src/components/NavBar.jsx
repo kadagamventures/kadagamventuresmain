@@ -6,6 +6,7 @@ import RightClipAccent from './RightClipAccent';
 
 import Kadagamventureslogohd from '../assets/Logo/Kadagamventureslogohd.png';
 import { navMenu } from '../config/navMenu';
+import SocialLinks from './SocialLinks';
 
 const NavBar = () => {
 
@@ -121,32 +122,26 @@ const NavBar = () => {
                                         {item.heading}
                                     </h2>
 
-                                    {item.subheading && (
-                                        <p
+                                    {item.subheading?.length > 0 && (
+                                        <div
                                             data-aos="fade-up"
                                             data-aos-duration="700"
                                             data-aos-delay="100"
-                                            className="text-gray-600 text-sm mt-2 max-w-2xl"
+                                            className="flex items-center justify-between mt-2 max-w-full"
                                         >
-                                            {item.subheading}
-                                        </p>
+                                            <p className="text-gray-600 text-sm">
+                                                {item.subheading}
+                                            </p>
+
+                                            <SocialLinks />
+                                        </div>
                                     )}
                                 </div>
                                 <div className="w-full h-px bg-gray-200 mb-8" />
                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                    {item.children.map((child, index) =>
-                                        isExternal(child) ? (
-                                            <a
-                                                key={child.title}
-                                                href={child.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                onClick={closeAllMenus}
-                                                data-aos="zoom-up"
-                                                data-aos-duration="800"
-                                                data-aos-delay={`${index * 100}`}
-                                                className="group block p-4 rounded-xl border-gray-200 hover:bg-[#9F090C]"
-                                            >
+                                    {item.children.map((child, index) => {
+                                        const CardContent = (
+                                            <>
                                                 {child.logo && (
                                                     <img
                                                         src={child.logo}
@@ -162,6 +157,43 @@ const NavBar = () => {
                                                 <p className="text-sm mt-1 text-gray-600 group-hover:text-white">
                                                     {child.description}
                                                 </p>
+
+                                                {/* SOCIAL LINKS */}
+                                                {child.social && (
+                                                    <div className="flex gap-3 mt-3">
+                                                        {child.social.map((social, i) => {
+                                                            const Icon = social.icon;
+                                                            return (
+                                                                <a
+                                                                    key={i}
+                                                                    href={social.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-gray-500 group-hover:text-white transition"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <Icon size={18} className="hover:scale-150 transition-all duration-300" />
+                                                                </a>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
+                                            </>
+                                        );
+
+                                        return isExternal(child) ? (
+                                            <a
+                                                key={child.title}
+                                                href={child.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={closeAllMenus}
+                                                data-aos="zoom-up"
+                                                data-aos-duration="800"
+                                                data-aos-delay={`${index * 100}`}
+                                                className="group block p-4 rounded-xl border border-gray-200 hover:bg-[#9F090C] transition"
+                                            >
+                                                {CardContent}
                                             </a>
                                         ) : (
                                             <Link
@@ -171,37 +203,16 @@ const NavBar = () => {
                                                 data-aos="zoom-up"
                                                 data-aos-duration="800"
                                                 data-aos-delay={`${index * 100}`}
-                                                className={`group block p-4 rounded-xl transition
+                                                className={`group block p-4 rounded-xl border transition
                 ${location.pathname.startsWith(child.path)
-                                                        ? 'bg-[#9F090C] text-white'
-                                                        : 'border-gray-200 hover:bg-[#9F090C]'
+                                                        ? "bg-[#9F090C] text-white"
+                                                        : "border-gray-200/45 hover:bg-[#9F090C]"
                                                     }`}
                                             >
-                                                {child.logo && (
-                                                    <img
-                                                        src={child.logo}
-                                                        alt={child.title}
-                                                        className="h-24 w-24 mb-4 object-contain"
-                                                    />
-                                                )}
-
-                                                <h4 className={`font-semibold ${location.pathname.startsWith(child.path)
-                                                    ? 'text-white'
-                                                    : 'text-gray-900 group-hover:text-white'
-                                                    }`}>
-                                                    {child.title}
-                                                </h4>
-
-                                                <p className={`text-sm mt-1 ${location.pathname.startsWith(child.path)
-                                                    ? 'text-white'
-                                                    : 'text-gray-600 group-hover:text-white'
-                                                    }`}>
-                                                    {child.description}
-                                                </p>
+                                                {CardContent}
                                             </Link>
-                                        )
-                                    )}
-
+                                        );
+                                    })}
                                 </div>
 
                             </div>

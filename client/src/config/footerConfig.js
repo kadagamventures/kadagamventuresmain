@@ -3,6 +3,7 @@ import {
     FaInstagram,
     FaFacebookF,
     FaYoutube,
+    FaLinkedinIn
 } from "react-icons/fa";
 
 import { FaXTwitter } from "react-icons/fa6";
@@ -22,7 +23,7 @@ export const footerConfig = {
         { label: "Nithyaevent", path: "https://nithyaevent.com/" },
         { label: "Nithya Tickets", path: "https://nithyatickets.com/" },
         { label: "Kadagam next", path: "https://www.kadagamnext.com/" },
-        { label: "Nithyaevent vendor", path: "/vendor" },
+        { label: "Nithyaevent vendor", path: "https://play.google.com/store/apps/details?id=com.eboxvendor&pcampaignid=web_share" },
     ],
 
     services: [
@@ -52,5 +53,6 @@ export const footerConfig = {
         { icon: FaXTwitter, url: "https://x.com/KadagamVentures" },
         { icon: FaFacebookF, url: "https://www.facebook.com/profile.php?id=61587383576859" },
         { icon: FaYoutube, url: "https://www.youtube.com/@KadagamVentures" },
+        { icon: FaLinkedinIn, url: "https://www.linkedin.com/company/kadagam-ventures-private-limited/posts/?feedView=all" }
     ],
 };

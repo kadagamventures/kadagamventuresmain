@@ -1,5 +1,6 @@
 import React from "react";
 import { privacyData } from "../data/privacyData";
+import SocialLinks from "../components/SocialLinks";
 
 const PrivacyPolicy = () => {
     const data = privacyData["privacy-policy"];
@@ -11,9 +12,11 @@ const PrivacyPolicy = () => {
                     {data.title}
                 </h1>
 
+
                 <p className="text-gray-600 mb-8">
                     {data.description}
                 </p>
+                <SocialLinks />
 
                 {data.sections.map((section, index) => (
                     <div key={index} className="mb-8">

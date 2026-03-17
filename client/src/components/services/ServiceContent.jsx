@@ -69,6 +69,7 @@
 // export default ServiceContent;
 
 import React from "react";
+import SocialLinks from "../SocialLinks";
 
 const ServiceContent = ({ sections = [] }) => {
     if (!sections.length) return null;
@@ -111,41 +112,51 @@ const ServiceContent = ({ sections = [] }) => {
                     )}
 
                     {/* FAQs Section */}
-                   {/* FAQs Section */}
-{section.faqs && section.faqs.length > 0 && (
-    <div className="mt-10 w-full">
-        <h3 className="text-xl font-semibold mb-4">
-            Frequently Asked Questions
-        </h3>
+                    {/* FAQs Section */}
+                    {section.faqs && section.faqs.length > 0 && (
+                        <div className="mt-10 w-full">
+                            <h3 className="text-xl font-semibold mb-4">
+                                Frequently Asked Questions
+                            </h3>
 
-        <div className="space-y-4">
-            {section.faqs.map((faq, i) => (
-                <div
-                    key={i}
-                    className="border border-gray-200 rounded-lg p-4 bg-gray-50"
-                >
-                    <h4 className="font-semibold text-lg mb-2">
-                        {faq.question}
-                    </h4>
+                            <div className="space-y-4">
+                                {section.faqs.map((faq, i) => (
+                                    <div
+                                        key={i}
+                                        className="border border-gray-200 rounded-lg p-4 bg-gray-50"
+                                    >
+                                        <h4 className="font-semibold text-lg mb-2">
+                                            {faq.question}
+                                        </h4>
 
-                    {/* ✅ Handle string OR array */}
-                    {Array.isArray(faq.answer) ? (
-                        <ul className="list-disc list-inside space-y-1 text-gray-600 leading-relaxed text-justify">
-                            {faq.answer.map((point, index) => (
-                                <li key={index}>{point}</li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="text-gray-600 leading-relaxed text-justify">
-                            {faq.answer}
-                        </p>
+                                        {/* ✅ Handle string OR array */}
+                                        {Array.isArray(faq.answer) ? (
+                                            <>
+                                                <ul className="list-disc list-inside space-y-1 text-gray-600 leading-relaxed text-justify mb-2">
+                                                    {faq.answer.map((point, index) => (
+                                                        <li key={index}>{point}</li>
+                                                    ))}
+                                                </ul>
+                                                <SocialLinks />
+                                            </>
+
+                                        ) : (
+
+                                            <>
+                                                <p className="text-gray-600 leading-relaxed text-justify mb-2">
+                                                    {faq.answer}
+                                                </p>
+                                                <SocialLinks />
+                                            </>
+
+
+                                        )}
+
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     )}
-
-                </div>
-            ))}
-        </div>
-    </div>
-)}
 
                 </div>
             ))}

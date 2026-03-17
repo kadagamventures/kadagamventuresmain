@@ -1,3 +1,10 @@
+const fs = require("fs");
+const path = require("path")
+
+
+const fontPath = path.join(__dirname, "../assets/fonts/DejaVuSans.ttf");
+const fontBase64 = fs.readFileSync(fontPath).toString("base64");
+
 function numberToWords(num) {
   const a = [
     "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -59,12 +66,12 @@ module.exports = (data) => {
       <td>${i + 1}</td>
       <td style="text-align:left">${s.serviceName || ""}</td>
       <td>${s.quantity || 0}</td>
-      <td>₹${(s.price || 0).toFixed(2)}</td>
-      <td>₹${(s.taxableAmount || 0).toFixed(2)}</td>
-      <td>₹${(s.cgst || 0).toFixed(2)}</td>
-      <td>₹${(s.sgst || 0).toFixed(2)}</td>
-      <td>₹${(s.igst || 0).toFixed(2)}</td>
-      <td>₹${(s.total || 0).toFixed(2)}</td>
+      <td>Rs.${(s.price || 0).toFixed(2)}</td>
+      <td>Rs.${(s.taxableAmount || 0).toFixed(2)}</td>
+      <td>Rs.${(s.cgst || 0).toFixed(2)}</td>
+      <td>Rs.${(s.sgst || 0).toFixed(2)}</td>
+      <td>Rs.${(s.igst || 0).toFixed(2)}</td>
+      <td>Rs.${(s.total || 0).toFixed(2)}</td>
     </tr>
   `).join("");
 
@@ -74,16 +81,27 @@ module.exports = (data) => {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Tax Invoice - ${data.invoiceNumber || 'Draft'}</title>
   <style>
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      background: #f5f6f5;
-      line-height: 1.5;
-    }
+ @font-face {
+  font-family: 'DejaVuSans';
+  src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+  
+* {
+  font-family: 'DejaVuSans' !important;
+}
+body {
+  font-family: 'DejaVuSans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background: #f5f6f5;
+  line-height: 1.5;
+}
     .container {
       max-width: 1000px;
       margin: 30px auto;
@@ -266,6 +284,8 @@ module.exports = (data) => {
 
   <div class="title">TAX INVOICE</div>
 
+<div>Rs. TEST</div>
+
   <div class="invoice-meta">
     <div class="bill-to">
       <strong>Bill To</strong>
@@ -300,11 +320,11 @@ module.exports = (data) => {
   </table>
 
   <div class="totals">
-    <div><span>Subtotal</span><span>₹${subtotal.toFixed(2)}</span></div>
-    ${totalCGST > 0 ? `<div><span>CGST</span><span>₹${totalCGST.toFixed(2)}</span></div>` : ''}
-    ${totalSGST > 0 ? `<div><span>SGST</span><span>₹${totalSGST.toFixed(2)}</span></div>` : ''}
-    ${totalIGST > 0 ? `<div><span>IGST</span><span>₹${totalIGST.toFixed(2)}</span></div>` : ''}
-    <div class="grand"><span>Grand Total</span><span>₹${totalAmount.toFixed(2)}</span></div>
+    <div><span>Subtotal</span><span>Rs.${subtotal.toFixed(2)}</span></div>
+    ${totalCGST > 0 ? `<div><span>CGST</span><span>Rs.${totalCGST.toFixed(2)}</span></div>` : ''}
+    ${totalSGST > 0 ? `<div><span>SGST</span><span>Rs.${totalSGST.toFixed(2)}</span></div>` : ''}
+    ${totalIGST > 0 ? `<div><span>IGST</span><span>Rs.${totalIGST.toFixed(2)}</span></div>` : ''}
+    <div class="grand"><span>Grand Total</span><span>Rs.${totalAmount.toFixed(2)}</span></div>
   </div>
 
   <div class="amount-words">
@@ -313,10 +333,10 @@ module.exports = (data) => {
   </div>
 
   <div class="payment-info">
-    ${advance > 0 ? `<div>Advance Received: <strong>₹${advance.toFixed(2)}</strong></div>` : ''}
-    ${paid > 0 ? `<div>Total Paid: <strong>₹${paid.toFixed(2)}</strong></div>` : ''}
+    ${advance > 0 ? `<div>Advance Received: <strong>Rs.${advance.toFixed(2)}</strong></div>` : ''}
+    ${paid > 0 ? `<div>Total Paid: <strong>Rs.${paid.toFixed(2)}</strong></div>` : ''}
     ${pending > 0
-      ? `<div class="status-pending">Balance Payable: <strong>₹${pending.toFixed(2)}</strong><br>(${pendingInWords})</div>`
+      ? `<div class="status-pending">Balance Payable: <strong>Rs.${pending.toFixed(2)}</strong><br>(${pendingInWords})</div>`
       : `<div class="status-paid">Invoice Fully Paid – Thank You!</div>`
     }
   </div>
@@ -367,9 +387,9 @@ module.exports = (data) => {
   <p>2.4 The Service Provider may use subcontractors provided that it remains fully responsible for their performance and compliance with this Agreement.</p>
 
   <h3>3. FEES & PAYMENT TERMS</h3>
-  <p>Total Contract Value (as per this document): <strong>₹${totalAmount.toFixed(2)}</strong><br/>
-  Advance / Payment Received: ₹${(advance + paid).toFixed(2)}<br/>
-  Outstanding Amount: ₹${pending.toFixed(2)}</p>
+  <p>Total Contract Value (as per this document): <strong>Rs.${totalAmount.toFixed(2)}</strong><br/>
+  Advance / Payment Received: Rs.${(advance + paid).toFixed(2)}<br/>
+  Outstanding Amount: Rs.${pending.toFixed(2)}</p>
 
   <p>3.1 Fees shall be as specified in the applicable SOW or invoice. All amounts are Inclusive of GST and other taxes, which shall be borne by the Client.</p>
   <p>3.2 Invoices shall be paid within the agreed credit period (default 15 days from invoice date) via bank transfer / UPI / cheque to the Service Provider’s designated account.</p>

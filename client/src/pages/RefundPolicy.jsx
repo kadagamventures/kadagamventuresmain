@@ -1,5 +1,6 @@
 import React from "react";
 import { refundData } from "../data/refundData";
+import SocialLinks from "../components/SocialLinks";
 
 const RefundPolicy = () => {
     const data = refundData["refund-and-cancellation-policy"];
@@ -14,6 +15,7 @@ const RefundPolicy = () => {
                 <p className="text-gray-600 mb-8">
                     {data.description}
                 </p>
+                <SocialLinks />
 
                 {data.sections.map((section, index) => (
                     <div key={index} className="mb-8">

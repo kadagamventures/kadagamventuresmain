@@ -6,6 +6,7 @@ import useJobsStore from "../zustand/useJobsStore";
 
 import JobCard from "../components/JobCard";
 import InfinityLoader from "../components/InfinityLoader";
+import SocialLinks from "../components/SocialLinks";
 
 const Careers = () => {
 
@@ -21,10 +22,10 @@ const Careers = () => {
         loadJobs();
     }, [loadJobs]);
 
-   // const jobs = Array.isArray(filteredJobs()) ? filteredJobs() : [];
-   const jobs = Array.isArray(filteredJobs())
-  ? [...filteredJobs()].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-  : [];
+    // const jobs = Array.isArray(filteredJobs()) ? filteredJobs() : [];
+    const jobs = Array.isArray(filteredJobs())
+        ? [...filteredJobs()].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        : [];
 
     return (
         <main>
@@ -74,7 +75,7 @@ const Careers = () => {
                         <div
                             data-aos="fade-left"
                             data-duration="1200"
-                            className="relative">
+                            className="relative mb-3">
                             <input
                                 type="text"
                                 value={searchQuery}
@@ -96,6 +97,7 @@ const Careers = () => {
                                 Search
                             </button>
                         </div>
+                        <SocialLinks />
                     </div>
                 </div>
             </section>
