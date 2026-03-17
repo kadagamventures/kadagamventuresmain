@@ -284,8 +284,6 @@ body {
 
   <div class="title">TAX INVOICE</div>
 
-<div>Rs. TEST</div>
-
   <div class="invoice-meta">
     <div class="bill-to">
       <strong>Bill To</strong>
