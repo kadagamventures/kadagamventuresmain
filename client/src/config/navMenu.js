@@ -5,11 +5,17 @@ import kadagamfoundation from "../assets/products/kadagamfoundationtwo.png"
 
 import {
     FaWhatsapp,
-    FaInstagram,
+    FaInstagramSquare,
     FaFacebookF,
     FaYoutube,
     FaLinkedinIn
 } from "react-icons/fa";
+
+import { FiFacebook } from "react-icons/fi";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { RiInstagramFill } from "react-icons/ri";
+import { RiFacebookFill } from "react-icons/ri";
+
 
 export const navMenu = [
 
@@ -33,11 +39,11 @@ export const navMenu = [
                 logo: NithyaEvents,
                 external: true,
                 social: [
-                    { icon: FaWhatsapp, url: "#" },
-                    { icon: FaInstagram, url: "#" },
-                    { icon: FaFacebookF, url: "#" },
-                    { icon: FaYoutube, url: "#" },
-                    { icon: FaLinkedinIn, url: "#" }
+                    { icon: IoLogoWhatsapp, url: "https://whatsapp.com/channel/0029VbAmJT0HrDZYLfsgsE41" },
+                    { icon: RiInstagramFill, url: "https://www.instagram.com/nithya_event/" },
+                    { icon: RiFacebookFill, url: "https://www.facebook.com/profile.php?id=61580686112863" },
+                    { icon: FaYoutube, url: "https://www.youtube.com/@nithyaevent" },
+                    { icon: FaLinkedinIn, url: "https://www.linkedin.com/in/nithya-event-259680343/" }
                 ]
             },
             {
@@ -47,11 +53,11 @@ export const navMenu = [
                 logo: NithyaTickets,
                 external: true,
                 social: [
-                    { icon: FaWhatsapp, url: "#" },
-                    { icon: FaInstagram, url: "#" },
-                    { icon: FaFacebookF, url: "#" },
-                    { icon: FaYoutube, url: "#" },
-                    { icon: FaLinkedinIn, url: "#" }
+                    { icon: IoLogoWhatsapp, url: "https://whatsapp.com/channel/0029Vb7T7f1JZg48ku48Kp3a" },
+                    { icon: RiInstagramFill, url: "https://www.instagram.com/nithyaticket/" },
+                    { icon: RiFacebookFill, url: "https://www.facebook.com/profile.php?id=61584594945449" },
+                    { icon: FaYoutube, url: "https://www.youtube.com/@NithyaTickets-t3c" },
+
                 ]
             },
             {
@@ -61,11 +67,11 @@ export const navMenu = [
                 logo: KadagamNext,
                 external: true,
                 social: [
-                    { icon: FaWhatsapp, url: "#" },
-                    { icon: FaInstagram, url: "#" },
-                    { icon: FaFacebookF, url: "#" },
-                    { icon: FaYoutube, url: "#" },
-                    { icon: FaLinkedinIn, url: "#" }
+                    { icon: IoLogoWhatsapp, url: "https://whatsapp.com/channel/0029Vb7U65J2kNFqLJBsMM2M" },
+                    { icon: RiInstagramFill, url: "https://www.instagram.com/kadagamnext.__/" },
+                    { icon: RiFacebookFill, url: "https://www.facebook.com/profile.php?id=61584425724416" },
+                    { icon: FaYoutube, url: "https://www.youtube.com/@kadagamnext" },
+                    { icon: FaLinkedinIn, url: "https://www.linkedin.com/in/kadagam-next/" }
                 ]
             },
             {
@@ -75,11 +81,8 @@ export const navMenu = [
                 logo: kadagamfoundation,
                 external: true,
                 social: [
-                    { icon: FaWhatsapp, url: "#" },
-                    { icon: FaInstagram, url: "#" },
-                    { icon: FaFacebookF, url: "#" },
-                    { icon: FaYoutube, url: "#" },
-                    { icon: FaLinkedinIn, url: "#" }
+                    { icon: RiFacebookFill, url: "https://www.facebook.com/profile.php?id=100090048667481" },
+
                 ]
             },
         ],
