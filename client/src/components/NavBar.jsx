@@ -140,6 +140,7 @@ const NavBar = () => {
                                 <div className="w-full h-px bg-gray-200 mb-8" />
                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                     {item.children.map((child, index) => {
+                                        const isActive = location.pathname.startsWith(child.path);
                                         const CardContent = (
                                             <>
                                                 {child.logo && (
@@ -150,15 +151,24 @@ const NavBar = () => {
                                                     />
                                                 )}
 
-                                                <h4 className="font-semibold text-gray-900 group-hover:text-white">
+                                                <h4
+                                                    className={`font-semibold ${isActive
+                                                            ? "text-white"
+                                                            : "text-gray-900 group-hover:text-white"
+                                                        }`}
+                                                >
                                                     {child.title}
                                                 </h4>
 
-                                                <p className="text-sm mt-1 text-gray-600 group-hover:text-white">
+                                                <p
+                                                    className={`text-sm mt-1 ${isActive
+                                                            ? "text-white"
+                                                            : "text-gray-600 group-hover:text-white"
+                                                        }`}
+                                                >
                                                     {child.description}
                                                 </p>
 
-                                                {/* SOCIAL LINKS */}
                                                 {child.social && (
                                                     <div className="flex gap-3 mt-3">
                                                         {child.social.map((social, i) => {
@@ -169,8 +179,11 @@ const NavBar = () => {
                                                                     href={social.url}
                                                                     target="_blank"
                                                                     rel="noopener noreferrer"
-                                                                    className="text-gray-500 group-hover:text-white transition"
                                                                     onClick={(e) => e.stopPropagation()}
+                                                                    className={`transition ${isActive
+                                                                            ? "text-white"
+                                                                            : "text-gray-500 group-hover:text-white"
+                                                                        }`}
                                                                 >
                                                                     <Icon size={18} className="hover:scale-150 transition-all duration-300" />
                                                                 </a>
