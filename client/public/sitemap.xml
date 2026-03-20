@@ -1,39 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- ================= MAIN PAGES ================= -->
   <url>
     <loc>https://www.kadagamventures.com/</loc>
-    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.kadagamventures.com/aboutus</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://www.kadagamventures.com/about/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://www.kadagamventures.com/products</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://www.kadagamventures.com/careers/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.kadagamventures.com/services</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://www.kadagamventures.com/services/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.kadagamventures.com/blogs</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://www.kadagamventures.com/blogs/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- ================= SERVICES ================= -->
+  <url>
+    <loc>https://www.kadagamventures.com/services/digital-marketing/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/mobile-app-development/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/website-development/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/uiux-designing/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/landing-page-design/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/branding-graphic-design/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/software-testing/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/animated-websites/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/brand-strategy-identity/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/video-production/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/services/video-editing/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ================= BLOGS ================= -->
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/role-of-brand-and-graphic-design-in-marketing-or-kadagam/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/empowering-learning-beyond-the-classroom-to-day/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/professional-video-editing-services-for-bangalore/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/event-rental-price-in-india-rent-and-pricing-wedding-birthday-event-and-corporate-events/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/top-digital-marketing-agency-trends-for-2026/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/what-services-does-an-event-planner-provide-a-complete-checklist-for-your-big-day/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/how-ui-ux-design-services-improve-conversion-rates-and-user-engagement/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/ai-powered-software-testing-the-biggest-trend-of-2026/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/mobile-application-development-services-for-startups-and-enterprises/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kadagamventures.com/blogs/web-design-trends-2026/</loc>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

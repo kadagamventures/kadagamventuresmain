@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import MainLayout from './layout/MainLayout.jsx'
 import AdminLayout from './layout/AdminLayout.jsx'
 
@@ -51,6 +51,8 @@ import AdminHistoryLeads from './pages/Admin/leads/AdminLeadsHistory.jsx'
 
 const App = () => {
 
+
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -71,18 +73,29 @@ const App = () => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
+
+
+  useEffect(() => {
+    if (
+      !location.pathname.endsWith("/") &&
+      !location.pathname.includes(".")
+    ) {
+      navigate(location.pathname + "/", { replace: true });
+    }
+  }, [location.pathname]);
+
   return (
     <div>
       {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <ToastContainer
-  position="top-right"
-  autoClose={3000}
-  hideProgressBar={false}
-  newestOnTop
-  closeOnClick
-  pauseOnHover
-  draggable
-/>
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
 
       <Routes>
         <Route element={<MainLayout />}>
@@ -96,7 +109,7 @@ const App = () => {
           <Route path='/terms' element={<TermsAndConditions />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
           <Route path='/refund-policy' element={<RefundPolicy />} />
-          <Route path='/help-center' element={<HelpCenter/>} />
+          <Route path='/help-center' element={<HelpCenter />} />
 
         </Route>
 
@@ -115,20 +128,20 @@ const App = () => {
 
             {/* 👇 ADD THESE HERE 👇 */}
             {/* Blogs */}
-    <Route path="blogs/add" element={<AdminAddBlog />} />
-    <Route path="blogs/edit/:id" element={<AdminEditBlog />} />
-    <Route path="blogs/view/:id" element={<AdminViewBlog />} />
+            <Route path="blogs/add" element={<AdminAddBlog />} />
+            <Route path="blogs/edit/:id" element={<AdminEditBlog />} />
+            <Route path="blogs/view/:id" element={<AdminViewBlog />} />
 
-                      {/* career */}
-    <Route path="careers/add" element={<AdminAddCareer />} />
-    <Route path="careers/edit/:id" element={<AdminEditCareer />} />
-    <Route path="careers/view/:id" element={<AdminViewCareer />} />
+            {/* career */}
+            <Route path="careers/add" element={<AdminAddCareer />} />
+            <Route path="careers/edit/:id" element={<AdminEditCareer />} />
+            <Route path="careers/view/:id" element={<AdminViewCareer />} />
 
-                      {/* Leads */}
-    <Route path="leads/add" element={<AdminAddLeads/>}/>  
-    <Route path="leads/edit/:id" element={<AdminEditLeads/>} />  
-    <Route path="leads/view/:id" element={<AdminViewLeads/>} />
-    <Route path="leads/history" element={<AdminHistoryLeads/>} />
+            {/* Leads */}
+            <Route path="leads/add" element={<AdminAddLeads />} />
+            <Route path="leads/edit/:id" element={<AdminEditLeads />} />
+            <Route path="leads/view/:id" element={<AdminViewLeads />} />
+            <Route path="leads/history" element={<AdminHistoryLeads />} />
 
             <Route index element={<AdminDashboard />} />
 

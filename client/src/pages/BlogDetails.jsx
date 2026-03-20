@@ -29,7 +29,8 @@ const BlogDetails = () => {
     // INTERNAL LINKS
     if (url.startsWith("/")) {
       e.preventDefault();
-      navigate(url);
+      const finalUrl = url.endsWith("/") ? url : `${url}/`;
+      navigate(finalUrl);
     }
 
     // EXTERNAL LINKS
@@ -103,6 +104,11 @@ const BlogDetails = () => {
     );
   };
 
+  const canonicalUrl =
+    location.pathname.endsWith("/")
+      ? `${baseUrl}${location.pathname}`
+      : `${baseUrl}${location.pathname}/`;
+
   return (
     <main className="bg-white min-h-screen">
       {/* ================= SEO ================= */}
@@ -125,10 +131,7 @@ const BlogDetails = () => {
         )}
 
         {/* Canonical */}
-        <link
-          rel="canonical"
-          href={`${baseUrl}${location.pathname}`}
-        />
+        <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph */}
         <meta property="og:title" content={blog.title} />
@@ -137,7 +140,7 @@ const BlogDetails = () => {
           content={blog.seo?.metaDescription || blog.excerpt}
         />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`${baseUrl}${location.pathname}`} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={blog.featuredImageUrl} />
 
         {/* Article Info */}
@@ -380,7 +383,7 @@ const BlogDetails = () => {
               {recommended.slice(0, 3).map((item) => (
                 <Link
                   key={item._id}
-                  to={`/blogs/${item.slug}`}
+                  to={`/blogs/${item.slug}/`}
                   className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100"
                 >
                   <div className="aspect-4/2 relative ">

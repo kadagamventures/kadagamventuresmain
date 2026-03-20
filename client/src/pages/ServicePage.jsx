@@ -10,6 +10,11 @@ const ServicePage = () => {
     const baseUrl = "https://www.kadagamventures.com";
     const service = servicesData[serviceSlug];
 
+    const canonicalUrl =
+        location.pathname.endsWith("/")
+            ? `${baseUrl}${location.pathname}`
+            : `${baseUrl}${location.pathname}/`;
+
     useEffect(() => {
         console.log("meta",
             document.querySelector('meta[name="description"]')?.content
@@ -51,15 +56,12 @@ const ServicePage = () => {
                 <meta property="og:title" content={service.title} />
                 <meta property="og:description" content={service.description} />
                 <meta property="og:type" content="website" />
-
+                <meta property="og:url" content={canonicalUrl} />
 
                 {service.image && (
                     <meta property="og:image" content={service.image} />
                 )}
-                <link
-        rel="canonical"
-        href={`${baseUrl}${location.pathname}`}
-    />
+                <link rel="canonical" href={canonicalUrl} />
 
                 <meta name="robots" content="index, follow" />
             </Helmet>
