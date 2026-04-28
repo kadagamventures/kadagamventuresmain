@@ -85,14 +85,33 @@ class InvoiceService {
             isDeleted: false
         });
 
-
         if (!invoice || invoice.isDeleted)
             throw new Error("Invoice not found");
 
+        // 1. Add payment
         invoice.payments.push(paymentData);
+
+        // 2. Calculate total paid (IMPORTANT)
+        const paymentsTotal = invoice.payments.reduce((sum, p) => {
+            return sum + (p.amount || 0);
+        }, 0);
+
+        // 3. Include advance also
+        invoice.totalPaid = paymentsTotal + (invoice.advanceAmount || 0);
+
+        // 4. Recalculate pending
+        invoice.pendingAmount = invoice.grandTotal - invoice.totalPaid;
+
+        // 5. Optional: update status
+        if (invoice.pendingAmount <= 0) {
+            invoice.status = "paid";
+        } else if (invoice.totalPaid > 0) {
+            invoice.status = "partial";
+        }
+
         await invoice.save();
 
-        // Regenerate latest PDF after payment update
+        // Regenerate latest PDF
         await this.generatePDF(id);
 
         return invoice;
@@ -173,6 +192,7 @@ class InvoiceService {
                 name: invoice.company?.companyName || "",
                 email: invoice.company?.email || "",
                 phone: invoice.company?.phone || "",
+                gstNumber: invoice.company?.gstNumber || "",
                 address: [
                     invoice.company?.billingAddress?.street,
                     invoice.company?.billingAddress?.city,

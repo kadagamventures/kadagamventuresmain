@@ -5,6 +5,9 @@ const path = require("path")
 const fontPath = path.join(__dirname, "../assets/fonts/DejaVuSans.ttf");
 const fontBase64 = fs.readFileSync(fontPath).toString("base64");
 
+const qrPath = path.join(__dirname, "../assets/qr.jpeg");
+const qrBase64 = fs.readFileSync(qrPath).toString("base64");
+
 function numberToWords(num) {
   const a = [
     "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -39,6 +42,7 @@ function numberToWords(num) {
 }
 
 module.exports = (data) => {
+
   const companyName = data.companyName || "";
   const companyAddress = data.companyAddress || "";
   const client = data.client || {};
@@ -99,7 +103,6 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  background: #f5f6f5;
   line-height: 1.5;
 }
     .container {
@@ -108,7 +111,6 @@ body {
       background: white;
       padding: 40px;
       border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
     .header {
       display: flex;
@@ -225,7 +227,6 @@ body {
       padding: 50px 40px;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
       margin: 40px auto;
       max-width: 1000px;
       font-size: 13.5px;
@@ -282,67 +283,155 @@ body {
     </div>
   </div>
 
-  <div class="title">TAX INVOICE</div>
+<div style="padding:5px 10px;font-size:11px;">
 
-  <div class="invoice-meta">
-    <div class="bill-to">
-      <strong>Bill To</strong>
-      ${client.name || '—'}<br>
-      ${client.address || ''}<br>
-      ${client.email ? `Email: ${client.email}<br>` : ''}
-      ${client.phone ? `Phone: ${client.phone}` : ''}
-    </div>
-    <div class="invoice-details">
-      <strong>Invoice No</strong> ${data.invoiceNumber || '—'}<br>
-      <strong>Date</strong> ${data.invoiceDate ? new Date(data.invoiceDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '—'}<br>
-    </div>
-  </div>
-
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th class="service-col">Service Description</th>
-        <th>Qty</th>
-        <th>Rate</th>
-        <th>Taxable Amt</th>
-        <th>CGST</th>
-        <th>SGST</th>
-        <th>IGST</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${rows || '<tr><td colspan="9" style="text-align:center;padding:30px;">No services added</td></tr>'}
-    </tbody>
+  <!-- HEADER -->
+  <table style="width:100%;">
+    <tr>
+      <td style="text-align:right; vertical-align:top; padding:0; border:none !important;">
+        <strong>Invoice No:</strong> ${data.invoiceNumber}<br>
+        <strong>Date:</strong> ${data.invoiceDate
+      ? new Date(data.invoiceDate).toLocaleDateString("en-IN")
+      : ""
+    }
+      </td>
+    </tr>
   </table>
 
-  <div class="totals">
-    <div><span>Subtotal</span><span>Rs.${subtotal.toFixed(2)}</span></div>
-    ${totalCGST > 0 ? `<div><span>CGST</span><span>Rs.${totalCGST.toFixed(2)}</span></div>` : ''}
-    ${totalSGST > 0 ? `<div><span>SGST</span><span>Rs.${totalSGST.toFixed(2)}</span></div>` : ''}
-    ${totalIGST > 0 ? `<div><span>IGST</span><span>Rs.${totalIGST.toFixed(2)}</span></div>` : ''}
-    <div class="grand"><span>Grand Total</span><span>Rs.${totalAmount.toFixed(2)}</span></div>
-  </div>
+  <hr/>
 
-  <div class="amount-words">
-    <strong>Amount in Words:</strong><br>
-    ${grandTotalInWords}
-  </div>
+  <!-- BILL -->
+<table style="width:100%; text-align:left; border-collapse:collapse;">
+  <tr>
+    <td style="text-align:left; vertical-align:top; padding:0; border:none !important;">
+      <strong>BILL TO</strong><br>
+      ${client.name}<br>
+      ${client.address}<br>
+      GSTIN: ${client.gstNumber || "N/A"}<br>
+      Place: ${data.placeOfSupply || ""}
+    </td>
+  </tr>
+</table>
 
-  <div class="payment-info">
-    ${advance > 0 ? `<div>Advance Received: <strong>Rs.${advance.toFixed(2)}</strong></div>` : ''}
-    ${paid > 0 ? `<div>Total Paid: <strong>Rs.${paid.toFixed(2)}</strong></div>` : ''}
-    ${pending > 0
-      ? `<div class="status-pending">Balance Payable: <strong>Rs.${pending.toFixed(2)}</strong><br>(${pendingInWords})</div>`
-      : `<div class="status-paid">Invoice Fully Paid – Thank You!</div>`
-    }
-  </div>
+  <!-- TABLE -->
+<table style="width:100%;border-collapse:collapse;margin-top:8px;">
+  <tr>
+    <th style="border:1px solid #000;">ITEM</th>
+    <th style="border:1px solid #000;">QTY</th>
+    <th style="border:1px solid #000;">RATE</th>
+    <th style="border:1px solid #000;">TAX (18%)</th>
+    <th style="border:1px solid #000;">AMOUNT</th>
+  </tr>
 
-  <div class="footer">
-    This is a computer-generated invoice and does not require a physical signature.<br>
-    Thank you for your business. For any queries, please contact us.
+  ${services.map(s => `
+  <tr>
+    <td style="border:1px solid #000;">${s.serviceName}</td>
+    <td style="border:1px solid #000;text-align:center;">${s.quantity}</td>
+    <td style="border:1px solid #000;text-align:right;">
+      ₹ ${Number(s.price || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+    </td>
+    <td style="border:1px solid #000;text-align:right;">
+      ₹ ${Number((s.cgst || 0) + (s.sgst || 0)).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+    </td>
+    <td style="border:1px solid #000;text-align:right;">
+      ₹ ${Number(s.total || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+    </td>
+  </tr>
+`).join("")}
+</table>
+
+  <!-- TOTAL -->
+<div style="text-align:right;margin-top:8px;">
+  Taxable Amount:- ₹${subtotal.toLocaleString("en-IN")}<br>
+  CGST @9%:- ₹${totalCGST.toLocaleString("en-IN", { minimumFractionDigits: 2 })}<br>
+  SGST @9%:- ₹${totalSGST.toLocaleString("en-IN", { minimumFractionDigits: 2 })}<br>
+
+  <strong>Total Amount:- ₹${totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</strong><br><br>
+
+  Advance Paid:- ₹${advance.toLocaleString("en-IN", { minimumFractionDigits: 2 })}<br>
+  Payments Received (After Advance):- ₹${(paid).toLocaleString("en-IN", { minimumFractionDigits: 2 })}<br>
+
+  <strong>Total Paid:- ₹${paid.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</strong><br>
+
+  Balance Due:- ₹${pending.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+</div>
+
+<table style="width:100%; margin-top:12px; border-collapse:collapse;">
+  <tr>
+
+    <!-- LEFT -->
+    <td style="width:70%; text-align:left; vertical-align:top; padding:4px 0; border:none !important;">
+
+      <div style="font-size:13px; font-weight:600; margin-bottom:4px;">
+        BANK DETAILS
+      </div>
+
+      <div style="font-size:11.5px; line-height:1.4;">
+        KADAGAM VENTURES PVT LTD<br>
+        A/C: 401971999999<br>
+        IFSC: RATN0000305<br>
+
+        <strong>Bank & Branch:</strong><br>
+        RBL Bank Ltd, Millers Road<br>
+        Bengaluru – 560052
+      </div>
+
+    </td>
+
+    <!-- RIGHT -->
+    <td style="width:30%; vertical-align:top; border:none !important;">
+
+      <!-- WRAPPER (important fix) -->
+      <div style="width:120px; margin-left:auto; text-align:center;">
+
+        <div style="font-size:11px; font-weight:600; margin-bottom:4px;">
+          PAYMENT QR CODE
+        </div>
+
+        <img 
+          src="data:image/jpeg;base64,${qrBase64}" 
+          style="width:95px; height:auto; border:1px solid #eee; padding:4px; border-radius:6px;"
+        />
+
+        <div style="font-size:10px; margin-top:4px; color:#555;">
+          Pay via UPI
+        </div>
+
+        <div style="font-size:10px; font-weight:500;">
+          kadagamventures@ibl
+        </div>
+
+        <div style="margin-top:6px; font-size:9px; color:#666;">
+          GPay • PhonePe • Paytm
+        </div>
+
+      </div>
+
+    </td>
+
+  </tr>
+</table>
+
+  <!-- WORDS -->
+<div style="margin-top:12px;font-size:11px;">
+  <strong>Total Amount (in words):</strong>
+  ${grandTotalInWords}
+</div>
+
+<div style="margin-top:4px;font-size:11px;color:#444;">
+  <strong>Outstanding Balance (in words):</strong>
+  ${pendingInWords}
+</div>
+
+  <!-- SIGN -->
+<!-- SIGN -->
+<div style="text-align:center; margin-top:10px;">
+  <strong>TAX INVOICE ORIGINAL FOR RECIPIENT</strong>
+  
+  <div style="font-size:11px; margin-top:4px; color:#555;">
+    This is a computer generated invoice and does not require a signature.
   </div>
+</div>
 
 </div>
 

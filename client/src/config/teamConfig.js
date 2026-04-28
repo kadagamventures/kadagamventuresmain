@@ -1,16 +1,16 @@
 import vinay from "../assets/team/vinay.png"
 import balaji from "../assets/team/Balaji.png"
-import nishanthi from "../assets/team/nishanthi.png"
+// import nishanthi from "../assets/team/nishanthi.png"
 import anugya from "../assets/team/anugya.png"
 import darshan from "../assets/team/darshan.png"
 import arvindb from "../assets/team/arvindb.png"
 import aman from "../assets/team/amantwo.png"
-import salman from "../assets/team/salmantwo.png"
-import shivaji from "../assets/team/shivaji.png"
+// import salman from "../assets/team/salmantwo.png"
+// import shivaji from "../assets/team/shivaji.png"
 import veeran from "../assets/team/veeran.png"
-import arvindm from "../assets/team/aravindnew.png"
+// import arvindm from "../assets/team/aravindnew.png"
 import sagar from "../assets/team/sagar.png"
-import stanly from "../assets/team/stanleynewone.png"
+// import stanly from "../assets/team/stanleynewone.png"
 import kiran from "../assets/team/kiran.png"
 
 
@@ -30,13 +30,13 @@ export const TeamDetails = [
         // linkedIn: "https://www.linkedin.com/in/nishauiux?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     },
 
-    {
-        id: 3,
-        profile: nishanthi,
-        name: "Nishanthi S",
-        designation: "UIUX Designer",
-        linkedIn: "https://www.linkedin.com/in/nishauiux?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    },
+    // {
+    //     id: 3,
+    //     profile: nishanthi,
+    //     name: "Nishanthi S",
+    //     designation: "UIUX Designer",
+    //     linkedIn: "https://www.linkedin.com/in/nishauiux?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    // },
     {
         id: 4,
         profile: anugya,
@@ -86,13 +86,13 @@ export const TeamDetails = [
         designation: "Software Tester",
         linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
     },
-    {
-        id: 11,
-        profile: arvindm,
-        name: "Arvind M",
-        designation: "SEO Executive",
-        linkedIn: "https://www.linkedin.com/in/arvind-m-0b4b3b172?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    },
+    // {
+    //     id: 11,
+    //     profile: arvindm,
+    //     name: "Arvind M",
+    //     designation: "SEO Executive",
+    //     linkedIn: "https://www.linkedin.com/in/arvind-m-0b4b3b172?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    // },
     {
         id: 12,
         profile: sagar,
@@ -100,13 +100,13 @@ export const TeamDetails = [
         designation: "Business Development Asst (SR)",
         // linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
     },
-    {
-        id: 13,
-        profile: stanly,
-        name: "Stanley E",
-        designation: "Business Development Asst",
-        linkedIn: "https://www.linkedin.com/in/stanley-havoc-a2b318246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    },
+    // {
+    //     id: 13,
+    //     profile: stanly,
+    //     name: "Stanley E",
+    //     designation: "Business Development Asst",
+    //     linkedIn: "https://www.linkedin.com/in/stanley-havoc-a2b318246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    // },
     {
         id: 13,
         profile: kiran,
