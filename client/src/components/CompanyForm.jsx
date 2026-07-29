@@ -54,7 +54,7 @@ const CompanyForm = ({ close }) => {
         e.preventDefault();
 
         if (selectedCompany) {
-            await updateCompany(selectedCompany._id, form);
+            await updateCompany(selectedCompany.id, form);
         } else {
             await createCompany(form);
         }

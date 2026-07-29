@@ -56,7 +56,7 @@ export default function BroadcastHistoryModal({ onClose }) {
             <div className="divide-y divide-gray-100">
               {companyUpdates.map((update) => (
                 <div
-                  key={update._id}
+                  key={update.id}
                   className="group p-6 hover:bg-gray-50/70 transition-colors duration-150"
                 >
                   <div className="flex items-start justify-between gap-4">

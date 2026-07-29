@@ -52,36 +52,41 @@ export default function AdminEditBlog() {
   // Load existing blog data
   useEffect(() => {
     const loadBlog = async () => {
-      if (blogs.length === 0) {
+      let blogList = blogs;
+  
+      if (blogList.length === 0) {
         await fetchBlogs();
+        blogList = useAdminBlogStore.getState().blogs;
       }
-
-      const blogToEdit = blogs.find((b) => b._id === id);
-      if (blogToEdit) {
-        setForm({
-          title: blogToEdit.title || "",
-          slug: blogToEdit.slug || "",
-          content: blogToEdit.content || "",
-          excerpt: blogToEdit.excerpt || "",
-          author: blogToEdit.author || "Admin",
-          category: blogToEdit.category || "",
-          isRecommended: blogToEdit.isRecommended || false,
-          status: blogToEdit.status || "draft",
-          metaTitle: blogToEdit.seo?.metaTitle || "",
-          metaDescription: blogToEdit.seo?.metaDescription || "",
-          metaKeywords: blogToEdit.seo?.metaKeywords?.join(", ") || "",
-        });
-
-        setFeaturedPreview(blogToEdit.featuredImageUrl || null);
-        setOgPreview(blogToEdit.ogImageUrl || null);
-      } else {
+  
+      const blogToEdit = blogList.find((b) => b.id === Number(id));
+  
+      if (!blogToEdit) {
         toast.error("Blog not found");
         navigate("/admin/blogs");
+        return;
       }
+  
+      setForm({
+        title: blogToEdit.title || "",
+        slug: blogToEdit.slug || "",
+        content: blogToEdit.content || "",
+        excerpt: blogToEdit.excerpt || "",
+        author: blogToEdit.author || "Admin",
+        category: blogToEdit.category || "",
+        isRecommended: blogToEdit.isRecommended || false,
+        status: blogToEdit.status || "draft",
+        metaTitle: blogToEdit.seo?.metaTitle || "",
+        metaDescription: blogToEdit.seo?.metaDescription || "",
+        metaKeywords: blogToEdit.seo?.metaKeywords?.join(", ") || "",
+      });
+  
+      setFeaturedPreview(blogToEdit.featuredImageUrl || null);
+      setOgPreview(blogToEdit.ogImageUrl || null);
     };
-
+  
     loadBlog();
-  }, [id, blogs, fetchBlogs, navigate]);
+  }, [id]);
 
   const handleTextChange = (e) => {
     const { name, value } = e.target;

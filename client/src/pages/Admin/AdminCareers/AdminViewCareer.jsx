@@ -16,7 +16,7 @@ export default function AdminViewCareer() {
     }
   }, [careers.length, fetchCareers]);
 
-  const career = careers.find((c) => c._id === id);
+  const career = careers.find((c) => c.id === Number(id));
 
   if (!career) {
     return (

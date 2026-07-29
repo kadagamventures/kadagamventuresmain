@@ -70,7 +70,7 @@ export default function AdminCareers() {
       <div className="grid md:grid-cols-2 gap-6">
         {careers?.map((career) => (
           <div
-            key={career._id}
+            key={career.id}
             className="bg-gray-200 rounded-xl shadow-md p-7  hover:shadow-lg transition"
           >
             {/* TITLE */}
@@ -120,7 +120,7 @@ export default function AdminCareers() {
 
             <div className="flex gap-3">
               <button
-                onClick={() => navigate(`/admin/careers/view/${career._id}`)}
+                onClick={() => navigate(`/admin/careers/view/${career.id}`)}
                 className="bg-green-600 text-white px-3 py-1.5 rounded flex items-center gap-1 text-sm hover:bg-green-700 cursor-pointer"
               >
                 <FaEye size={13} />
@@ -128,7 +128,7 @@ export default function AdminCareers() {
               </button>
 
               <button
-                onClick={() => navigate(`/admin/careers/edit/${career._id}`)}
+                onClick={() => navigate(`/admin/careers/edit/${career.id}`)}
                 className="bg-blue-600 text-white px-3 py-1.5 rounded flex items-center gap-1 text-sm hover:bg-blue-700 cursor-pointer"
               >
                 <FaEdit size={13} />
@@ -136,7 +136,7 @@ export default function AdminCareers() {
               </button>
 
               <button
-                onClick={() => handleDelete(career._id)}
+                onClick={() => handleDelete(career.id)}
                 className="bg-red-600 text-white px-3 py-1.5 rounded flex items-center gap-1 text-sm hover:bg-red-700 cursor-pointer"
               >
                 <FaTrash size={13} />

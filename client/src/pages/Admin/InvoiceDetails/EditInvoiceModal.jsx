@@ -94,7 +94,7 @@ const EditInvoiceModal = ({ invoice, close }) => {
             })),
         };
 
-        await updateInvoice(invoice._id, payload);
+        await updateInvoice(invoice.id, payload);
         close();
     };
 
@@ -120,12 +120,8 @@ const EditInvoiceModal = ({ invoice, close }) => {
                                 onChange={handleChange}
                                 className="w-full border p-3 rounded-lg"
                             >
-                                <option value="Tax Invoice">
-                                    Tax Invoice
-                                </option>
-                                <option value="Proforma Invoice">
-                                    Proforma Invoice
-                                </option>
+                               <option value="Tax_Invoice">Tax Invoice</option>
+                               <option value="Proforma_Invoice">Proforma Invoice</option>
                             </select>
                         </div>
 

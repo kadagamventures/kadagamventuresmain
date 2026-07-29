@@ -105,7 +105,7 @@ const AdminContactUs = () => {
 
             {!loading &&
               inquiries?.map((item) => (
-                <tr key={item._id} className=" hover:bg-gray-50 transition">
+                <tr key={item.id} className=" hover:bg-gray-50 transition">
                   <td className="p-4">{item.fullName}</td>
                   <td className="p-4">{item.contactNumber}</td>
                   <td className="p-4">{item.email}</td>

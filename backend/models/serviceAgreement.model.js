@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const serviceAgreementSchema = new mongoose.Schema({
 
     company: {

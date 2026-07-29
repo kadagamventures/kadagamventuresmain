@@ -83,7 +83,8 @@ exports.getBlogs = asyncHandler(async (req, res) => {
 
   const response = await Promise.all(
     blogs.map(async (blog) => ({
-      ...blog.toObject(),
+      //...blog.toObject(),
+      ...blog,
       featuredImageUrl: await getSignedImageUrl(blog.featuredImage),
       ogImageUrl: await getSignedImageUrl(blog.ogImage),
     }))
@@ -101,7 +102,8 @@ exports.getBlogBySlug = asyncHandler(async (req, res, next) => {
   res.json({
     success: true,
     data: {
-      ...blog.toObject(),
+      //...blog.toObject(),
+      ...blog,
       featuredImageUrl: await getSignedImageUrl(blog.featuredImage),
       ogImageUrl: await getSignedImageUrl(blog.ogImage),
     },
@@ -114,7 +116,8 @@ exports.getRecommendedBlogs = asyncHandler(async (req, res) => {
   
     const response = await Promise.all(
       blogs.map(async (blog) => ({
-        ...blog.toObject(),
+        //...blog.toObject(),
+        ...blog,
         featuredImageUrl: await getSignedImageUrl(blog.featuredImage),
         ogImageUrl: await getSignedImageUrl(blog.ogImage),
       }))
@@ -132,7 +135,8 @@ exports.getRecommendedBlogs = asyncHandler(async (req, res) => {
   
     const response = await Promise.all(
       blogs.map(async (blog) => ({
-        ...blog.toObject(),
+        //...blog.toObject(),
+        ...blog,
         featuredImageUrl: await getSignedImageUrl(blog.featuredImage),
         ogImageUrl: await getSignedImageUrl(blog.ogImage),
       }))
@@ -175,8 +179,7 @@ exports.getRecommendedBlogs = asyncHandler(async (req, res) => {
 //   res.json({ success: true, data: blog });
 // });
 exports.updateBlog = asyncHandler(async (req, res, next) => {
-
-  // ✅ ADD THIS
+  // Parse SEO JSON
   if (req.body.seo && typeof req.body.seo === "string") {
     try {
       req.body.seo = JSON.parse(req.body.seo);
@@ -186,32 +189,48 @@ exports.updateBlog = asyncHandler(async (req, res, next) => {
   }
 
   const blog = await blogService.getBlogById(req.params.id);
-  if (!blog) return next(new AppError("Blog not found", 404));
 
+  if (!blog) {
+    return next(new AppError("Blog not found", 404));
+  }
+
+  let featuredImage = blog.featuredImage;
+  let ogImage = blog.ogImage;
+
+  // Replace featured image
   if (req.files?.featuredImage) {
-    await deleteFromS3(blog.featuredImage);
-    blog.featuredImage = await uploadToS3({
+    if (featuredImage) {
+      await deleteFromS3(featuredImage);
+    }
+
+    featuredImage = await uploadToS3({
       file: req.files.featuredImage[0],
       folder: "blogs/featured",
     });
   }
 
+  // Replace OG image
   if (req.files?.ogImage) {
-    await deleteFromS3(blog.ogImage);
-    blog.ogImage = await uploadToS3({
+    if (ogImage) {
+      await deleteFromS3(ogImage);
+    }
+
+    ogImage = await uploadToS3({
       file: req.files.ogImage[0],
       folder: "blogs/og",
     });
   }
 
-  Object.assign(blog, req.body);
+  const updatedBlog = await blogService.updateBlog(req.params.id, {
+    ...req.body,
+    featuredImage,
+    ogImage,
+  });
 
-  blog.publishedAt =
-    req.body.status === "published" ? new Date() : null;
-
-  await blog.save();
-
-  res.json({ success: true, data: blog });
+  res.json({
+    success: true,
+    data: updatedBlog,
+  });
 });
 
 
@@ -223,7 +242,7 @@ exports.deleteBlog = asyncHandler(async (req, res, next) => {
   await deleteFromS3(blog.featuredImage);
   await deleteFromS3(blog.ogImage);
 
-  await blog.deleteOne();
+  await blogService.deleteBlog(req.params.id);
 
   res.json({
     success: true,

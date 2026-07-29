@@ -1,0 +1,776 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum BlogStatus {
+  draft
+  published
+}
+
+model Blog {
+  id       Int     @id @default(autoincrement())
+  title    String
+  slug     String  @unique
+  content  String
+  excerpt  String?
+  author   String
+  category String
+
+  tags String[]
+
+  featuredImage String
+  ogImage       String?
+
+  isRecommended Boolean @default(false)
+
+  status BlogStatus @default(draft)
+
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String[]
+
+  publishedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BrandingGraphicDesign {
+  id          Int      @id @default(autoincrement())
+  title       String   @default("Branding & Graphic Design")
+  slug        String   @unique @default("branding-graphic-design")
+  description String
+  platforms   String[]
+  isActive    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans PricingPlan[]
+}
+
+model PricingPlan {
+  id        Int      @id @default(autoincrement())
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  brandingGraphicDesignId Int
+  brandingGraphicDesign   BrandingGraphicDesign @relation(fields: [brandingGraphicDesignId], references: [id], onDelete: Cascade)
+}
+
+model BrandStrategyIdentity {
+  id          Int      @id @default(autoincrement())
+  title       String   @default("Brand Strategy & Identity")
+  slug        String   @unique @default("brand-strategy-identity")
+  description String
+  platforms   String[]
+  isActive    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans BrandStrategyPricingPlan[]
+}
+
+model BrandStrategyPricingPlan {
+  id        Int      @id @default(autoincrement())
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  brandStrategyIdentityId Int
+  brandStrategyIdentity   BrandStrategyIdentity @relation(fields: [brandStrategyIdentityId], references: [id], onDelete: Cascade)
+}
+
+model BusinessSettings {
+  id Int @id @default(autoincrement())
+
+  businessName     String
+  gstNumber        String?
+  panNumber        String?
+  cin              String?
+  state            String?
+  address          String?
+  phone            String?
+  email            String?
+  logoUrl          String?
+  signatureUrl     String?
+  authorizedPerson String?
+
+  invoicePrefix     String @default("INV")
+  nextInvoiceNumber Int    @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bankDetails BankDetails?
+}
+
+model BankDetails {
+  id Int @id @default(autoincrement())
+
+  bankName      String?
+  accountNumber String?
+  ifscCode      String?
+  branch        String?
+  upiId         String?
+
+  businessSettingsId Int              @unique
+  businessSettings   BusinessSettings @relation(fields: [businessSettingsId], references: [id], onDelete: Cascade)
+}
+
+model Career {
+  id Int @id @default(autoincrement())
+
+  title          String
+  location       String
+  experience     String
+  employmentType String
+  overview       String
+
+  responsibilities String[]
+  skills           String[]
+
+  whatWeOffer String[]
+  howToApply  String?
+
+  positionCount Int
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applications CareerApplication[]
+}
+
+model CareerApplication {
+  id Int @id @default(autoincrement())
+
+  careerId Int
+  career   Career @relation(fields: [careerId], references: [id], onDelete: Cascade)
+
+  firstName String?
+  lastName  String?
+
+  email String
+
+  phone    String?
+  gender   String?
+  location String?
+
+  experience     String?
+  currentSalary  String?
+  expectedSalary String?
+  noticePeriod   String?
+
+  joiningDate       DateTime?
+  joiningTime       String?
+  isImmediateJoiner Boolean?
+
+  resumeKey String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([careerId, email])
+}
+
+model Company {
+  id Int @id @default(autoincrement())
+
+  companyName        String
+  legalName          String?
+  gstNumber          String?
+  panNumber          String?
+  registrationNumber String?
+
+  email   String?
+  phone   String?
+  website String?
+
+  contactPersonName        String?
+  contactPersonDesignation String?
+  contactPersonPhone       String?
+  contactPersonEmail       String?
+
+  isDeleted Boolean @default(false)
+
+  billingStreet  String?
+  billingCity    String?
+  billingState   String?
+  billingCountry String? @default("India")
+  billingPincode String?
+
+  shippingStreet  String?
+  shippingCity    String?
+  shippingState   String?
+  shippingCountry String? @default("India")
+  shippingPincode String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  invoices          Invoice[]
+  serviceAgreements ServiceAgreement[]
+}
+
+model CompanyUpdate {
+  id Int @id @default(autoincrement())
+
+  title   String
+  message String
+
+  pdfKey String?
+
+  isPublished Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DigitalMarketing {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Digital Marketing")
+  slug        String @unique @default("digital-marketing")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans DigitalMarketingPricingPlan[]
+}
+
+model DigitalMarketingPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  digitalMarketingId Int
+  digitalMarketing   DigitalMarketing @relation(fields: [digitalMarketingId], references: [id], onDelete: Cascade)
+}
+
+enum InquiryAbout {
+  services
+  products
+}
+
+model Inquiry {
+  id Int @id @default(autoincrement())
+
+  fullName      String
+  contactNumber String
+  email         String
+
+  inquiryAbout InquiryAbout
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InteractiveAnimatedWebsites {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Interactive & Animated Websites")
+  slug        String @unique @default("interactive-animated-websites")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans InteractiveAnimatedWebsitePricingPlan[]
+}
+
+model InteractiveAnimatedWebsitePricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  interactiveAnimatedWebsiteId Int
+  interactiveAnimatedWebsite   InteractiveAnimatedWebsites @relation(fields: [interactiveAnimatedWebsiteId], references: [id], onDelete: Cascade)
+}
+
+enum InvoiceType {
+  Tax_Invoice
+  Proforma_Invoice
+}
+
+enum InvoiceStatus {
+  draft
+  sent
+  partial
+  paid
+  overdue
+  cancelled
+}
+
+model Invoice {
+  id Int @id @default(autoincrement())
+
+  invoiceNumber String      @unique
+  invoiceType   InvoiceType @default(Tax_Invoice)
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  invoiceDate DateTime  @default(now())
+  dueDate     DateTime?
+
+  placeOfSupply String?
+
+  status InvoiceStatus @default(draft)
+
+  subTotal   Float @default(0)
+  totalGST   Float @default(0)
+  roundOff   Float @default(0)
+  grandTotal Float @default(0)
+
+  advanceAmount Float @default(0)
+  totalPaid     Float @default(0)
+  pendingAmount Float @default(0)
+
+  amountInWords String?
+
+  termsAndConditions String?
+
+  pdfKey String?
+
+  isDeleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  services      InvoiceService[]
+  payments      InvoicePayment[]
+  emailTracking EmailTracking?
+
+  @@index([companyId])
+  @@index([status])
+  @@index([invoiceDate])
+}
+
+model InvoiceService {
+  id Int @id @default(autoincrement())
+
+  invoiceId Int
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  serviceName String
+  description String?
+
+  sacCode String?
+
+  price    Float
+  quantity Int   @default(1)
+
+  gstRate Float @default(18)
+
+  taxableAmount Float?
+
+  cgst Float?
+
+  sgst Float?
+
+  igst Float?
+
+  total Float?
+}
+
+model InvoicePayment {
+  id Int @id @default(autoincrement())
+
+  invoiceId Int
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  amount Float
+
+  paymentMethod String?
+
+  transactionId String?
+
+  paymentDate DateTime @default(now())
+
+  notes String?
+}
+
+model EmailTracking {
+  id Int @id @default(autoincrement())
+
+  invoiceId Int     @unique
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  sent Boolean @default(false)
+
+  sentCount Int @default(0)
+
+  lastSentAt DateTime?
+
+  history EmailHistory[]
+}
+
+model EmailHistory {
+  id Int @id @default(autoincrement())
+
+  emailTrackingId Int
+  emailTracking   EmailTracking @relation(fields: [emailTrackingId], references: [id], onDelete: Cascade)
+
+  sentAt DateTime?
+
+  sentTo String?
+}
+
+model LandingPageDesign {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Landing Page Design")
+  slug        String @unique @default("landing-page-design")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans LandingPagePricingPlan[]
+}
+
+model LandingPagePricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  landingPageDesignId Int
+  landingPageDesign   LandingPageDesign @relation(fields: [landingPageDesignId], references: [id], onDelete: Cascade)
+}
+
+enum LeadBatchStatus {
+  active
+  archived
+}
+
+model LeadBatch {
+  id Int @id @default(autoincrement())
+
+  leadName   String
+  totalLeads Int
+
+  leadGeneratedDate DateTime
+
+  source       String  @default("Unknown")
+  campaignName String?
+
+  costPerLead Float?
+  totalCost   Float?
+
+  fileKey  String?
+  fileName String?
+  fileSize Int?
+
+  notes String?
+
+  status LeadBatchStatus @default(active)
+
+  isDeleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MobileAppDevelopment {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Mobile App Development")
+  slug        String @unique @default("mobile-app-development")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans MobileAppPricingPlan[]
+}
+
+model MobileAppPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  mobileAppDevelopmentId Int
+  mobileAppDevelopment   MobileAppDevelopment @relation(fields: [mobileAppDevelopmentId], references: [id], onDelete: Cascade)
+}
+
+enum AgreementType {
+  one_time
+  monthly
+  quarterly
+  yearly
+}
+
+enum AgreementStatus {
+  draft
+  sent
+  active
+  expired
+  terminated
+}
+
+model ServiceAgreement {
+  id Int @id @default(autoincrement())
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  agreementNumber String @unique
+
+  agreementType AgreementType @default(one_time)
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  status AgreementStatus @default(draft)
+
+  documentUrl String?
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailTracking AgreementEmailTracking?
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model AgreementEmailTracking {
+  id Int @id @default(autoincrement())
+
+  sent   Boolean   @default(false)
+  sentAt DateTime?
+
+  opened   Boolean   @default(false)
+  openedAt DateTime?
+
+  serviceAgreementId Int              @unique
+  serviceAgreement   ServiceAgreement @relation(fields: [serviceAgreementId], references: [id], onDelete: Cascade)
+}
+
+model SoftwareTestingQA {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Software Testing & QA")
+  slug        String @unique @default("software-testing-qa")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans SoftwareTestingQAPricingPlan[]
+}
+
+model SoftwareTestingQAPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  softwareTestingQAId Int
+  softwareTestingQA   SoftwareTestingQA @relation(fields: [softwareTestingQAId], references: [id], onDelete: Cascade)
+}
+
+model Subscriber {
+  id Int @id @default(autoincrement())
+
+  email    String  @unique
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UiUxDesigning {
+  id Int @id @default(autoincrement())
+
+  title       String @default("UI / UX Designing")
+  slug        String @unique @default("ui-ux-designing")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans UiUxPricingPlan[]
+}
+
+model UiUxPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  uiUxDesigningId Int
+  uiUxDesigning   UiUxDesigning @relation(fields: [uiUxDesigningId], references: [id], onDelete: Cascade)
+}
+
+model VideoEditingPostProduction {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Video Editing & Post-Production")
+  slug        String @unique @default("video-editing-post-production")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans VideoEditingPricingPlan[]
+}
+
+model VideoEditingPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  videoEditingPostProductionId Int
+  videoEditingPostProduction   VideoEditingPostProduction @relation(fields: [videoEditingPostProductionId], references: [id], onDelete: Cascade)
+}
+
+model VideoProduction {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Video Production")
+  slug        String @unique @default("video-production")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans VideoProductionPricingPlan[]
+}
+
+model VideoProductionPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  videoProductionId Int
+  videoProduction   VideoProduction @relation(fields: [videoProductionId], references: [id], onDelete: Cascade)
+}
+
+model WebsiteDevelopment {
+  id Int @id @default(autoincrement())
+
+  title       String @default("Website Development")
+  slug        String @unique @default("website-development")
+  description String
+
+  platforms String[]
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pricingPlans WebsiteDevelopmentPricingPlan[]
+}
+
+model WebsiteDevelopmentPricingPlan {
+  id Int @id @default(autoincrement())
+
+  planName  String
+  priceFrom Float
+  priceTo   Float
+  duration  String?
+  features  String[]
+  isPopular Boolean  @default(false)
+
+  websiteDevelopmentId Int
+  websiteDevelopment   WebsiteDevelopment @relation(fields: [websiteDevelopmentId], references: [id], onDelete: Cascade)
+}
+
+model WorkTogether {
+  id Int @id @default(autoincrement())
+
+  firstName String
+  email     String
+
+  company String?
+
+  projectDetails String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

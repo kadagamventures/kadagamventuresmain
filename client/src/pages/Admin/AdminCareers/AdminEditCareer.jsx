@@ -40,9 +40,9 @@ export default function AdminEditCareer() {
       if (careers.length === 0) {
         await fetchCareers();
       }
-
-      const career = careers.find((c) => c._id === id);
-
+  
+      const career = careers.find((c) => c.id === Number(id));
+  
       if (career) {
         setForm({
           title: career.title || "",
@@ -58,7 +58,7 @@ export default function AdminEditCareer() {
         });
       }
     };
-
+  
     load();
   }, [careers, fetchCareers, id]);
 

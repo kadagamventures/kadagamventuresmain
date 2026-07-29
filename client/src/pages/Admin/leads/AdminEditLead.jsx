@@ -13,9 +13,18 @@ export default function AdminEditLead() {
   const [currentFileName, setCurrentFileName] = useState("");
 
   useEffect(() => {
-    if (leads.length === 0) fetchLeads();
-
-    const lead = leads.find((l) => l._id === id);
+    const loadLead = async () => {
+      if (leads.length === 0) {
+        await fetchLeads();
+      }
+    };
+  
+    loadLead();
+  }, []);
+  
+  useEffect(() => {
+    const lead = leads.find((l) => l.id === Number(id));
+  
     if (lead) {
       setForm({
         leadName: lead.leadName || "",
@@ -29,10 +38,12 @@ export default function AdminEditLead() {
         totalCost: lead.totalCost || "",
         notes: lead.notes || "",
       });
+  
       setCurrentFileName(lead.fileName || "");
     }
   }, [leads, id]);
 
+  
   if (!form)
     return (
       <div className="p-10 text-center text-gray-500">Loading lead data...</div>

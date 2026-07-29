@@ -15,11 +15,19 @@ export default function AdminViewBlog() {
 
   useEffect(() => {
     const load = async () => {
-      if (blogs.length === 0) await fetchBlogs();
-      const found = blogs.find((b) => b._id === id);
-      if (found) setBlog(found);
-      else toast.error("Blog not found");
+      if (blogs.length === 0) {
+        await fetchBlogs();
+      }
+  
+      const found = blogs.find((b) => b.id === Number(id));
+  
+      if (found) {
+        setBlog(found);
+      } else {
+        toast.error("Blog not found");
+      }
     };
+  
     load();
   }, [id, blogs, fetchBlogs]);
 

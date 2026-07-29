@@ -128,7 +128,7 @@ export default function AdminLeadsHistory() {
   ]);
 
   const campaignWiseData = data.campaignStats.map((c) => [
-    c._id || "Unnamed",
+    c.id || "Unnamed",
     c.totalLeads.toLocaleString(),
     `₹ ${c.totalCost?.toLocaleString() || "0"}`,
   ]);

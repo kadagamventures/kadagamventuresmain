@@ -118,7 +118,7 @@ const CompanyList = () => {
                         ) : (
                             filteredCompanies.map((c) => (
                                 <tr
-                                    key={c._id}
+                                    key={c.id}
                                     className="border-t hover:bg-gray-50 transition"
                                 >
                                     {/* Company Name + Legal */}
@@ -241,7 +241,7 @@ const CompanyList = () => {
 
                             <button
                                 onClick={() => {
-                                    deleteCompany(companyToDelete._id);
+                                    deleteCompany(companyToDelete.id);
                                     setShowDeleteModal(false);
                                     setCompanyToDelete(null);
                                 }}

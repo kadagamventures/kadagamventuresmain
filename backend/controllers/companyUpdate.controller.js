@@ -1,6 +1,7 @@
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/appError");
-const CompanyUpdate = require("../models/companyUpdate.model");
+//const CompanyUpdate = require("../models/companyUpdate.model");
+const prisma = require("../config/prisma");
 const broadcastService = require("../services/subscriberBroadcast.service");
 const { uploadToS3 } = require("../utils/s3");
 
@@ -20,10 +21,17 @@ exports.createUpdate = asyncHandler(async (req, res, next) => {
     });
   }
 
-  const update = await CompanyUpdate.create({
-    title,
-    message,
-    pdfKey,
+  // const update = await CompanyUpdate.create({
+  //   title,
+  //   message,
+  //   pdfKey,
+  // });
+  const update = await prisma.companyUpdate.create({
+    data: {
+      title,
+      message,
+      pdfKey,
+    },
   });
 
   if (update.isPublished) {
@@ -38,8 +46,16 @@ exports.createUpdate = asyncHandler(async (req, res, next) => {
 });
 
 exports.getUpdates = asyncHandler(async (req, res) => {
-    const updates = await CompanyUpdate.find({ isPublished: true })
-      .sort({ createdAt: -1 });
+    // const updates = await CompanyUpdate.find({ isPublished: true })
+    //   .sort({ createdAt: -1 });
+    const updates = await prisma.companyUpdate.findMany({
+      where: {
+        isPublished: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   
     res.json({
       success: true,
@@ -48,7 +64,12 @@ exports.getUpdates = asyncHandler(async (req, res) => {
   });
 
 exports.getAllUpdates = asyncHandler(async (req, res) => {
-  const updates = await CompanyUpdate.find().sort({ createdAt: -1 });
+  //const updates = await CompanyUpdate.find().sort({ createdAt: -1 });
+  const updates = await prisma.companyUpdate.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   res.json({
     success: true,

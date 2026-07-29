@@ -65,7 +65,7 @@ export default function AdminWorkTogether() {
               ) : (
                 workRequests.map((item, index) => (
                   <tr
-                    key={item._id}
+                    key={item.id}
                     onClick={() => setSelected(item)}
                     className="hover:bg-blue-50/60 transition-colors duration-150 cursor-pointer group"
                   >

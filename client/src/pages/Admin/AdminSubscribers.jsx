@@ -194,7 +194,7 @@ export default function AdminSubscribers() {
               ) : (
                 filteredSubscribers.map((sub, index) => (
                   <tr
-                    key={sub._id}
+                    key={sub.id}
                     className="group transition-colors hover:bg-gray-50/70"
                   >
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-600">

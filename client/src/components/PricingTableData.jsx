@@ -41,7 +41,7 @@ const PricingTableData = ({ slug }) => {
 
                     {service.pricingPlans.map((plan) => (
                         <div
-                            key={plan._id}
+                            key={plan.id}
                             className={`rounded-2xl shadow-lg p-8 border transition 
                                 ${plan.isPopular
                                     ? "border-gray-300/75 scale-105 bg-white"

@@ -95,7 +95,7 @@ const useAdminCareerStore = create((set, get) => ({
       const res = await api.delete(`/careers/${id}`);
 
       set({
-        careers: get().careers.filter((c) => c._id !== id),
+        careers: get().careers.filter((c) => c.id !== id),
       });
 
       return res.data;

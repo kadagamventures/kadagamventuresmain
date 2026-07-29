@@ -32,7 +32,7 @@ const Blogs = () => {
                     <div className="grid sm:grid-cols-2 gap-14">
                         {blogs.map((blog, index) => (
                             <div
-                                key={blog._id}
+                                key={blog.id}
                                 data-aos="fade-right"
                                 data-aos-duration="800"
                                 data-aos-delay={index * 50}

@@ -382,7 +382,7 @@ const BlogDetails = () => {
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {recommended.slice(0, 3).map((item) => (
                 <Link
-                  key={item._id}
+                  key={item.id}
                   to={`/blogs/${item.slug}/`}
                   className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100"
                 >

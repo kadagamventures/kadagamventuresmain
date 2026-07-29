@@ -7,7 +7,7 @@ const CreateInvoiceModal = ({ close }) => {
     const { createInvoice } = useInvoiceStore();
 
     const [form, setForm] = useState({
-        company: selectedCompany?._id || "",
+        companyId: selectedCompany?.id || "",
         invoiceType: "Tax Invoice",
         placeOfSupply: selectedCompany?.billingAddress?.state || "",
         dueDate: "",
@@ -79,13 +79,49 @@ const CreateInvoiceModal = ({ close }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // const payload = {
+        //     company: form.company,
+        //     invoiceType: form.invoiceType,
+        //     placeOfSupply: form.placeOfSupply,
+        //     dueDate: form.dueDate,
+        //     advanceAmount: Number(form.advanceAmount),
+        //     termsAndConditions: form.termsAndConditions,
+        //     services: form.services.map((s) => ({
+        //         serviceName: s.serviceName,
+        //         description: s.description,
+        //         sacCode: s.sacCode,
+        //         price: Number(s.price),
+        //         quantity: Number(s.quantity),
+        //         gstRate: Number(s.gstRate),
+        //     })),
+        // };
         const payload = {
-            company: form.company,
+            companyId: form.companyId,
+        
             invoiceType: form.invoiceType,
-            placeOfSupply: form.placeOfSupply,
+        
+            invoiceDate: new Date(),
+        
             dueDate: form.dueDate,
+        
+            placeOfSupply: form.placeOfSupply,
+        
+            subTotal: preview.subTotal,
+            totalGST: preview.gst,
+            roundOff: 0,
+            grandTotal: preview.grandTotal,
+        
             advanceAmount: Number(form.advanceAmount),
+        
+            totalPaid: 0,
+        
+            pendingAmount:
+                preview.grandTotal - Number(form.advanceAmount),
+        
+            amountInWords: "",
+        
             termsAndConditions: form.termsAndConditions,
+        
             services: form.services.map((s) => ({
                 serviceName: s.serviceName,
                 description: s.description,
@@ -93,6 +129,27 @@ const CreateInvoiceModal = ({ close }) => {
                 price: Number(s.price),
                 quantity: Number(s.quantity),
                 gstRate: Number(s.gstRate),
+        
+                taxableAmount:
+                    Number(s.price) * Number(s.quantity),
+        
+                cgst:
+                    ((Number(s.price) * Number(s.quantity)) *
+                        Number(s.gstRate)) /
+                    200,
+        
+                sgst:
+                    ((Number(s.price) * Number(s.quantity)) *
+                        Number(s.gstRate)) /
+                    200,
+        
+                igst: 0,
+        
+                total:
+                    Number(s.price) * Number(s.quantity) +
+                    ((Number(s.price) * Number(s.quantity)) *
+                        Number(s.gstRate)) /
+                        100,
             })),
         };
 
@@ -126,8 +183,8 @@ const CreateInvoiceModal = ({ close }) => {
                                 onChange={handleChange}
                                 className="w-full border p-3 rounded-lg"
                             >
-                                <option value="Tax Invoice">Tax Invoice</option>
-                                <option value="Proforma Invoice">Proforma Invoice</option>
+                               <option value="Tax_Invoice">Tax Invoice</option>
+                               <option value="Proforma_Invoice">Proforma Invoice</option>
                             </select>
                         </div>
 

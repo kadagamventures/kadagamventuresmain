@@ -116,7 +116,18 @@ exports.updateLeadBatch = asyncHandler(async (req, res) => {
   });
 
 // DELETE (soft delete)
+// exports.deleteLeadBatch = asyncHandler(async (req, res) => {
+//   await deleteLeadBatch(req.params.id);
+
+//   res.json({
+//     success: true,
+//     message: "Lead batch archived successfully",
+//   });
+// });
 exports.deleteLeadBatch = asyncHandler(async (req, res) => {
+  // console.log("DELETE params:", req.params);
+  // console.log("DELETE id:", req.params.id);
+
   await deleteLeadBatch(req.params.id);
 
   res.json({

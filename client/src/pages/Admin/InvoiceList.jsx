@@ -52,7 +52,7 @@ const InvoiceList = () => {
     }, [invoices, search, statusFilter]);
 
     const confirmDelete = async () => {
-        await deleteInvoice(invoiceToDelete._id);
+        await deleteInvoice(invoiceToDelete.id);
         setShowDeleteModal(false);
         setInvoiceToDelete(null);
     };
@@ -112,7 +112,7 @@ const InvoiceList = () => {
                         ) : (
                             filteredInvoices.map((inv) => (
                                 <tr
-                                    key={inv._id}
+                                    key={inv.id}
                                     className="border-t hover:bg-gray-50 transition"
                                 >
                                     <td className="p-4 font-semibold text-gray-800">
@@ -144,7 +144,7 @@ const InvoiceList = () => {
 
                                             <button
                                                 title="Generate PDF"
-                                                onClick={() => generatePDF(inv._id)}
+                                                onClick={() => generatePDF(inv.id)}
                                                 className="p-2 rounded-lg hover:bg-purple-100 text-purple-600 transition"
                                             >
                                                 <FaFilePdf />
@@ -152,7 +152,7 @@ const InvoiceList = () => {
 
                                             <button
                                                 title="Download"
-                                                onClick={() => downloadPDF(inv._id)}
+                                                onClick={() => downloadPDF(inv.id)}
                                                 className="p-2 rounded-lg hover:bg-green-100 text-green-600 transition"
                                             >
                                                 <FaDownload />
@@ -160,7 +160,7 @@ const InvoiceList = () => {
 
                                             <button
                                                 title="Send Email"
-                                                onClick={() => sendInvoice(inv._id)}
+                                                onClick={() => sendInvoice(inv.id)}
                                                 className="p-2 rounded-lg hover:bg-blue-100 text-blue-600 transition"
                                             >
                                                 <MdEmail />
@@ -179,7 +179,7 @@ const InvoiceList = () => {
 
                                             <Link
                                                 title="View Details"
-                                                to={`/admin/invoices/${inv._id}`}
+                                                to={`/admin/invoices/${inv.id}`}
                                                 className="p-2 rounded-lg hover:bg-indigo-100 text-indigo-600 transition"
                                             >
                                                 <MdOutlinePreview />

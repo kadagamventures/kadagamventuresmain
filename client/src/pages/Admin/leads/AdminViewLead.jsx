@@ -11,21 +11,41 @@ export default function AdminViewLead() {
   const [lead, setLead] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (leads.length === 0) {
-      fetchLeads();
-    }
+  // useEffect(() => {
+  //   if (leads.length === 0) {
+  //     fetchLeads();
+  //   }
 
-    const found = leads.find((l) => l._id === id);
+  //   const found = leads.find((l) => l._id === id);
+  //   if (found) {
+  //     setLead(found);
+  //     setLoading(false);
+  //   } else if (leads.length > 0) {
+  //     // If leads are loaded but not found → probably invalid id
+  //     setLoading(false);
+  //   }
+  // }, [leads, id, fetchLeads]);
+
+  useEffect(() => {
+    const loadLead = async () => {
+      if (leads.length === 0) {
+        await fetchLeads();
+      }
+    };
+  
+    loadLead();
+  }, []);
+  
+  useEffect(() => {
+    const found = leads.find((l) => l.id === Number(id));
+  
     if (found) {
       setLead(found);
-      setLoading(false);
-    } else if (leads.length > 0) {
-      // If leads are loaded but not found → probably invalid id
-      setLoading(false);
     }
-  }, [leads, id, fetchLeads]);
-
+  
+    setLoading(false);
+  }, [leads, id]);
+  
   const handleDownload = async () => {
     if (!lead?.fileKey) return;
 

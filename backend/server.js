@@ -4,10 +4,11 @@ require("dotenv").config({
   
   const express = require("express");
   const cookieParser = require("cookie-parser");
-  const connectDB = require("./config/dbConfig");
+  //const connectDB = require("./config/dbConfig");
   const corsMiddleware = require("./config/cors.config");
   const AppError = require("./utils/appError")
   const adminDashboardRoutes = require("./routes/adminDashboardRoutes");
+  const prisma = require("./config/prisma");
   
   const app = express();
 
@@ -17,7 +18,7 @@ require("dotenv").config({
  
   
   // ✅ Connect Database
-  connectDB();
+  //connectDB();
   
   // ✅ Middlewares
   app.use(express.json());
@@ -143,7 +144,23 @@ app.use((err, req, res, next) => {
   
 
   // ✅ Start Server
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
+  // app.listen(PORT, () => {
+  //   console.log(`🚀 Server running on port ${PORT}`);
+  // });
+
+  async function startServer() {
+    try {
+      await prisma.$connect();
+      console.log("✅ PostgreSQL connected");
+  
+      app.listen(PORT, () => {
+        console.log(`🚀 Server running on port ${PORT}`);
+      });
+    } catch (err) {
+      console.error("❌ Failed to connect to PostgreSQL:", err);
+      process.exit(1);
+    }
+  }
+  
+  startServer();
   

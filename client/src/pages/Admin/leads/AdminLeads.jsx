@@ -89,9 +89,9 @@ export default function AdminLeads() {
             <tbody>
               {leads.map((lead) => (
                 <tr
-                  key={lead._id}
+                  key={lead.id}
                   className=" hover:bg-gray-50 cursor-pointer"
-                  onClick={() => navigate(`/admin/leads/view/${lead._id}`)}
+                  onClick={() => navigate(`/admin/leads/view/${lead.id}`)}
                 >
                   <td className="p-4 font-medium">{lead.leadName}</td>
                   <td className="p-4">{lead.totalLeads.toLocaleString()}</td>
@@ -112,7 +112,7 @@ export default function AdminLeads() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDownload(lead._id);
+                          handleDownload(lead.id);
                         }}
                         className="text-indigo-600 hover:text-indigo-800 font-medium"
                       >
@@ -129,7 +129,7 @@ export default function AdminLeads() {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/admin/leads/edit/${lead._id}`);
+                        navigate(`/admin/leads/edit/${lead.id}`);
                       }}
                       className="text-blue-600 hover:text-blue-800 font-medium"
                     >
@@ -140,7 +140,7 @@ export default function AdminLeads() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleArchive(lead._id);
+                          handleArchive(lead.id);
                         }}
                         className="text-red-600 hover:text-red-800 font-medium"
                       >

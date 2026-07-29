@@ -8,11 +8,17 @@ const {
   AWS_S3_BUCKET_NAME,
 } = require("../config/aws");
 
-const Subscriber = require("../models/subscriber.model");
+//const Subscriber = require("../models/subscriber.model");
+const prisma = require("../config/prisma");
 const template = require("../services/companyUpdate.template");
 
 exports.sendUpdateToSubscribers = async (update) => {
-  const subscribers = await Subscriber.find({ isActive: true });
+  //const subscribers = await Subscriber.find({ isActive: true });
+  const subscribers = await prisma.subscriber.findMany({
+    where: {
+      isActive: true,
+    },
+  });
 
   let pdfUrl = null;
   if (update.pdfKey) {

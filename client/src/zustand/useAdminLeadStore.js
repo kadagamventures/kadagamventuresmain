@@ -79,7 +79,7 @@ const useAdminLeadStore = create((set) => ({
   deleteLead: async (id) => {
     await api.delete(`/leads/${id}`);
     set((state) => ({
-      leads: state.leads.filter((l) => l._id !== id),
+      leads: state.leads.filter((l) => l.id !== id),
     }));
   },
 

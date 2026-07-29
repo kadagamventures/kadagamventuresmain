@@ -111,8 +111,9 @@ exports.applyCareer = asyncHandler(async (req, res, next) => {
       resumeKey: req.file.key,
     };
 
-    let savedApplication = await service.applyCareer(payload);
-    savedApplication = await savedApplication.populate("careerId");
+    // let savedApplication = await service.applyCareer(payload);
+    // savedApplication = await savedApplication.populate("careerId");
+    const savedApplication = await service.applyCareer(payload);
 
     await emailService.sendAdminApplicationMail(savedApplication);
     await emailService.sendApplicantReply(

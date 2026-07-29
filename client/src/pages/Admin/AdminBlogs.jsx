@@ -68,7 +68,7 @@ export default function AdminBlogs() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div
-              key={blog._id}
+              key={blog.id}
               className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group"
             >
               {blog.featuredImageUrl ? (
@@ -117,19 +117,19 @@ export default function AdminBlogs() {
 
                 <div className="flex gap-2">
                   <button
-                    onClick={() => navigate(`/admin/blogs/view/${blog._id}`)}
+                    onClick={() => navigate(`/admin/blogs/view/${blog.id}`)}
                     className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-1.5"
                   >
                     <FaEye size={14} /> View
                   </button>
                   <button
-                    onClick={() => navigate(`/admin/blogs/edit/${blog._id}`)}
+                    onClick={() => navigate(`/admin/blogs/edit/${blog.id}`)}
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-1.5"
                   >
                     <FaEdit size={14} /> Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(blog._id)}
+                    onClick={() => handleDelete(blog.id)}
                     className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-1.5"
                   >
                     <FaTrash size={14} /> Delete
