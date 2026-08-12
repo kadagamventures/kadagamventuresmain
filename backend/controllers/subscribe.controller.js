@@ -1,161 +1,140 @@
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/appError");
-//const Subscriber = require("../models/subscriber.model");
 const prisma = require("../config/prisma");
 const emailService = require("../services/subscriberemail.service");
 
-// exports.subscribe = asyncHandler(async (req, res, next) => {
-//   const { email } = req.body;
+// ==========================================
+// SUBSCRIBE
+// ==========================================
 
-//   if (!email)
-//     return next(new AppError("Email is required", 400));
-
-// const exists = await Subscriber.findOne({ email });
-
-// if (exists) {
-//   if (exists.isActive) {
-//     return next(
-//       new AppError("You are already subscribed", 409)
-//     );
-//   }
-
-//   // 🔥 Resubscribe
-//   exists.isActive = true;
-//   await exists.save();
-
-//   await emailService.sendWelcomeSubscriptionEmail(email);
-
-//   return res.json({
-//     success: true,
-//     message: "Welcome back! You are subscribed again.",
-//   });
-// }
-
-
-//   await Subscriber.create({ email });
-
-//   await emailService.sendWelcomeSubscriptionEmail(email);
-
-//   res.status(201).json({
-//     success: true,
-//     message: "Subscribed successfully. Check your email!",
-//   });
-// });
 exports.subscribe = asyncHandler(async (req, res, next) => {
-  const { email } = req.body;
+    const { email } = req.body;
 
-  if (!email) {
-    return next(new AppError("Email is required", 400));
-  }
-
-  const exists = await prisma.subscriber.findUnique({
-    where: {
-      email,
-    },
-  });
-
-  if (exists) {
-    if (exists.isActive) {
-      return next(new AppError("You are already subscribed", 409));
+    // Validate email
+    if (!email) {
+        return next(
+            new AppError("Email is required", 400)
+        );
     }
 
-    // Resubscribe
-    await prisma.subscriber.update({
-      where: {
-        email,
-      },
-      data: {
-        isActive: true,
-      },
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Check existing subscriber
+    const exists = await prisma.subscriber.findUnique({
+        where: {
+            email: normalizedEmail,
+        },
     });
 
-    await emailService.sendWelcomeSubscriptionEmail(email);
+    // ==========================================
+    // EXISTING SUBSCRIBER
+    // ==========================================
 
-    return res.json({
-      success: true,
-      message: "Welcome back! You are subscribed again.",
+    if (exists) {
+
+        // Already active
+        if (exists.isActive) {
+            return next(
+                new AppError(
+                    "You are already subscribed",
+                    409
+                )
+            );
+        }
+
+        // ==========================================
+        // RESUBSCRIBE
+        // ==========================================
+
+        await prisma.subscriber.update({
+            where: {
+                email: normalizedEmail,
+            },
+            data: {
+                isActive: true,
+            },
+        });
+
+        await emailService.sendWelcomeSubscriptionEmail(
+            normalizedEmail
+        );
+
+        return res.json({
+            success: true,
+            message: "Welcome back! You are subscribed again.",
+        });
+    }
+
+    // ==========================================
+    // NEW SUBSCRIBER
+    // ==========================================
+
+    await prisma.subscriber.create({
+        data: {
+            email: normalizedEmail,
+        },
     });
-  }
 
-  await prisma.subscriber.create({
-    data: {
-      email,
-    },
-  });
+    // Send welcome email
+    await emailService.sendWelcomeSubscriptionEmail(
+        normalizedEmail
+    );
 
-  await emailService.sendWelcomeSubscriptionEmail(email);
-
-  res.status(201).json({
-    success: true,
-    message: "Subscribed successfully. Check your email!",
-  });
+    return res.status(201).json({
+        success: true,
+        message: "Subscribed successfully. Check your email!",
+    });
 });
 
 
-// exports.unsubscribe = asyncHandler(async (req, res, next) => {
-//     const { email } = req.query;
-  
-//     if (!email) {
-//       return next(new AppError("Email is required", 400));
-//     }
-  
-//     const subscriber = await Subscriber.findOne({ email });
-  
-//     if (!subscriber) {
-//       return next(new AppError("Subscriber not found", 404));
-//     }
-  
-//     if (!subscriber.isActive) {
-//       return res.json({
-//         success: true,
-//         message: "You are already unsubscribed",
-//       });
-//     }
-  
-//     subscriber.isActive = false;
-//     await subscriber.save();
-  
-//     res.json({
-//       success: true,
-//       message: "You have been unsubscribed successfully",
-//     });
-//   });
-  
+// ==========================================
+// UNSUBSCRIBE
+// ==========================================
+
 exports.unsubscribe = asyncHandler(async (req, res, next) => {
-  const { email } = req.query;
+    const { email } = req.query;
 
-  if (!email) {
-    return next(new AppError("Email is required", 400));
-  }
+    if (!email) {
+        return next(
+            new AppError("Email is required", 400)
+        );
+    }
 
-  const subscriber = await prisma.subscriber.findUnique({
-    where: {
-      email,
-    },
-  });
+    const normalizedEmail = email.trim().toLowerCase();
 
-  if (!subscriber) {
-    return next(new AppError("Subscriber not found", 404));
-  }
-
-  if (!subscriber.isActive) {
-    return res.json({
-      success: true,
-      message: "You are already unsubscribed",
+    // Find subscriber
+    const subscriber = await prisma.subscriber.findUnique({
+        where: {
+            email: normalizedEmail,
+        },
     });
-  }
 
-  await prisma.subscriber.update({
-    where: {
-      email,
-    },
-    data: {
-      isActive: false,
-    },
-  });
+    if (!subscriber) {
+        return next(
+            new AppError("Subscriber not found", 404)
+        );
+    }
 
-  res.json({
-    success: true,
-    message: "You have been unsubscribed successfully",
-  });
+    // Already inactive
+    if (!subscriber.isActive) {
+        return res.json({
+            success: true,
+            message: "You are already unsubscribed",
+        });
+    }
+
+    // Deactivate
+    await prisma.subscriber.update({
+        where: {
+            email: normalizedEmail,
+        },
+        data: {
+            isActive: false,
+        },
+    });
+
+    return res.json({
+        success: true,
+        message: "You have been unsubscribed successfully",
+    });
 });

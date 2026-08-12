@@ -68,7 +68,7 @@ const JobApplyModal = ({ isOpen, onClose, job }) => {
               <input
                 id="resume"
                 type="file"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf"
                 className="hidden"
                 onChange={(e) => setField("resume", e.target.files[0])}
               />
@@ -160,7 +160,7 @@ const JobApplyModal = ({ isOpen, onClose, job }) => {
 
         {/* ================= Submit ================= */}
         <button
-          onClick={() => submitApplication(job._id)}
+          onClick={() => submitApplication(job.id)}
           disabled={loading}
           className="w-full mt-10 py-4 bg-[#405BAA] text-white rounded-xl"
         >

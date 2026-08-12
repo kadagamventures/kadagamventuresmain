@@ -1,5 +1,17 @@
-const { SendEmailCommand } = require("@aws-sdk/client-ses");
-const { ses, AWS_SES_SENDER_EMAIL } = require("../config/aws");
+// const { SendEmailCommand } = require("@aws-sdk/client-ses");
+// const { ses, AWS_SES_SENDER_EMAIL } = require("../config/aws");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: Number(process.env.EMAIL_PORT),
+    secure: process.env.EMAIL_SECURE === "true",
+
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+    },
+});
 
 exports.sendWelcomeSubscriptionEmail = async (email) => {
   const html = `
@@ -406,47 +418,32 @@ exports.sendWelcomeSubscriptionEmail = async (email) => {
   //   },
   // });
 
-  const command = new SendEmailCommand({
-    Source: `"Kadagam Ventures Private Limited" <${AWS_SES_SENDER_EMAIL}>`,
-  
-    Destination: {
-      ToAddresses: [email],
-    },
-  
-    ReplyToAddresses: ["info@kadagamventures.com"],
-  
-    Message: {
-      Subject: {
-        Data: "Welcome to Kadagam Ventures",
-        Charset: "UTF-8",
-      },
-  
-      Body: {
-        Html: {
-          Charset: "UTF-8",
-          Data: html,
-        },
-  
-        Text: {
-          Charset: "UTF-8",
-          Data: `
-  Welcome to Kadagam Ventures!
-  
-  Thank you for subscribing to Kadagam Ventures.
-  We build modern digital solutions that help businesses grow.
-  
-  Visit us:
-  https://kadagamventures.com
-  
-  Kadagam Ventures Private Limited
-  Bengaluru – 560051
-  info@kadagamventures.com
-  `,
-        },
-      },
-    },
-  });
-  
+  await transporter.sendMail({
+    from:
+        `"Kadagam Ventures Private Limited" <${process.env.EMAIL_FROM}>`,
 
-  await ses.send(command);
+    to: email,
+
+    replyTo:
+        "info@kadagamventures.com",
+
+    subject:
+        "Welcome to Kadagam Ventures",
+
+    html,
+
+    text: `
+Welcome to Kadagam Ventures!
+
+Thank you for subscribing to Kadagam Ventures.
+We build modern digital solutions that help businesses grow.
+
+Visit us:
+https://kadagamventures.com
+
+Kadagam Ventures Private Limited
+Bengaluru – 560051
+info@kadagamventures.com
+`,
+});
 };

@@ -689,6 +689,30 @@ class InvoiceService {
 
     //     return signedUrl;
     // }
+    // static async getSignedUrl(id) {
+    //     const invoice = await prisma.invoice.findFirst({
+    //         where: {
+    //             id: Number(id),
+    //             isDeleted: false,
+    //         },
+    //     });
+    
+    //     if (!invoice || !invoice.pdfKey) {
+    //         throw new Error("PDF not found");
+    //     }
+    
+    //     const command = new GetObjectCommand({
+    //         Bucket: AWS_S3_BUCKET_NAME,
+    //         Key: invoice.pdfKey,
+    //     });
+    
+    //     const signedUrl = await getSignedUrl(s3, command, {
+    //         expiresIn: 60 * 10,
+    //     });
+    
+    //     return signedUrl;
+    // }
+
     static async getSignedUrl(id) {
         const invoice = await prisma.invoice.findFirst({
             where: {
@@ -701,16 +725,20 @@ class InvoiceService {
             throw new Error("PDF not found");
         }
     
+        // LOCAL STORAGE
+        if (process.env.FILE_STORAGE === "local") {
+            return `${process.env.BACKEND_URL}/uploads/${invoice.pdfKey}`;
+        }
+    
+        // AWS S3 STORAGE
         const command = new GetObjectCommand({
             Bucket: AWS_S3_BUCKET_NAME,
             Key: invoice.pdfKey,
         });
     
-        const signedUrl = await getSignedUrl(s3, command, {
+        return await getSignedUrl(s3, command, {
             expiresIn: 60 * 10,
         });
-    
-        return signedUrl;
     }
 
     // static async sendInvoiceEmail(id) {
