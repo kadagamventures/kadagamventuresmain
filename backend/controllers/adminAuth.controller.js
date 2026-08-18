@@ -3,6 +3,7 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/token.util");
+const AppError = require("../utils/appError");
 
 const { loginAdmin } = require("../services/adminAuth.service");
 
