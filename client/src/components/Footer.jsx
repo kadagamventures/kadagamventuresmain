@@ -119,9 +119,17 @@ const Footer = () => {
                                 />
                             </div>
 
+                            
                             <p className="text-sm text-gray-300 leading-relaxed">
-                                {footerConfig.address.text}
-                            </p>
+    {footerConfig.address.text}
+</p>
+
+<a
+    href={footerConfig.address.phoneLink}
+    className="inline-flex items-center gap-2 mt-3 text-sm text-gray-300 hover:text-white transition"
+>
+    📞 {footerConfig.address.phone}
+</a>
                         </section>
 
                         {/* Contact + Newsletter */}

@@ -142,18 +142,27 @@ export default function AdminViewBlog() {
         <div className="p-6  bg-gray-50">
           <h2 className="text-2xl font-semibold mb-4">SEO Details</h2>
           <div className="space-y-4">
-            <div>
-              <strong>Meta Title:</strong> {blog.seo?.metaTitle || "—"}
-            </div>
-            <div>
-              <strong>Meta Description:</strong>{" "}
-              {blog.seo?.metaDescription || "—"}
-            </div>
-            <div>
-              <strong>Meta Keywords:</strong>{" "}
-              {blog.seo?.metaKeywords?.join(", ") || "—"}
-            </div>
-          </div>
+  <div>
+    <strong className="text-gray-700">Meta Title:</strong>
+    <p className="mt-1 text-gray-600">
+      {blog.metaTitle || "—"}
+    </p>
+  </div>
+
+  <div>
+    <strong className="text-gray-700">Meta Description:</strong>
+    <p className="mt-1 text-gray-600">
+      {blog.metaDescription || "—"}
+    </p>
+  </div>
+
+  <div>
+    <strong className="text-gray-700">Meta Keywords:</strong>
+    <p className="mt-1 text-gray-600">
+      {blog.metaKeywords?.join(", ") || "—"}
+    </p>
+  </div>
+</div>
         </div>
       </div>
     </div>

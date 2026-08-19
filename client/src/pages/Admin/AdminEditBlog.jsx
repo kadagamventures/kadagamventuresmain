@@ -76,9 +76,12 @@ export default function AdminEditBlog() {
         category: blogToEdit.category || "",
         isRecommended: blogToEdit.isRecommended || false,
         status: blogToEdit.status || "draft",
-        metaTitle: blogToEdit.seo?.metaTitle || "",
-        metaDescription: blogToEdit.seo?.metaDescription || "",
-        metaKeywords: blogToEdit.seo?.metaKeywords?.join(", ") || "",
+        // metaTitle: blogToEdit.seo?.metaTitle || "",
+        // metaDescription: blogToEdit.seo?.metaDescription || "",
+        // metaKeywords: blogToEdit.seo?.metaKeywords?.join(", ") || "",
+        metaTitle: blogToEdit.metaTitle || "",
+metaDescription: blogToEdit.metaDescription || "",
+metaKeywords: blogToEdit.metaKeywords?.join(", ") || "",
       });
   
       setFeaturedPreview(blogToEdit.featuredImageUrl || null);

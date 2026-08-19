@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useBusinessStore } from "../../zustand/useBusinessStore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BusinessSettings = () => {
     const { business, fetchBusiness, saveBusiness, loading } =
@@ -56,13 +58,45 @@ const BusinessSettings = () => {
         });
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     await saveBusiness(form);
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await saveBusiness(form);
+    
+        try {
+            await saveBusiness(form);
+    
+            toast.success("Business settings saved successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error("Save business error:", error);
+    
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to save business settings",
+                {
+                    position: "top-right",
+                    autoClose: 3000,
+                }
+            );
+        }
     };
 
     return (
         <div className="p-6 max-w-6xl mx-auto">
+         <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+        />
             <h2 className="text-3xl font-semibold mb-8">
                 Business Settings
             </h2>
