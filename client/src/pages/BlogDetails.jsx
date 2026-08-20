@@ -104,47 +104,60 @@ const BlogDetails = () => {
     );
   };
 
-  const canonicalUrl =
-    location.pathname.endsWith("/")
-      ? `${baseUrl}${location.pathname}`
-      : `${baseUrl}${location.pathname}/`;
+  const canonicalUrl = location.pathname.endsWith("/")
+    ? `${baseUrl}${location.pathname}`
+    : `${baseUrl}${location.pathname}/`;
 
   return (
     <main className="bg-white min-h-screen">
       {/* ================= SEO ================= */}
       <Helmet>
-        {/* Title */}
-        <title>{blog.seo?.metaTitle || blog.title}</title>
+        {/* Page Title */}
+        <title>{blog.seo?.metaTitle || blog.metaTitle || blog.title}</title>
 
         {/* Meta Description */}
         <meta
           name="description"
-          content={blog.seo?.metaDescription || blog.excerpt}
+          content={
+            blog.seo?.metaDescription || blog.metaDescription || blog.excerpt
+          }
         />
 
-        {/* Keywords (optional) */}
-        {blog.seo?.metaKeywords && (
+        {/* Meta Keywords */}
+        {(blog.seo?.metaKeywords || blog.metaKeywords)?.length > 0 && (
           <meta
             name="keywords"
-            content={blog.seo.metaKeywords.join(", ")}
+            content={(blog.seo?.metaKeywords || blog.metaKeywords).join(", ")}
           />
         )}
 
-        {/* Canonical */}
+        {/* Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph */}
-        <meta property="og:title" content={blog.title} />
+        <meta
+          property="og:title"
+          content={blog.seo?.metaTitle || blog.metaTitle || blog.title}
+        />
+
         <meta
           property="og:description"
-          content={blog.seo?.metaDescription || blog.excerpt}
+          content={
+            blog.seo?.metaDescription || blog.metaDescription || blog.excerpt
+          }
         />
+
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={blog.featuredImageUrl} />
 
-        {/* Article Info */}
+        <meta
+  property="og:image"
+  content={blog.featuredImageUrl || fallbackImage}
+/>
+
+        {/* Article Information */}
         <meta property="article:published_time" content={blog.publishedAt} />
+
         <meta property="article:author" content={blog.author} />
 
         {/* Robots */}
@@ -230,7 +243,6 @@ const BlogDetails = () => {
           ))}
           <SocialLinks />
         </div>
-
       </section>
 
       <section className="px-4 sm:px-6 md:px-8 lg:px-0">
@@ -336,7 +348,11 @@ const BlogDetails = () => {
                 }
 
                 return (
-                  <div key={index} className="content-section mb-10" onClick={handleContentClick}>
+                  <div
+                    key={index}
+                    className="content-section mb-10"
+                    onClick={handleContentClick}
+                  >
                     {img ? (
                       <div className="grid md:grid-cols-2 gap-10 items-start">
                         {/* LEFT SIDE TEXT */}
@@ -349,7 +365,6 @@ const BlogDetails = () => {
 
                         {/* RIGHT SIDE IMAGE */}
                         <div
-
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(imageHTML),
                           }}
@@ -409,12 +424,9 @@ const BlogDetails = () => {
                     <SocialLinks />
                   </div>
                 </Link>
-
               ))}
-
             </div>
           </div>
-
         </section>
       )}
     </main>
