@@ -63,23 +63,13 @@
 //   );
 // };
 
-
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 // ==========================================
-// HOSTINGER SMTP
+// RESEND
 // ==========================================
 
-const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT),
-    secure: process.env.EMAIL_SECURE === "true",
-
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-    },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 // ==========================================
@@ -88,11 +78,18 @@ const transporter = nodemailer.createTransport({
 
 exports.sendAdminEmail = async (data) => {
 
+    if (!process.env.RESEND_API_KEY) {
+        throw new Error(
+            "RESEND_API_KEY not set"
+        );
+    }
+
     if (!process.env.SES_ADMIN_RECEIVER_EMAIL) {
         throw new Error(
             "SES_ADMIN_RECEIVER_EMAIL not set"
         );
     }
+
 
     // Safe company name for subject
     const companyName =
@@ -100,8 +97,10 @@ exports.sendAdminEmail = async (data) => {
             ? data.company.trim()
             : "Individual";
 
+
     const subject =
         `New Project Inquiry – ${companyName}`;
+
 
     const html = `
         <html>
@@ -149,21 +148,53 @@ exports.sendAdminEmail = async (data) => {
         </html>
     `;
 
-    await transporter.sendMail({
 
-        from:
-            `"Kadagam Ventures Private Limited" <${process.env.EMAIL_FROM}>`,
+    // ==========================================
+    // SEND USING RESEND
+    // ==========================================
 
-        to:
-            process.env.SES_ADMIN_RECEIVER_EMAIL,
+    const { data: emailData, error } =
+        await resend.emails.send({
 
-        replyTo:
-            data.email,
+            from:
+                `Kadagam Ventures Private Limited <${process.env.EMAIL_FROM}>`,
 
-        subject,
+            to:
+                [process.env.SES_ADMIN_RECEIVER_EMAIL],
 
-        html,
-    });
+            replyTo:
+                data.email || undefined,
+
+            subject,
+
+            html,
+        });
+
+
+    if (error) {
+
+        console.error(
+            "❌ Resend admin email error:",
+            error
+        );
+
+        throw new Error(
+            error.message ||
+            "Failed to send admin email"
+        );
+    }
+
+
+    console.log(
+        `✅ Admin project inquiry email sent`
+    );
+
+    console.log(
+        `📨 Resend Email ID: ${emailData?.id}`
+    );
+
+
+    return emailData;
 };
 
 
@@ -181,6 +212,14 @@ exports.sendUserConfirmation = async (
             "User email is required"
         );
     }
+
+
+    if (!process.env.RESEND_API_KEY) {
+        throw new Error(
+            "RESEND_API_KEY not set"
+        );
+    }
+
 
     const html = `
         <html>
@@ -217,20 +256,52 @@ exports.sendUserConfirmation = async (
         </html>
     `;
 
-    await transporter.sendMail({
 
-        from:
-            `"Kadagam Ventures Private Limited" <${process.env.EMAIL_FROM}>`,
+    // ==========================================
+    // SEND USING RESEND
+    // ==========================================
 
-        to:
-            email,
+    const { data: emailData, error } =
+        await resend.emails.send({
 
-        replyTo:
-            process.env.EMAIL_FROM,
+            from:
+                `Kadagam Ventures Private Limited <${process.env.EMAIL_FROM}>`,
 
-        subject:
-            "We received your request 🚀",
+            to:
+                [email],
 
-        html,
-    });
+            replyTo:
+                process.env.EMAIL_FROM,
+
+            subject:
+                "We received your request 🚀",
+
+            html,
+        });
+
+
+    if (error) {
+
+        console.error(
+            "❌ Resend user confirmation error:",
+            error
+        );
+
+        throw new Error(
+            error.message ||
+            "Failed to send confirmation email"
+        );
+    }
+
+
+    console.log(
+        `✅ Confirmation email sent to ${email}`
+    );
+
+    console.log(
+        `📨 Resend Email ID: ${emailData?.id}`
+    );
+
+
+    return emailData;
 };

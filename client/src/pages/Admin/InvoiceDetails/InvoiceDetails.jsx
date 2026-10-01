@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useInvoiceStore } from "../../../zustand/InvoiceStore";
 import AddPaymentModal from "../InvoiceDetails/AddPaymentModal";
 import EditInvoiceModal from "../InvoiceDetails/EditInvoiceModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const InvoiceDetails = () => {
     const { id } = useParams();
@@ -27,6 +29,17 @@ const InvoiceDetails = () => {
     return (
         <div className="p-6 space-y-6">
 
+<ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="colored"
+        />
+
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-semibold">
                     {selectedInvoice.invoiceNumber}
@@ -43,25 +56,95 @@ const InvoiceDetails = () => {
                         Add Payment
                     </button>
 
-                    <button onClick={() => generatePDF(id)}
+                    {/* <button onClick={() => generatePDF(id)}
                         className="bg-purple-600 text-white px-3 py-1 rounded">
                         Generate PDF
-                    </button>
+                    </button> */}
+                    <button
+    onClick={async () => {
+        try {
+            await generatePDF(id);
+            toast.success("PDF generated successfully! 📄");
+        } catch (error) {
+            console.error("Generate PDF error:", error);
+
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to generate PDF"
+            );
+        }
+    }}
+    className="bg-purple-600 text-white px-3 py-1 rounded"
+>
+    Generate PDF
+</button>
 
                     <button onClick={() => downloadPDF(id)}
                         className="bg-gray-700 text-white px-3 py-1 rounded">
                         Download
                     </button>
 
-                    <button onClick={() => sendInvoice(id)}
+                    {/* <button onClick={() => sendInvoice(id)}
                         className="bg-blue-600 text-white px-3 py-1 rounded">
                         Send
-                    </button>
+                    </button> */}
+                    <button
+    onClick={async () => {
+        const confirmed = window.confirm(
+            `Are you sure you want to send invoice ${selectedInvoice.invoiceNumber} by email?`
+        );
 
-                    <button onClick={() => deleteInvoice(id)}
+        if (!confirmed) return;
+
+        try {
+            await sendInvoice(id);
+            toast.success("Invoice sent successfully! 📧");
+        } catch (error) {
+            console.error("Send invoice error:", error);
+
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to send invoice"
+            );
+        }
+    }}
+    className="bg-blue-600 text-white px-3 py-1 rounded"
+>
+    Send
+</button>
+
+                    {/* <button onClick={() => deleteInvoice(id)}
                         className="bg-red-600 text-white px-3 py-1 rounded">
                         Delete
-                    </button>
+                    </button> */}
+                    <button
+    onClick={async () => {
+        const confirmed = window.confirm(
+            `Are you sure you want to delete invoice ${selectedInvoice.invoiceNumber}? This action cannot be undone.`
+        );
+
+        if (!confirmed) return;
+
+        try {
+            await deleteInvoice(id);
+
+            toast.success("Invoice deleted successfully! 🗑️");
+        } catch (error) {
+            console.error("Delete invoice error:", error);
+
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to delete invoice"
+            );
+        }
+    }}
+    className="bg-red-600 text-white px-3 py-1 rounded"
+>
+    Delete
+</button>
                 </div>
             </div>
 

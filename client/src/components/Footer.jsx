@@ -159,11 +159,11 @@ const Footer = () => {
                             </div>
 
                             {/* Newsletter */}
-                            <div className="max-w-md bg-black/60 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-xl">
-                                <h6 className="text-[#9F080B] font-medium mb-1">
+                            <div className="max-w-md bg-black/60 backdrop-blur-md sm:p-5 p-2 sm:rounded-2xl rounded-xl border border-white/10 shadow-xl">
+                                <h6 className="text-[#9F080B] font-medium sm:mb-1 mb-0.5">
                                     Subscribe to our Newsletter
                                 </h6>
-                                <p className="text-gray-400 text-xs mb-4">
+                                <p className="text-gray-400 sm:text-xs text-[10px] sm:mb-4  mb-2">
                                     Get updates, insights & offers straight to your inbox.
                                 </p>
 
@@ -172,23 +172,23 @@ const Footer = () => {
                                         e.preventDefault()
                                         subscribe()
                                     }}
-                                    className="flex gap-2">
+                                    className="flex sm:gap-2 gap-1">
                                     <input
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="Enter your email"
                                         required
-                                        className="flex-1 px-4 py-2 rounded-lg
-                                        bg-gray-900 text-sm text-white
+                                        className="flex-1 sm:px-4 px-2 sm:py-2 py-1 rounded-lg
+                                        bg-gray-900 sm:text-sm text-[12px] text-white
                                         border border-gray-700
                                         focus:outline-none focus:ring-2 focus:ring-red-600"
                                     />
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="px-5 py-2 rounded-lg
-                                        bg-[#9F090C] text-white text-sm font-medium
+                                        className="sm:px-5 px-2 sm:py-2 py-1 rounded-lg
+                                        bg-[#9F090C] text-white sm:text-sm text-[8px] font-medium
                                         hover:bg-red-700 transition"
                                     >
                                         {loading ? "..." : "Subscribe"}

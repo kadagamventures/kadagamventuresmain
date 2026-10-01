@@ -3,6 +3,8 @@ import { useInvoiceStore } from "../../zustand/InvoiceStore";
 import { Link } from "react-router-dom";
 import { FaFilePdf, FaDownload } from "react-icons/fa6";
 import { MdEmail, MdDelete, MdOutlinePreview } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const statusColors = {
     draft: "bg-gray-100 text-gray-600",
@@ -26,6 +28,9 @@ const InvoiceList = () => {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [invoiceToDelete, setInvoiceToDelete] = useState(null);
+
+    const [showEmailModal, setShowEmailModal] = useState(false);
+const [invoiceToSend, setInvoiceToSend] = useState(null);
 
 
     const [search, setSearch] = useState("");
@@ -52,13 +57,55 @@ const InvoiceList = () => {
     }, [invoices, search, statusFilter]);
 
     const confirmDelete = async () => {
-        await deleteInvoice(invoiceToDelete.id);
-        setShowDeleteModal(false);
-        setInvoiceToDelete(null);
+        try {
+            await deleteInvoice(invoiceToDelete.id);
+    
+            toast.success("Invoice deleted successfully! 🗑️");
+    
+            setShowDeleteModal(false);
+            setInvoiceToDelete(null);
+        } catch (error) {
+            console.error("Delete invoice error:", error);
+    
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to delete invoice"
+            );
+        }
+    };
+
+    const confirmSendEmail = async () => {
+        try {
+            await sendInvoice(invoiceToSend.id);
+    
+            toast.success("Invoice sent successfully! 📧");
+    
+            setShowEmailModal(false);
+            setInvoiceToSend(null);
+        } catch (error) {
+            console.error("Send invoice error:", error);
+    
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to send invoice"
+            );
+        }
     };
 
     return (
         <div className="p-8 bg-gray-50 min-h-screen">
+         <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="colored"
+        />
             <h1 className="text-3xl font-bold mb-8 text-gray-800">
                 Invoices
             </h1>
@@ -159,12 +206,15 @@ const InvoiceList = () => {
                                             </button>
 
                                             <button
-                                                title="Send Email"
-                                                onClick={() => sendInvoice(inv.id)}
-                                                className="p-2 rounded-lg hover:bg-blue-100 text-blue-600 transition"
-                                            >
-                                                <MdEmail />
-                                            </button>
+    title="Send Email"
+    onClick={() => {
+        setInvoiceToSend(inv);
+        setShowEmailModal(true);
+    }}
+    className="p-2 rounded-lg hover:bg-blue-100 text-blue-600 transition"
+>
+    <MdEmail />
+</button>
 
                                             <button
                                                 title="Delete"
@@ -228,6 +278,47 @@ const InvoiceList = () => {
                     </div>
                 </div>
             )}
+
+            {/* Send Email Confirmation Modal */}
+{showEmailModal && (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="bg-white rounded-xl shadow-xl p-6 w-[400px] space-y-4">
+
+            <h2 className="text-lg font-semibold text-gray-800">
+                Confirm Send Email
+            </h2>
+
+            <p className="text-gray-600 text-sm">
+                Are you sure you want to send invoice{" "}
+                <span className="font-semibold">
+                    {invoiceToSend?.invoiceNumber}
+                </span>{" "}
+                by email?
+            </p>
+
+            <div className="flex justify-end gap-3 pt-4">
+
+                <button
+                    onClick={() => {
+                        setShowEmailModal(false);
+                        setInvoiceToSend(null);
+                    }}
+                    className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    onClick={confirmSendEmail}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                    Send Email
+                </button>
+
+            </div>
+        </div>
+    </div>
+)}
 
             {/* Full Screen Loader */}
             {loading && (

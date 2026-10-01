@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useCompanyStore } from "../zustand/useCompanyStore";
 import { useInvoiceStore } from "../zustand/InvoiceStore";
 
@@ -76,88 +78,187 @@ const CreateInvoiceModal = ({ close }) => {
         };
     }, [form.services]);
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const payload = {
+    //         companyId: form.companyId,
+        
+    //         invoiceType: form.invoiceType,
+        
+    //         invoiceDate: new Date(),
+        
+    //         dueDate: form.dueDate,
+        
+    //         placeOfSupply: form.placeOfSupply,
+        
+    //         subTotal: preview.subTotal,
+    //         totalGST: preview.gst,
+    //         roundOff: 0,
+    //         grandTotal: preview.grandTotal,
+        
+    //         advanceAmount: Number(form.advanceAmount),
+        
+    //         totalPaid: 0,
+        
+    //         pendingAmount:
+    //             preview.grandTotal - Number(form.advanceAmount),
+        
+    //         amountInWords: "",
+        
+    //         termsAndConditions: form.termsAndConditions,
+        
+    //         services: form.services.map((s) => ({
+    //             serviceName: s.serviceName,
+    //             description: s.description,
+    //             sacCode: s.sacCode,
+    //             price: Number(s.price),
+    //             quantity: Number(s.quantity),
+    //             gstRate: Number(s.gstRate),
+        
+    //             taxableAmount:
+    //                 Number(s.price) * Number(s.quantity),
+        
+    //             cgst:
+    //                 ((Number(s.price) * Number(s.quantity)) *
+    //                     Number(s.gstRate)) /
+    //                 200,
+        
+    //             sgst:
+    //                 ((Number(s.price) * Number(s.quantity)) *
+    //                     Number(s.gstRate)) /
+    //                 200,
+        
+    //             igst: 0,
+        
+    //             total:
+    //                 Number(s.price) * Number(s.quantity) +
+    //                 ((Number(s.price) * Number(s.quantity)) *
+    //                     Number(s.gstRate)) /
+    //                     100,
+    //         })),
+    //     };
+
+    //     await createInvoice(payload);
+    //     close();
+    // };
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // const payload = {
-        //     company: form.company,
-        //     invoiceType: form.invoiceType,
-        //     placeOfSupply: form.placeOfSupply,
-        //     dueDate: form.dueDate,
-        //     advanceAmount: Number(form.advanceAmount),
-        //     termsAndConditions: form.termsAndConditions,
-        //     services: form.services.map((s) => ({
-        //         serviceName: s.serviceName,
-        //         description: s.description,
-        //         sacCode: s.sacCode,
-        //         price: Number(s.price),
-        //         quantity: Number(s.quantity),
-        //         gstRate: Number(s.gstRate),
-        //     })),
-        // };
-        const payload = {
-            companyId: form.companyId,
-        
-            invoiceType: form.invoiceType,
-        
-            invoiceDate: new Date(),
-        
-            dueDate: form.dueDate,
-        
-            placeOfSupply: form.placeOfSupply,
-        
-            subTotal: preview.subTotal,
-            totalGST: preview.gst,
-            roundOff: 0,
-            grandTotal: preview.grandTotal,
-        
-            advanceAmount: Number(form.advanceAmount),
-        
-            totalPaid: 0,
-        
-            pendingAmount:
-                preview.grandTotal - Number(form.advanceAmount),
-        
-            amountInWords: "",
-        
-            termsAndConditions: form.termsAndConditions,
-        
-            services: form.services.map((s) => ({
-                serviceName: s.serviceName,
-                description: s.description,
-                sacCode: s.sacCode,
-                price: Number(s.price),
-                quantity: Number(s.quantity),
-                gstRate: Number(s.gstRate),
-        
-                taxableAmount:
-                    Number(s.price) * Number(s.quantity),
-        
-                cgst:
-                    ((Number(s.price) * Number(s.quantity)) *
-                        Number(s.gstRate)) /
-                    200,
-        
-                sgst:
-                    ((Number(s.price) * Number(s.quantity)) *
-                        Number(s.gstRate)) /
-                    200,
-        
-                igst: 0,
-        
-                total:
-                    Number(s.price) * Number(s.quantity) +
-                    ((Number(s.price) * Number(s.quantity)) *
-                        Number(s.gstRate)) /
-                        100,
-            })),
-        };
-
-        await createInvoice(payload);
-        close();
+    
+        try {
+            const payload = {
+                companyId: form.companyId,
+    
+                invoiceType: form.invoiceType,
+    
+                invoiceDate: new Date(),
+    
+                dueDate: form.dueDate,
+    
+                placeOfSupply: form.placeOfSupply,
+    
+                subTotal: preview.subTotal,
+    
+                totalGST: preview.gst,
+    
+                roundOff: 0,
+    
+                grandTotal: preview.grandTotal,
+    
+                advanceAmount: Number(form.advanceAmount),
+    
+                totalPaid: 0,
+    
+                pendingAmount:
+                    preview.grandTotal -
+                    Number(form.advanceAmount),
+    
+                amountInWords: "",
+    
+                termsAndConditions:
+                    form.termsAndConditions,
+    
+                services: form.services.map((s) => ({
+                    serviceName: s.serviceName,
+    
+                    description: s.description,
+    
+                    sacCode: s.sacCode,
+    
+                    price: Number(s.price),
+    
+                    quantity: Number(s.quantity),
+    
+                    gstRate: Number(s.gstRate),
+    
+                    taxableAmount:
+                        Number(s.price) *
+                        Number(s.quantity),
+    
+                    cgst:
+                        (
+                            Number(s.price) *
+                            Number(s.quantity) *
+                            Number(s.gstRate)
+                        ) / 200,
+    
+                    sgst:
+                        (
+                            Number(s.price) *
+                            Number(s.quantity) *
+                            Number(s.gstRate)
+                        ) / 200,
+    
+                    igst: 0,
+    
+                    total:
+                        Number(s.price) *
+                        Number(s.quantity) +
+                        (
+                            Number(s.price) *
+                            Number(s.quantity) *
+                            Number(s.gstRate)
+                        ) / 100,
+                })),
+            };
+    
+            await createInvoice(payload);
+    
+            toast.success("Invoice created successfully! 🎉");
+    
+            setTimeout(() => {
+                close();
+            }, 1000);
+    
+        } catch (error) {
+    
+            console.error(
+                "Create invoice error:",
+                error
+            );
+    
+            toast.error(
+                error?.response?.data?.message ||
+                error?.message ||
+                "Failed to create invoice"
+            );
+        }
     };
 
+
     return (
+        <>
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="colored"
+        />
+
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
             <div className="bg-white w-[1000px] max-h-[95vh] overflow-y-auto p-8 rounded-xl shadow-xl">
 
@@ -393,6 +494,8 @@ const CreateInvoiceModal = ({ close }) => {
                 </form>
             </div>
         </div>
+
+        </>
     );
 };
 

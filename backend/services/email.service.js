@@ -208,7 +208,9 @@
 // };
 
 
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+
+
 const fs = require("fs");
 const path = require("path");
 
@@ -235,29 +237,22 @@ const clean = (value) => {
 
 
 // =====================================================
-// HOSTINGER SMTP TRANSPORTER
+// Resend
 // =====================================================
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT),
-  secure: process.env.EMAIL_SECURE === "true",
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
 
 
 // =====================================================
-// OPTIONAL SMTP CONNECTION TEST
+// OPTIONAL Resend CONNECTION TEST
 // =====================================================
 
 exports.verifyEmailConnection = async () => {
-  await transporter.verify();
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is missing");
+  }
 
-  console.log("✅ Hostinger SMTP connection successful");
+  console.log("✅ Resend API key configured");
 };
 
 
@@ -402,13 +397,10 @@ exports.sendAdminApplicationMail = async (data) => {
   `;
 
 
-  await transporter.sendMail({
-    from: `"Kadagam Ventures" <${process.env.EMAIL_FROM}>`,
-  
-    to: process.env.SES_ADMIN_RECEIVER_EMAIL,
-  
+  await resend.emails.send({
+    from: `Kadagam Ventures <${process.env.EMAIL_FROM}>`,
+    to: [process.env.SES_ADMIN_RECEIVER_EMAIL],
     subject: `New Application – ${clean(careerTitle)}`,
-  
     html,
   });
 
@@ -461,13 +453,10 @@ exports.sendApplicantReply = async (email, name) => {
   `;
 
 
-  await transporter.sendMail({
-    from: `"Kadagam Ventures HR" <${process.env.EMAIL_FROM}>`,
-
-    to: clean(email),
-
+  await resend.emails.send({
+    from: `Kadagam Ventures HR <${process.env.EMAIL_FROM}>`,
+    to: [clean(email)],
     subject: "Application Received – Kadagam Ventures",
-
     html,
   });
 
@@ -477,136 +466,6 @@ exports.sendApplicantReply = async (email, name) => {
 // =====================================================
 // SEND INVOICE WITH PDF ATTACHMENT
 // =====================================================
-
-// exports.sendInvoiceWithAttachment = async (invoice) => {
-
-//   if (!invoice?.pdfKey) {
-//     throw new Error("Invoice PDF not found");
-//   }
-
-
-//   // Get PDF from AWS S3
-//   const command = new GetObjectCommand({
-//     Bucket: AWS_S3_BUCKET_NAME,
-//     Key: invoice.pdfKey,
-//   });
-
-
-//   const s3Object = await s3.send(command);
-
-
-//   const pdfBuffer = Buffer.from(
-//     await s3Object.Body.transformToByteArray()
-//   );
-
-
-//   const companyName =
-//     clean(invoice.company?.companyName) ||
-//     "Valued Client";
-
-
-//   const companyEmail =
-//     clean(invoice.company?.email);
-
-
-//   if (!companyEmail) {
-//     throw new Error("Customer email not found");
-//   }
-
-
-//   const invoiceNumber =
-//     clean(invoice.invoiceNumber);
-
-
-//   const html = `
-//     <html>
-
-//       <body
-//         style="
-//           font-family: Arial, Helvetica, sans-serif;
-//           font-size: 14px;
-//           color: #333;
-//           line-height: 1.6;
-//         "
-//       >
-
-//         <p>
-//           Dear ${companyName},
-//         </p>
-
-//         <p>
-//           We hope this message finds you well.
-//         </p>
-
-//         <p>
-//           Please find attached the
-//           <strong>
-//             Invoice (${invoiceNumber})
-//           </strong>
-//           along with the applicable
-//           <strong>
-//             Service Agreement
-//           </strong>
-//           for your review and records.
-//         </p>
-
-//         <p>
-//           Kindly process the payment as per the agreed
-//           terms mentioned in the invoice.
-//           Should you require any clarification regarding
-//           the invoice or agreement, please feel free
-//           to contact us.
-//         </p>
-
-//         <p>
-//           We appreciate your continued business
-//           and look forward to serving you.
-//         </p>
-
-//         <br />
-
-//         <p>
-//           Warm Regards,<br />
-
-//           <strong>
-//             Kadagam Ventures Private Limited
-//           </strong>
-//           <br />
-
-//           ${clean(invoice.company?.phone)}
-//         </p>
-
-//       </body>
-
-//     </html>
-//   `;
-
-
-//   await transporter.sendMail({
-
-//     from:
-//       `"Kadagam Ventures" <${process.env.EMAIL_FROM}>`,
-
-//     to: companyEmail,
-
-//     subject:
-//       `Invoice ${invoiceNumber} – Invoice & Service Agreement`,
-
-//     html,
-
-//     attachments: [
-//       {
-//         filename: `Invoice-${invoiceNumber}.pdf`,
-
-//         content: pdfBuffer,
-
-//         contentType: "application/pdf",
-//       },
-//     ],
-//   });
-
-// };
-
 exports.sendInvoiceWithAttachment = async (invoice) => {
 
   if (!invoice?.pdfKey) {
@@ -757,31 +616,20 @@ exports.sendInvoiceWithAttachment = async (invoice) => {
 
 
   // ==========================================
-  // SEND EMAIL USING HOSTINGER SMTP
+  // SEND EMAIL USING Resend
   // ==========================================
 
-  await transporter.sendMail({
-
-      from:
-          `"Kadagam Ventures" <${process.env.EMAIL_FROM}>`,
-
-      to: companyEmail,
-
-      subject:
-          `Invoice ${invoiceNumber} – Invoice & Service Agreement`,
-
-      html,
-
-      attachments: [
-          {
-              filename:
-                  `Invoice-${invoiceNumber}.pdf`,
-
-              content: pdfBuffer,
-
-              contentType: "application/pdf",
-          },
-      ],
+  await resend.emails.send({
+    from: `Kadagam Ventures <${process.env.EMAIL_FROM}>`,
+    to: [companyEmail],
+    subject: `Invoice ${invoiceNumber} – Invoice & Service Agreement`,
+    html,
+    attachments: [
+      {
+        filename: `Invoice-${invoiceNumber}.pdf`,
+        content: pdfBuffer,
+      },
+    ],
   });
 
   console.log(

@@ -23,32 +23,74 @@
 //   await ses.send(command);
 // };
 
-
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 const template = require("./inquiryEmail.template");
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT),
-  secure: process.env.EMAIL_SECURE === "true",
+// =====================================================
+// RESEND
+// =====================================================
 
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+// =====================================================
+// SEND INQUIRY EMAIL TO ADMIN
+// =====================================================
 
 exports.sendInquiryEmailToAdmin = async (data) => {
-  const html = template(data);
 
-  const mailOptions = {
-    from: `"Kadagam Ventures" <${process.env.EMAIL_FROM}>`,
-    to: process.env.SES_ADMIN_RECEIVER_EMAIL,
+  try {
 
-    subject: `New Inquiry – ${data.inquiryAbout}`,
+    const html = template(data);
 
-    html,
-  };
+    const { data: emailData, error } = await resend.emails.send({
 
-  await transporter.sendMail(mailOptions);
+      from: `Kadagam Ventures <${process.env.EMAIL_FROM}>`,
+
+      to: [process.env.SES_ADMIN_RECEIVER_EMAIL],
+
+      subject: `New Inquiry – ${data.inquiryAbout}`,
+
+      html,
+
+    });
+
+
+    // ==========================================
+    // RESEND ERROR
+    // ==========================================
+
+    if (error) {
+
+      console.error("❌ Resend inquiry email error:", error);
+
+      throw new Error(
+        error.message || "Failed to send inquiry email"
+      );
+
+    }
+
+
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+
+    console.log(
+      `✅ Inquiry email sent successfully. Resend ID: ${emailData?.id}`
+    );
+
+
+    return emailData;
+
+  } catch (error) {
+
+    console.error(
+      "❌ Failed to send inquiry email:",
+      error
+    );
+
+    throw error;
+
+  }
+
 };
