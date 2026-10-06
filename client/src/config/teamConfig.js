@@ -9,9 +9,10 @@ import arvindb from "../assets/team/arvindb.png"
 // import shivaji from "../assets/team/shivaji.png"
 import veeran from "../assets/team/veeran.png"
 // import arvindm from "../assets/team/aravindnew.png"
-//import sagar from "../assets/team/sagar.png"
+import sagar from "../assets/team/sagar.png"
 // import stanly from "../assets/team/stanleynewone.png"
 //import kiran from "../assets/team/kiran.png"
+import navitha from "../assets/team/navitha.jpeg"
 
 
 export const TeamDetails = [
@@ -84,7 +85,7 @@ export const TeamDetails = [
         profile: veeran,
         name: "Veeran",
         designation: "Software Tester",
-        linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
+        //linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
     },
     // {
     //     id: 11,
@@ -93,13 +94,13 @@ export const TeamDetails = [
     //     designation: "SEO Executive",
     //     linkedIn: "https://www.linkedin.com/in/arvind-m-0b4b3b172?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     // },
-    // {
-    //     id: 12,
-    //     profile: sagar,
-    //     name: "Sagar M",
-    //     designation: "Business Development Asst (SR)",
-    //     // linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
-    // },
+    {
+        id: 12,
+        profile: sagar,
+        name: "Sagar M",
+        designation: "Business Development Asst (SR)",
+        //linkedIn: "https://www.linkedin.com/in/darshan-s-2075a31a3/"
+    },
     // {
     //     id: 13,
     //     profile: stanly,
@@ -114,4 +115,12 @@ export const TeamDetails = [
     //     designation: "Full Stack Developer",
     //     // linkedIn: "https://www.linkedin.com/in/stanley-havoc-a2b318246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     // },
+    {
+        id: 12,
+        profile: navitha,
+        name: "Navitha G",
+        designation: "Full Stack Developer",
+        linkedIn: "https://linkedin.com/in/navitha-gnanavel-99b6322b9"
+    },
+    
 ]
